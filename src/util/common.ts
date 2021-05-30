@@ -6,6 +6,8 @@ const fs = require('fs-extra');
 export const call = (name:string)=>{
 
     const script_path = path.join(__dirname, "scripts", `${name}.sh`);// 脚本的真实路径 
+
+    console.log(script_path);
     
     return new Promise(async (resolve,reject)=>{
 
@@ -24,7 +26,7 @@ export const call = (name:string)=>{
               reject(error);
             }else{
                 const array:[string,string][] = [];
-                stdout.split("\t\t").forEach((item:string)=>{
+                stdout.split("\r\n\n").forEach((item:string)=>{
                     const [key,value] =  item.split(":");
                     array.push([key,value])
 

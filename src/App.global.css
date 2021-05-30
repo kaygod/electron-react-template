@@ -62,3 +62,14 @@ a:hover {
 .line{
   display: flex;
 }
+
+.first-column{
+ flex:1;
+}
+
+.second-column{
+ flex:2;
+}
+
+
+
