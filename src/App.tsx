@@ -20,7 +20,7 @@ const Hello = () => {
         {
          list.map((item:[string,string][])=>{
            return (
-             <div className="line">
+             <div className="line" key={item[0]}>
                <p>{item[0]}:</p>
                <p>{item[1]}</p>
              </div>

@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell,globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -105,6 +105,10 @@ const createWindow = async () => {
     event.preventDefault();
     shell.openExternal(url);
   });
+
+  globalShortcut.register('ctrl+x', function () {
+    mainWindow.webContents.openDevTools() 
+  })
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
