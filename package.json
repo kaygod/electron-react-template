@@ -239,7 +239,7 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.3",
-    "typescript": "^4.0.5",
+    "typescript": "^4.1.2",
     "url-loader": "^4.1.0",
     "webpack": "^5.5.1",
     "webpack-bundle-analyzer": "^4.1.0",
@@ -249,6 +249,7 @@
     "yarn-deduplicate": "^3.1.0"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
     "electron-debug": "^3.1.0",
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.4",
@@ -256,6 +257,7 @@
     "history": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.5",
     "source-map-support": "^0.5.19"
