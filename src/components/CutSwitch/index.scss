@@ -1,0 +1,50 @@
+.switch{
+    width: 72px;
+    height: 30px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+    .small{
+       width: 26px;
+       height: 26px;
+       cursor: pointer;
+       border:2px solid #02D7DB;
+       color: #fff;
+       text-align: center;
+       line-height: 26px;
+       background: -webkit-linear-gradient(#010103, #1C3A3C);
+       span{
+         width: 100%;
+         height: 100%;
+         display: block;
+         font-size:25px;
+       }
+    }
+    .cut{
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        border:2px solid #02D7DB;
+        color: #fff;
+        text-align: center;
+        line-height: 26px;
+        
+        background: -webkit-linear-gradient(#010103, #1C3A3C);
+        span{
+            width: 100%;
+            height: 100%;
+            display: block;
+            font-size:25px;
+        }
+    }
+
+
+
+
+
+
+
+
+
+

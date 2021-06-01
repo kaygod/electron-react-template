@@ -1,3 +1,38 @@
-.leftSider{
-  color:red;
+.leftsider{
+  color:#fff;
+  width: 193px;
+  height: 203px;
+  background:url('../../images/bar.png') no-repeat;
+  padding-top: 53px;
 }
+.lines{
+  width:100%;
+  height: 37px;
+  text-align: center;
+  display: flex;
+  justify-content:flex-start;
+  padding-left: 35px;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  span{
+    width: 20px;
+    text-align: center;
+    display: block;
+    margin-right: 13px;
+    font-size: 18px;
+    color:#889397;
+  }
+}
+.current{
+  background:url('../../images/bar_cur.png') no-repeat 10px;
+}
+
+
+
+
+
+
+
+
+

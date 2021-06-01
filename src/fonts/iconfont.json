@@ -1,0 +1,72 @@
+{
+  "id": "2558364",
+  "name": "托管",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4767096",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e7fc",
+      "unicode_decimal": 59388
+    },
+    {
+      "icon_id": "4767099",
+      "name": "minus",
+      "font_class": "minus",
+      "unicode": "e7fd",
+      "unicode_decimal": 59389
+    },
+    {
+      "icon_id": "4766695",
+      "name": "lock",
+      "font_class": "lock",
+      "unicode": "e7c9",
+      "unicode_decimal": 59337
+    },
+    {
+      "icon_id": "4936457",
+      "name": "desktop",
+      "font_class": "desktop",
+      "unicode": "e842",
+      "unicode_decimal": 59458
+    },
+    {
+      "icon_id": "4936965",
+      "name": "codepen",
+      "font_class": "codepen",
+      "unicode": "e87e",
+      "unicode_decimal": 59518
+    },
+    {
+      "icon_id": "4936512",
+      "name": "time-circle-fill",
+      "font_class": "time-circle-fill",
+      "unicode": "e848",
+      "unicode_decimal": 59464
+    },
+    {
+      "icon_id": "4936666",
+      "name": "customerservice-fill",
+      "font_class": "customerservice-fill",
+      "unicode": "e869",
+      "unicode_decimal": 59497
+    },
+    {
+      "icon_id": "4936678",
+      "name": "phone-fill",
+      "font_class": "phone-fill",
+      "unicode": "e86d",
+      "unicode_decimal": 59501
+    },
+    {
+      "icon_id": "4936690",
+      "name": "mail-fill",
+      "font_class": "mail-fill",
+      "unicode": "e86f",
+      "unicode_decimal": 59503
+    }
+  ]
+}
