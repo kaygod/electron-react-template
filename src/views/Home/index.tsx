@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { call } from '../../util/common';
 import { useSelector } from 'react-redux'
 import { getter } from "store/reducers/Global";
+import styles from "./index.scss";
 
 const Hello = () => {
 
