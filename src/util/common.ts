@@ -49,7 +49,7 @@ export const fetch = <
     const data = params.data || {};
     axios({
       ...params,
-      method: params.method || 'get',
+      method: params.method || 'post',
       data,
       withCredentials: true,
       crossDomain: true,

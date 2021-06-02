@@ -17,16 +17,164 @@ app.listen(3001, () => {
 })
 
 
-app.get('/getList',function(req, res){
-    res.json(
-      [
-        {
-          id:1,
-          msg:"123"
-        }
-      ]
-    );
+
+app.post('/startWork',function(req, res){
+  res.json(
+    {
+      result:1
+    }
+  );
 })
 
 
 
+app.post('/getMachineData',function(req, res){
+  res.json(
+    {
+      end_tasks:10,
+      working_tasks:10,
+      total_page:2,
+      is_complete:false,
+      list:[
+        {
+          k_value:30,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:40,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:50,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:30,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:30,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:70,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:30,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:90,
+          file_name:"admin",
+          status:30
+        }
+      ]
+    }
+  );
+})
+
+
+app.post('/switchMachine',function(req, res){
+  res.json(
+    {
+      result:1
+    }
+  );
+})
+
+
+app.post('/stop',function(req, res){
+  res.json(
+    {
+      result:1
+    }
+  );
+})
+
+
+
+app.post('/getStatus',function(req, res){
+  res.json(
+    {
+      cpu_rate:10,
+      memory_rate:20,
+      total_page:2,
+      list:[
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        }, {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        }, {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        }
+      ]
+    }
+  );
+})
+
+app.post('/switchKey',function(req, res){
+  res.json(
+    {
+      result:1
+    }
+  );
+})

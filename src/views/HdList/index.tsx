@@ -4,6 +4,7 @@ import Table from "./components/Table/index";
 import Chart from "./components/Chart/index";
 
 const HdList = () => {
+
   return (
     <div className={styles.hdList}>
         <div className={styles.left}>
