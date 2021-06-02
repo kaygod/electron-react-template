@@ -165,10 +165,5 @@ html {
    left: 32px; */
 }
 .right{
- flex:1;
-}
-.link{
-   /* position: absolute;
-   right: 3px;
-   top: 0; */
+  width:930px;
 }
