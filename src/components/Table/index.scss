@@ -1,0 +1,68 @@
+.table {
+  width: 100%;
+  border: 1px solid #e9e9ee;
+  table-layout: fixed;
+ 
+}
+.tbody .tr {
+  background-color: #fafafa;
+}
+.tbody .tr:hover {
+  background-color: #e9f6fe;
+}
+.grid {
+  width: 276px;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  border-bottom: 1px solid #e9e9ee;
+  border-right: 1px solid #e9e9ee;
+  color: #333;
+  font-size: 14px;
+}
+
+.grid p{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.thead_tr{
+  height: 40px;
+  border-bottom: 1px solid #e9e9ee;
+}
+
+.th {
+  height: 100%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 14px;
+  color: #666;
+  border-right: 1px solid #e9e9ee;
+  font-weight: bold;
+}
+
+.parentContainer {
+  position: relative;
+  cursor: pointer;
+}
+
+.parentContainer:hover  .select{
+  display: block;
+}
+
+.select {
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  display: none;
+}
+
+.select .li:hover {
+  color: rgb(255, 162, 0);
+}

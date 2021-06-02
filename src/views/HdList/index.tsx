@@ -1,10 +1,17 @@
 import React from 'react';
 import styles from "./index.scss";
+import Table from "./components/Table/index";
+import Chart from "./components/Chart/index";
 
 const HdList = () => {
   return (
     <div className={styles.hdList}>
-        硬件状态
+        <div className={styles.left}>
+          <Table/>
+        </div>
+        <div className={styles.right}>
+          <Chart />
+        </div>
     </div>
   );
 }

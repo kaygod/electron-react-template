@@ -1,3 +1,13 @@
 .hdList{
  color:#fff;
+ display: flex;
+}
+.left{
+  width:686px;
+  background-color: rgb(10,38,50);
 } 
+.right{
+  width:230px;
+  background-color: rgb(10,38,50);
+  margin-left:18px;
+}

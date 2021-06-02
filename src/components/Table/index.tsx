@@ -4,7 +4,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from 'react';
-import './index.less';
+import styles from './index.scss';
 
 export type selectType = { [key: string]: string };
 
@@ -79,19 +79,19 @@ const renderSelect = ({
   const { index } = filter_data[key];
 
   return (
-    <div className="parent-container">
+    <div className={styles.parentContainer}>
       <p>
         {filters[index].name}
         <span>▾</span>
       </p>
-      <ul className="select">
+      <ul className={styles.select}>
         {filters.map((item, idx) => {
           return (
             <li
               onClick={() => {
                 selItem(idx);
               }}
-              className="li"
+              className={styles.li}
               key={idx}
             >
               {idx == 0 ? '全部' : item.name}
@@ -169,7 +169,7 @@ const Table = forwardRef((props: defaulProps, ref) => {
   }
 
   return (
-    <table className="table">
+    <table className={styles.table}>
       <colgroup>
         {column.map((item) => {
           if (item.width) {
@@ -179,11 +179,11 @@ const Table = forwardRef((props: defaulProps, ref) => {
           }
         })}
       </colgroup>
-      <thead className="thead">
-        <tr>
+      <thead>
+        <tr className={styles.thead_tr}>
           {column.map((item) => {
             return (
-              <th key={item.key}>
+              <th key={item.key} className={styles.th}>
                 {item.filters
                   ? renderSelect({ ...item, filter_data, setFilters, onSelect })
                   : item.name}
@@ -192,13 +192,13 @@ const Table = forwardRef((props: defaulProps, ref) => {
           })}
         </tr>
       </thead>
-      <tbody className="tbody">
+      <tbody className={styles.tbody}>
         {data.map((item, index) => {
           return (
-            <tr key={index}>
+            <tr key={index} className={styles.tr}>
               {column.map((child) => {
                 return (
-                  <td className="grid" key={child.key}>
+                  <td className={styles.grid} key={child.key}>
                     {child.render(item[child.dataIndex], item, index)}
                   </td>
                 );
