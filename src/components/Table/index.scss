@@ -1,14 +1,17 @@
 .table {
   width: 100%;
-  border: 1px solid #e9e9ee;
+  // border: 1px solid #e9e9ee;
   table-layout: fixed;
  
 }
-.tbody .tr {
-  background-color: #fafafa;
+.tbody .tr:nth-child(odd) {
+  background-color: #1b3946;
+}
+.tbody .tr:nth-child(even) {
+  background-color: #0a2632;
 }
 .tbody .tr:hover {
-  background-color: #e9f6fe;
+  background-color: rgba(0,0,0,.2);
 }
 .grid {
   width: 276px;
@@ -16,9 +19,9 @@
   line-height: 40px;
   box-sizing: border-box;
   text-align: center;
-  border-bottom: 1px solid #e9e9ee;
-  border-right: 1px solid #e9e9ee;
-  color: #333;
+  // border-bottom: 1px solid #e9e9ee;
+  // border-right: 1px solid #e9e9ee;
+  color: #fff;
   font-size: 14px;
 }
 
@@ -31,7 +34,8 @@
 
 .thead_tr{
   height: 40px;
-  border-bottom: 1px solid #e9e9ee;
+
+  // border-bottom: 1px solid #e9e9ee;
 }
 
 .th {
@@ -39,8 +43,8 @@
   text-align: center;
   line-height: 40px;
   font-size: 14px;
-  color: #666;
-  border-right: 1px solid #e9e9ee;
+  color: #fff;
+  // border-right: 1px solid #e9e9ee;
   font-weight: bold;
 }
 

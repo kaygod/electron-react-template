@@ -10,6 +10,7 @@
 }
 .select{
     width: 390px;
+    position: relative;
 }
 .selectBar{
     width: 100%;
@@ -55,10 +56,13 @@
     cursor: pointer;
 }
 .selectBox{
-    width: 100%;
+    width: 390px;
     margin-top: 1px;
     background-color:#26475a ;
     border-radius: 3px;
+    position: absolute;
+    top: 51px;
+    z-index: 999;
 }
 .selectItem{
     height: 42px;

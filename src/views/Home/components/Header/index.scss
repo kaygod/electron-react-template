@@ -1,0 +1,25 @@
+.header{
+    width: 100%;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #355664;
+    border-radius: 5px;
+}
+.headerItem{
+    text-align: center;
+    flex: 1;
+}
+.itemName{
+    color:#02d7db;
+  }
+  .itemVal{
+    font-size: 20px;
+    margin-top: 10px;
+  }
+.headerItem:not(:first-child){
+    border-left: 1px solid #02d7db;
+}

@@ -4,8 +4,8 @@ import style from './index.scss';
 type defaultProps = {
     list: any[],
     title:string,
-    titleAlwayShow:boolean,
-    ableInput:boolean,
+    titleAlwayShow?:boolean,
+    ableInput?:boolean,
     placeHold?:string,
     value:string,
     inputType?:string,
@@ -27,19 +27,19 @@ const ctrlBtn = (props: defaultProps) => {
   return (
     <div className={style.select}>
         <div className={style.flexLeft+' '+ style.selectBar}>
-        <div className={style.containBox}>
-                {
-                    (titleAlwayShow||value)&&
-                    <div className={style.smTitle}>{title}</div>
-                }
-                {ableInput?
-                    <input className={style.in} type={inputType} value={value} placeholder={placeHold} onInput={(e)=>{onChange(e.currentTarget.value)}}></input>:
-                    <div className={style.textShow+' '+style.textEllips}>{value||placeHold}</div>
-                }
-        </div>
-        <div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
-                1
-        </div>
+            <div className={style.containBox}>
+                    {
+                        (titleAlwayShow||value)&&
+                        <div className={style.smTitle}>{title}</div>
+                    }
+                    {ableInput?
+                        <input className={style.in} type={inputType} value={value} placeholder={placeHold} onInput={(e)=>{onChange(e.currentTarget.value)}}></input>:
+                        <div className={style.textShow+' '+style.textEllips}>{value||placeHold}</div>
+                    }
+            </div>
+            <div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
+                    1
+            </div>
         </div>
         {
             dropShow&&<div className={style.selectBox}>
@@ -47,7 +47,7 @@ const ctrlBtn = (props: defaultProps) => {
                 list.map((val)=>{
                     return (
                         <div className={style.selectItem+' '+style.textEllips} onClick={()=>{
-                            onChange(val.name) 
+                            onChange(val) 
                             setdropShow(false)
                             }}>
                             {val.name}

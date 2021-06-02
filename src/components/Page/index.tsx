@@ -55,11 +55,12 @@ const renderLeft = (page_no: number, updatePage: updatePageType) => {
     return (
       <div
         className={styles.cube}
+        style={{width:'60px'}}
         onClick={() => {
           updatePage(page_no - 1);
         }}
       >
-        &lt;
+        &lt; 上一页
       </div>
     );
   }
@@ -80,14 +81,15 @@ const renderRight = (
 
   return (
     <>
-      <div className={styles.cube}>...</div>
+      {total_page>10&&<div className={styles.cube}>...</div>}
       <div
         className={styles.cube}
+        style={{width:'60px'}}
         onClick={() => {
           updatePage(page_no + 1);
         }}
       >
-        &gt;
+        下一页 &gt;
       </div>
     </>
   );
@@ -110,7 +112,7 @@ const getContent = (
     return null;
   }
   //总页码<=9
-  else if (total_page <= 9) {
+  else if (total_page <= 10) {
     content = pageList({ total_page, start: 1, page_no, updatePage });
   }
   //当前页码>=1且<=4
@@ -142,11 +144,13 @@ const Page = (props: defaultProps) => {
 
   return (
     <div className={styles.page}>
+      <span className={styles.cube} style={{width:'44px'}} onClick={() => { updatePage(1); }}>首页</span>
       {renderLeft(page_no, updatePage)}
       {content.map((item, index) => {
         return <span key={index}>{item}</span>;
       })}
       {renderRight(page_no, total_page, updatePage)}
+      <span className={styles.cube} style={{width:'44px'}} onClick={() => { updatePage(total_page); }}>尾页</span>
     </div>
   );
 };
