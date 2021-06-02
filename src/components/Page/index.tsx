@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import './index.less';
+import styles from './index.scss';
 
 type updatePageType = (page_no: number) => void;
 
@@ -33,7 +33,7 @@ const pageList = ({
   Array.from(Array(total_page)).forEach((v, index) => {
     content.push(
       <div
-        className={`cube ${index + start === page_no ? 'active' : ''}`}
+        className={`${styles.cube} ${index + start === page_no ? styles.active : ''}`}
         onClick={() => {
           jump(index + start);
         }}
@@ -54,7 +54,7 @@ const renderLeft = (page_no: number, updatePage: updatePageType) => {
   } else {
     return (
       <div
-        className="cube"
+        className={styles.cube}
         onClick={() => {
           updatePage(page_no - 1);
         }}
@@ -80,9 +80,9 @@ const renderRight = (
 
   return (
     <>
-      <div className="cube">...</div>
+      <div className={styles.cube}>...</div>
       <div
-        className="cube"
+        className={styles.cube}
         onClick={() => {
           updatePage(page_no + 1);
         }}
@@ -141,7 +141,7 @@ const Page = (props: defaultProps) => {
   }
 
   return (
-    <div className="page">
+    <div className={styles.page}>
       {renderLeft(page_no, updatePage)}
       {content.map((item, index) => {
         return <span key={index}>{item}</span>;

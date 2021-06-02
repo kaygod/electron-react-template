@@ -1,4 +1,5 @@
 .hdList{
+<<<<<<< HEAD
     width: 928px;
     height:  659px;
     display: flex;
@@ -17,3 +18,21 @@
 
 
 
+=======
+ color:#fff;
+ display: flex;
+ height: 100%;
+}
+.left{
+  width:686px;
+  background-color: rgb(10,38,50);
+  box-sizing: border-box;
+  padding:26px 16px 18px 16px;
+  height: 100%;
+} 
+.right{
+  width:230px;
+  background-color: rgb(10,38,50);
+  margin-left:18px;
+}
+>>>>>>> 4c5ff220d21c6bbbbfd24488601349c665f9d7ea

@@ -1,7 +1,7 @@
 import React,{useRef,useEffect} from 'react';
 import * as echarts from 'echarts';
 import 'echarts/lib/chart/line';
-import style from './index.scss';
+import styles from './index.scss';
 
 type defaultProps = {
    procent:string|number,
@@ -86,11 +86,11 @@ const initChart = ()=>{
     }
 }
   return ( 
-      <div className={style.warp}>
-        <div className={style.box}>
-          <div className={style.chartBox} ref={gridRef}></div>
+      <div className={styles.warp}>
+        <div className={styles.box}>
+          <div className={styles.chartBox} ref={gridRef}></div>
         </div>
-        <div className={style.title}>
+        <div className={styles.title}>
             {title}
         </div>
       </div>
