@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2558364 */
-  src: url('iconfont.woff2?t=1622529876632') format('woff2'),
-       url('iconfont.woff?t=1622529876632') format('woff'),
-       url('iconfont.ttf?t=1622529876632') format('truetype');
+  src: url('iconfont.woff2?t=1622613900613') format('woff2'),
+       url('iconfont.woff?t=1622613900613') format('woff'),
+       url('iconfont.ttf?t=1622613900613') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-caret-down:before {
+  content: "\e8ec";
 }
 
 .icon-close:before {

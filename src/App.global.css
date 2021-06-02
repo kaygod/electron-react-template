@@ -152,10 +152,10 @@ html {
 
 
 .main{
-  margin-top:88px;
+  margin-top:58px;
   display: flex;
   justify-content:flex-end;
-  align-items: center;
+  align-items: flex-start;
   width: 1200px;
 }
 
@@ -168,4 +168,5 @@ html {
 }
 .right{
   width:930px;
+  margin-right: 20px;
 }

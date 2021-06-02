@@ -1,7 +1,32 @@
 .switchkey{
-    width: 592px;
-    height: 392px;
-    background-color: #fff;
-    margin: 0 auto;
-    margin-top:155px;
+    width: 928px;
+    height: 508px;
+    padding-top: 150px;
+    background-color: #0A2632;
+    .mid_box{
+        width: 592px;
+        height: 391px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("../../images/publickey.png") no-repeat;
+        .alltext{
+            width: 424px;
+            height: 228px;
+            margin-left: 25px;
+            .title{
+               font-size: 16px;
+               color: #fff;
+               margin-bottom: 25px;
+            }
+            .choice{
+                margin-bottom: 15px;
+            }
+            .btn{
+                text-align: center;
+                width: 100%;
+            }
+        }
+    }
 }

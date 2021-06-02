@@ -6,8 +6,8 @@ type defaultProps = {
     title:string,
     titleAlwayShow:boolean,
     ableInput:boolean,
-    placeHold?:string,
-    value:string,
+    placeHold:string,
+    value?:string,
     inputType?:string,
     onChange?: (v: any) => void; // 更新事件
 };
@@ -38,7 +38,7 @@ const ctrlBtn = (props: defaultProps) => {
                 }
         </div>
         <div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
-                1
+                <span className="iconfont icon-caret-down"></span>
         </div>
         </div>
         {
