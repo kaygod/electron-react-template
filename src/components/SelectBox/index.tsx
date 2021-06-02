@@ -4,10 +4,10 @@ import style from './index.scss';
 type defaultProps = {
     list: any[],
     title:string,
-    titleAlwayShow:boolean,
-    ableInput:boolean,
-    placeHold:string,
-    value?:string,
+    titleAlwayShow?:boolean,
+    ableInput?:boolean,
+    placeHold?:string,
+    value:string,
     inputType?:string,
     onChange?: (v: any) => void; // 更新事件
 };
@@ -47,7 +47,7 @@ const ctrlBtn = (props: defaultProps) => {
                 list.map((val)=>{
                     return (
                         <div className={style.selectItem+' '+style.textEllips} onClick={()=>{
-                            onChange(val.name) 
+                            onChange(val) 
                             setdropShow(false)
                             }}>
                             {val.name}

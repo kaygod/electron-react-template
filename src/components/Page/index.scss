@@ -1,5 +1,6 @@
 .page {
   display: flex;
+  margin-left: auto;
 }
 .cube {
   width: 26px;
@@ -7,16 +8,16 @@
   margin: 0px 5px;
   text-align: center;
   line-height: 26px;
-  color: #818181;
+  color: #02d7db;
   text-align: center;
   font-size: 12px;
   margin-right: 6px;
   cursor: pointer;
-  border:1px solid #E9E9EE;
+  border:1px solid #02d7db;
   border-radius:3px;
 }
 .cube.active {
-  background-image:linear-gradient(to bottom right, #fff, rgb(14, 171, 177));
-  color: #818181;
+  background: #02d7db;
+  color: #fff;
   border: 1px solid transparent;
 }

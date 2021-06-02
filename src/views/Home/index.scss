@@ -1,19 +1,7 @@
 .home {
-  .Hello {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-  }
-  .line {
-    display: flex;
-  }
-
-  .first-column {
-    flex: 1;
-  }
-
-  .second-column {
-    flex: 2;
-  }
+  width: 100%;
+  height: 650px;
+  background-color: #0a2632;
+  padding: 20px;
+  box-sizing: border-box;
 }
