@@ -167,14 +167,5 @@ html {
    left: 32px; */
 }
 .right{
-   width: 928px;
-   height: 660px;
-   margin-top: 55px;
-   margin-right: 27px;
-   background-color: #0A2632;
-}
-.link{
-   /* position: absolute;
-   right: 3px;
-   top: 0; */
+  width:930px;
 }
