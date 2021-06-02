@@ -5,6 +5,7 @@ import React, {
   useImperativeHandle,
 } from 'react';
 import styles from './index.scss';
+import custome_styles from "./custome.scss";
 
 export type selectType = { [key: string]: string };
 
@@ -182,8 +183,9 @@ const Table = forwardRef((props: defaulProps, ref) => {
       <thead>
         <tr className={styles.thead_tr}>
           {column.map((item) => {
+            const cus_styles = custome_styles as any;
             return (
-              <th key={item.key} className={styles.th}>
+              <th key={item.key} className={`${styles.th} ${item.className?cus_styles[item.className]:cus_styles.default}`}>
                 {item.filters
                   ? renderSelect({ ...item, filter_data, setFilters, onSelect })
                   : item.name}

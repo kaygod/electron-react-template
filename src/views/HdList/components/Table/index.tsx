@@ -9,6 +9,7 @@ const Table = () => {
       name:"硬盘",
       dataIndex:"hard_disk",
       key:"hard_disk",
+      className:"text_left",
       render(value:string){
         return <p>{value}</p>
       }
