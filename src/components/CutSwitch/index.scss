@@ -1,3 +1,14 @@
+.header{
+    display: flex;
+    align-items: stretch;
+    width: 100vw;
+    cursor: pointer;
+}
+.moveBar{
+    flex:1;
+    cursor: pointer;
+    -webkit-app-region: drag;
+}
 .switch{
     width: 72px;
     height: 30px;

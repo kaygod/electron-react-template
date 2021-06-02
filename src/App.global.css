@@ -155,23 +155,20 @@ html {
   margin-top:88px;
   display: flex;
   width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-  background: url("../src/images/main_bg.png") no-repeat fixed center;
 }
 
 .left{
    width:246px;
-   position: absolute;
+   /* margin-top: 88px; */
+   /* position: absolute;
    top: 210px;
-   left: 32px;
+   left: 32px; */
 }
 .right{
  flex:1;
 }
 .link{
-   position: absolute;
+   /* position: absolute;
    right: 3px;
-   top: 121px;
+   top: 0; */
 }
