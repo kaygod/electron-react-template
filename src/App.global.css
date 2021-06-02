@@ -157,17 +157,14 @@ html {
   justify-content:flex-end;
   align-items: center;
   width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-  background: url("../src/images/main_bg.png") no-repeat fixed center;
 }
 
 .left{
    width:246px;
-   position: absolute;
+   /* margin-top: 88px; */
+   /* position: absolute;
    top: 210px;
-   left: 32px;
+   left: 32px; */
 }
 .right{
    width: 928px;
@@ -177,7 +174,7 @@ html {
    background-color: #0A2632;
 }
 .link{
-   position: absolute;
+   /* position: absolute;
    right: 3px;
-   top: 121px;
+   top: 0; */
 }

@@ -1,0 +1,38 @@
+.box{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #093447;
+    position: relative;
+}
+.chartBox{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.box::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-image: url('../../images/procent.png');
+    width:160px;
+    height: 160px;
+    transform: translate(-50%,-50%);
+    background-size: contain;
+    z-index: 1;
+}
+.warp{
+    width: 150px;
+    text-align: center;
+    color: #fff;
+}
+.title{
+    padding-top: 10px;
+    font-weight: bold;
+    text-shadow: 0 0 1px #01fff6,0 0 1px #01fff6,0 0 1px #01fff6,0 0 1px #01fff6;
+}

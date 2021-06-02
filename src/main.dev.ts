@@ -69,9 +69,10 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 1200,
+    height: 800,
     icon: getAssetPath('icon.png'),
+    frame:false,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -106,8 +107,10 @@ const createWindow = async () => {
     shell.openExternal(url);
   });
 
-  globalShortcut.register('ctrl+x', function () {
-    mainWindow.webContents.openDevTools() 
+  globalShortcut.register('ctrl+d', function () {
+    if(mainWindow){
+      mainWindow.webContents.openDevTools(); 
+    }
   })
 
   // Remove this if your app does not use auto updates

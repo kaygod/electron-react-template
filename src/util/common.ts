@@ -2,8 +2,9 @@ const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
 import axios, { AxiosResponse } from 'axios';
+import { api_url } from "mock/config";
 
-const service_ip = "";
+const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
 
 export const call = (name: string) => {
@@ -43,7 +44,7 @@ export const fetch = <
 >(
   params: any
 ) => {
-  return new Promise<K>((resolve, reject) => {
+  return new Promise<T>((resolve, reject) => {
     params.url = `${service_ip}${params.url}`;
     const data = params.data || {};
     axios({
@@ -57,18 +58,16 @@ export const fetch = <
         if (typeof res == 'string') {
           res = JSON.parse(res);
         }
-        const rResult = res.data;
-        if (rResult && rResult.result == 1) {
-          resolve(rResult.data);
-        } else {
-          if (rResult.errno != null) {
+          const rResult = res.data;
+          if(rResult.errno == null){
+            resolve(rResult);
+          }else{
             if (rResult.errno == '1030' || rResult.errno == '1040') {
               //没有登录 或者 被挤下来了
               //store.commit('noLogin');
             }
             alert(msgCode(rResult.errno));
-          }
-        }
+          }   
       })
       .catch((error) => {
         if (error.code === 'ECONNABORTED') {
