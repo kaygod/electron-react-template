@@ -23,6 +23,7 @@
   // border-right: 1px solid #e9e9ee;
   color: #fff;
   font-size: 14px;
+  padding-left: 15px;
 }
 
 .grid p{
@@ -47,7 +48,9 @@
   // border-right: 1px solid #e9e9ee;
   font-weight: bold;
 }
-
+.th:first-child{
+  width: 100px;
+}
 .parentContainer {
   position: relative;
   cursor: pointer;

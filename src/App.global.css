@@ -160,7 +160,7 @@ html {
 }
 
 .left{
-   width:246px;
+   width:223px;
    /* margin-top: 88px; */
    /* position: absolute;
    top: 210px;
@@ -169,4 +169,5 @@ html {
 .right{
   width:930px;
   height:660px;
+  margin-right: 25px;
 }
