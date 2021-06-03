@@ -178,3 +178,10 @@ app.post('/switchKey',function(req, res){
     }
   );
 })
+
+
+app.post('/getKey',function(req, res){
+  res.json(
+    [{farm_key:'123',pool_key:'456'},{farm_key:'789',pool_key:'111'}]
+  );
+})
