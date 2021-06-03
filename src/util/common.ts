@@ -254,3 +254,16 @@ export const msgCode = (n: string) => {
 export const Alert = (msg:string)=>{
   window.alert(msg);
 }
+
+/**
+ * 弹框
+ */
+export const Confirm  = (msg:string)=>{
+  return new Promise((resolve,reject)=>{
+    if(window.confirm(msg)){
+      resolve(true);
+    }else{
+      reject(null);
+    }
+  })
+}

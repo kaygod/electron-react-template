@@ -61,6 +61,9 @@ export const counterSlice = createSlice({
         state.end_tasks = end_tasks;
         state.working_tasks= working_tasks;
         state.list = list;
+    },
+    updatePage(state,action){
+      state.page_no = action.payload;
     }
   },
 });
@@ -70,7 +73,7 @@ export const getter = (state: any) => {
 };
 
 // Action creators are generated for each case reducer function
-export const {  noOperate,updateStatus,updateState,updateKType } = counterSlice.actions;
+export const {  noOperate,updateStatus,updateState,updateKType,updatePage } = counterSlice.actions;
 
 
 /**
@@ -111,12 +114,12 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
 /**
  *  获取P盘数据
  */
- export const getMachineDataAsync = () => async (dispatch: Function, getState: Function) => {
+ export const getMachineDataAsync = (page:number | undefined = undefined) => async (dispatch: Function, getState: Function) => {
   const { page_no } = getter(getState());
   const response = await fetch({
     url:"/getMachineData",
     data:{
-      page_no
+      page_no:page != null ? page:page_no
     }
   })
   const { is_complete } = response;
@@ -126,6 +129,10 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   }
   //更新后端数据
   dispatch(updateState(response));
+
+  if(page != null){
+   dispatch(updatePage(page));
+  }
 };
 
 /**
