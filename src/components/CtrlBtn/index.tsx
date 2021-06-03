@@ -67,6 +67,10 @@ const useMethods = ()=>{
 
   const global_state = useSelector(globalGetter);
 
+  const toggleLoop = useLoop(()=>{
+    dispatch(getMachineDataAsync());
+  });
+
 
      /**
    * 开始P盘.对应几种情况
@@ -88,6 +92,9 @@ const useMethods = ()=>{
            return;
          }
          await dispatch(startWorkAsync()); // 开始P盘
+         if(status === statusType.stop){
+          toggleLoop(true);//开启定时器
+         }
          dispatch(getMachineDataAsync()); // 获取P盘数据
     }
   }
@@ -105,6 +112,7 @@ const useMethods = ()=>{
   */
   const stop = async ()=>{
     await dispatch(stopAsync()); // 全部停止
+    toggleLoop(false);//关掉定时器
     dispatch(getMachineDataAsync()); // 获取P盘数据  
   }
 

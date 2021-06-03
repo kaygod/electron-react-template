@@ -27,6 +27,9 @@ export const useLoop = (fn:Function)=>{
 
   useEffect(()=>{
     toggle(true); // 开启定时器
+    return ()=>{
+      toggle(false);
+    }
   },[])
 
   return toggle;
