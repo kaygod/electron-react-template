@@ -44,7 +44,7 @@ export const fetch = <
 >(
   params: any
 ) => {
-  return new Promise<T>((resolve, reject) => {
+  return new Promise<any>((resolve, reject) => {
     params.url = `${service_ip}${params.url}`;
     const data = params.data || {};
     axios({
@@ -66,12 +66,13 @@ export const fetch = <
               //没有登录 或者 被挤下来了
               //store.commit('noLogin');
             }
-            alert(msgCode(rResult.errno));
+            Alert(msgCode(rResult.errno));
+            reject(rResult.errno);
           }   
       })
       .catch((error) => {
         if (error.code === 'ECONNABORTED') {
-          alert('请求超时');
+          Alert('请求超时');
           return false;
         }
         console.log(error);
@@ -246,3 +247,10 @@ export const msgCode = (n: string) => {
       return '未知错误';
   }
 };
+
+/**
+ * 提示框
+ */
+export const Alert = (msg:string)=>{
+  window.alert(msg);
+}

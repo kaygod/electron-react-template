@@ -1,46 +1,118 @@
 import React from 'react';
 import style from './index.scss';
+import { useSelector, useDispatch } from 'react-redux'
+import { getter,statusType,startWorkAsync,getMachineDataAsync,switchMachineAsync,stopAsync } from "store/reducers/Home";
+import { KEY_IS_REQUIRED } from "util/constants";
+import { Alert } from "util/common";
 
 type defaultProps = {
-  labelStart: string;
-  labelEnd?: string;
   bgStart?: string
   bgEnd?: string;
-  status: Boolean;
-  onlyBtn:Boolean;
-  onChange?: (v: boolean) => void; // 更新事件
 };
 
+
 const ctrlBtn = (props: defaultProps) => {
-  let {
-    labelStart = props.status?'切换P盘':(props.labelStart||'开始P盘'),
-    labelEnd =  '全部停止',
-    status = true,
+
+  const { status } = useSelector(getter);
+
+  const {
     bgStart ='#02d7db',
-    bgEnd = '#ff614a',
-    onlyBtn = false,
-    onChange = () => {},
+    bgEnd = '#ff614a'
   } = props;
-  let bgStartStyle = {
+
+  const bgStartStyle = {
     backgroundColor:bgStart,
     borderWidth:'1px',
     borderColor:bgStart,
     borderStyle:'solid'
   };
-  let bgStartEnd = {
+
+  const bgStartEnd = {
     backgroundColor:bgEnd,
     borderWidth:'1px',
     borderColor:bgEnd,
     borderStyle:'solid'
   };
+
+  const { startWork,switchMachine,stop } = useMethods();
+
+
   return (
     <div className={style.flexLeft}>
-        <div className={style.btn+' '+style.flexCenter} onClick={()=>{onChange(!status)}} style={bgStartStyle}>{labelStart}</div>
+
         {
-          status&&!onlyBtn&&<div className={style.btn+' '+style.flexCenter} style={bgStartEnd}  onClick={()=>{onChange(false)}}>{labelEnd}</div>
-        }     
+          status == statusType.completed || status === statusType.initial || status === statusType.stop?
+          <div className={style.btn+' '+style.flexCenter} onClick={startWork} style={bgStartStyle}>开始P盘</div>
+          :null
+        }
+        {
+          status === statusType.working?(
+            <>
+            <div className={style.btn+' '+style.flexCenter} onClick={switchMachine} style={bgStartStyle}>切换P盘</div>
+            <div className={style.btn+' '+style.flexCenter} style={bgStartEnd}  onClick={stop}>全部停止</div>
+            </>   
+          ):null
+        }
     </div>
   );
 };
+
+const useMethods = ()=>{
+
+  const dispatch = useDispatch();
+
+  const state = useSelector(getter);
+
+     /**
+   * 开始P盘.对应几种情况
+   *
+   * 1.程序初始启动调用
+   * 2.全部停止后的调用
+   * 3.全部完成后的调用.p盘完成后有两种情况,第一种是当前规格已经没有空间再p了,后端返回错误码725.当前 规格还有空间可以p,那就继续p.
+   */
+  const startWork = async ()=>{
+  
+    const status =  state.status;
+
+    const is_login = true; // 是否登录
+
+    // 对应情况1 和 情况 2 还有 情况 3
+    if(status === statusType.initial || status === statusType.stop || status === statusType.completed){ 
+         if(!is_login){ // 没有登录
+           Alert(KEY_IS_REQUIRED);
+           return;
+         }
+         await dispatch(startWorkAsync()); // 开始P盘
+         dispatch(getMachineDataAsync()); // 获取P盘数据
+    }
+  }
+
+  /**
+  * 切换P盘
+  */
+  const switchMachine = async ()=>{
+    await dispatch(switchMachineAsync()); // 切换P盘
+    dispatch(getMachineDataAsync()); // 获取P盘数据  
+  }
+
+  /**
+  * 全部停止
+  */
+  const stop = async ()=>{
+    await dispatch(stopAsync()); // 全部停止
+    dispatch(getMachineDataAsync()); // 获取P盘数据  
+  }
+
+
+  return {
+    startWork,
+    switchMachine,
+    stop
+  }
+
+}
+
+
+
 
 export default ctrlBtn;
