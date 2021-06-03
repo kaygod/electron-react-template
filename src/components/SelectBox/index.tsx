@@ -26,6 +26,18 @@ const ctrlBtn = (props: defaultProps) => {
     ableDrag = true,
     onChange = () => {},
   } = props;
+
+  const filter = (val:string)=>{
+        const item = list.find((item)=>{
+            return item.value === val;
+        })
+        if(item){
+            return item.name;
+        }else{
+            return placeHold;
+        }
+  }
+
   return (
     <div className={style.select}>
         <div className={style.flexLeft+' '+ style.selectBar}>
@@ -36,7 +48,7 @@ const ctrlBtn = (props: defaultProps) => {
                 }
                 {ableInput?
                     <input className={style.in} type={inputType} value={value} placeholder={placeHold} onInput={(e)=>{onChange(e.currentTarget.value)}}></input>:
-                    <div className={style.textShow+' '+style.textEllips}>{value||placeHold}</div>
+                    <div className={style.textShow+' '+style.textEllips}>{filter(value)}</div>
                 }
         </div>
         {ableDrag&&<div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
