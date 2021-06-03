@@ -10,6 +10,7 @@ type defaultProps = {
   total_page: number;
   updatePage: (num: number) => void;
   onSelect?: (data: selectType) => void;
+  min_height:number;
 };
 
 const Table = forwardRef((props: defaultProps, ref) => {
@@ -20,10 +21,11 @@ const Table = forwardRef((props: defaultProps, ref) => {
     total_page,
     updatePage,
     onSelect,
+    min_height,
   } = props;
 
   return (
-    <div>
+    <div className={styles.allpage} style={{minHeight:min_height+'px'}}>
       <Grid column={column} data={data} onSelect={onSelect} ref={ref} />
       <div className={styles.bottom}>
         <Page

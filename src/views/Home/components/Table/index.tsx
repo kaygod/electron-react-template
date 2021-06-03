@@ -8,9 +8,9 @@ const Table = () => {
             name:'编号', 
             dataIndex:"num",
             key:"num",
-            className:'text_left',
+            className:'text_padding20',
             render(value:string){
-                return <p style={{textAlign:'left'}}>{value}</p>
+                return <p style={{textAlign:'left',paddingLeft:'25px'}}>{value}</p>
             }
         },
         {
@@ -50,34 +50,33 @@ const Table = () => {
     }
     let data=[
         {
-            num:1,
+            num:'01',
             k_value:'K-32,101.4GiB',
             file_name:'文件名',
             status:10
         },
         {
-            num:2,
+            num:'20',
             k_value:'K-32,101.4GiB',
             file_name:'文件名',
             status:30
         },
         {
-            num:2,
+            num:'200',
             k_value:'K-32,101.4GiB',
             file_name:'文件名',
             status:50
         },
         {
-            num:2,
+            num:'2000',
             k_value:'K-32,101.4GiB',
             file_name:'文件名',
             status:90
         }
     ]
   return (
-    <div className={styles.ChooseBox}>
-      <TableGrid column={column} data={data} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage} />
-       
+    <div>
+      <TableGrid column={column} data={data} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage}  min_height={479}/>     
     </div>
   );
 };

@@ -42,7 +42,7 @@ const Table = () => {
 
   return (
     <div className={styles.table}>
-        <TableGrid column={column} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage}/>
+        <TableGrid column={column} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage} min_height={636}/>
     </div>
   );
 }

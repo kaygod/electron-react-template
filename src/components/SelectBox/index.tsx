@@ -9,6 +9,7 @@ type defaultProps = {
     placeHold?:string,
     value:string,
     inputType?:string,
+    ableDrag?:boolean,
     onChange?: (v: any) => void; // 更新事件
 };
 
@@ -22,6 +23,7 @@ const ctrlBtn = (props: defaultProps) => {
     value,
     inputType='text',
     placeHold='请选择',
+    ableDrag = true,
     onChange = () => {},
   } = props;
   return (
@@ -37,9 +39,9 @@ const ctrlBtn = (props: defaultProps) => {
                     <div className={style.textShow+' '+style.textEllips}>{value||placeHold}</div>
                 }
         </div>
-        <div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
+        {ableDrag&&<div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
                 <span className="iconfont icon-caret-down"></span>
-        </div>
+        </div>}
         </div>
         {
             dropShow&&<div className={style.selectBox}>
