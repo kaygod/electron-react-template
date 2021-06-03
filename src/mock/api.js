@@ -105,8 +105,9 @@ app.post('/getStatus',function(req, res){
   res.json(
     {
       cpu_rate:10,
-      memory_rate:20,
+      memory_rate:98,
       total_page:2,
+      page_no:1,
       list:[
         {
           hard_disk:"had",
@@ -164,7 +165,7 @@ app.post('/getStatus',function(req, res){
         {
           hard_disk:"had",
           draw_num:"122",
-          draw_capacity:"100"
+          draw_capacity:"300"
         }
       ]
     }
