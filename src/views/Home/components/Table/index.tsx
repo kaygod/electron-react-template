@@ -75,9 +75,8 @@ const Table = () => {
         }
     ]
   return (
-    <div className={styles.ChooseBox}>
-      <TableGrid column={column} data={data} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage} />
-       
+    <div>
+      <TableGrid column={column} data={data} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage}  min_height={479}/>     
     </div>
   );
 };
