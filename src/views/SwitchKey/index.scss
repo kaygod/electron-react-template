@@ -1,12 +1,12 @@
 .switchkey{
     width: 928px;
-    height: 508px;
-    padding-top: 150px;
+    height: 660px;
     background-color: #0A2632;
+    display: flex;
     .mid_box{
         width: 592px;
         height: 391px;
-        margin: 0 auto;
+        margin: auto;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -23,7 +23,6 @@
             .choice{
                 margin-bottom: 15px;
             }
-            
             .btn{
                 width: 95px;
                 height: 35px;

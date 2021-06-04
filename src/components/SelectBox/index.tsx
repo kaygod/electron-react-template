@@ -18,7 +18,7 @@ type defaultProps = {
 const ctrlBtn = (props: defaultProps) => {
     const [dropShow,setdropShow] = useState(false)
   let {
-    list,
+    list=[],
     title,
     ableInput=false,
     titleAlwayShow=false,

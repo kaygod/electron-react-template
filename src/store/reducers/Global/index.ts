@@ -5,7 +5,6 @@ const getKey = ()=>{
   let chia_key;
   try {
      chia_key = localStorage.getItem("chia_key") 
-      alert(chia_key)
   } catch (error) {
     chia_key = null;
   }

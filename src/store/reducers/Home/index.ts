@@ -129,7 +129,6 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   }
   //更新后端数据
   dispatch(updateState(response));
-
   if(page != null){
    dispatch(updatePage(page));
   }

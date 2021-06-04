@@ -22,8 +22,8 @@ export const counterSlice = createSlice({
   name: 'HdList',
   initialState: {
     table_data:{
-        cpu_rate:'',
-        memory_rate:'',
+        cpu_rate:'0',
+        memory_rate:'0',
         page_no:1,
         total_page: 1,
         list:[]
@@ -48,7 +48,7 @@ export const getter = (state: any): dataType => {
   return state.HdList;
 };
 export const queryAsync = (
-    page_no?: string
+    page_no?: string|number
   ) => async (dispatch: Function, getState: Function) => {
     const { table_data } = getter(getState()) as dataType;
 
@@ -70,9 +70,7 @@ export const queryAsync = (
       }
       item.code = code;
     });
-    if (page_no != null) {
       dispatch(updatePage(response));
-    }
   };
 // Action creators are generated for each case reducer function
 

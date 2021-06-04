@@ -5,8 +5,8 @@ import CtrlBtn from "components/CtrlBtn/index"
 import { queryAsync, getter, updateKey,updateKeyList } from 'store/reducers/SwitchKey';
 import { queryUpdateKey,getter as globalGetter } from 'store/reducers/Global';
 import { useSelector, useDispatch } from 'react-redux';
-import { Alert } from 'util/common'
-import { KEY_FARM_IS_REQUIRED, POOL_KEY_IS_REQUIRED } from 'util/constants'
+import { Alert, Confirm } from 'util/common'
+import { KEY_FARM_IS_REQUIRED, POOL_KEY_IS_REQUIRED, COMFIRM_UPDATE_KEY } from 'util/constants'
 
 const SwitchKey = () => {
   const dispatch = useDispatch()
@@ -23,13 +23,13 @@ const SwitchKey = () => {
     }
   },[])
 
-  const farmKey=(v)=>{
+  const farmKey=(v:string)=>{
     dispatch(updateKey({key_name:'farm_key',value:v}))
   }
-  const poolKey=(v)=>{
+  const poolKey=(v:string)=>{
     dispatch(updateKey({key_name:'pool_key',value:v}))
   }
-  const onChange = (v)=>{
+  const onChange = (v:{farm_key:string,pool_key:string})=>{
     dispatch(updateKey({key_name:'farm_key',value:v.farm_key}))
     dispatch(updateKey({key_name:'pool_key',value:v.pool_key}))
   }
@@ -41,7 +41,11 @@ const SwitchKey = () => {
       Alert(POOL_KEY_IS_REQUIRED)
       return
     }else{
+      Confirm(COMFIRM_UPDATE_KEY).then(()=>{
       dispatch(queryUpdateKey(key))
+      }).catch(()=>{
+        return
+      })
     }
   }
   return (
@@ -51,15 +55,15 @@ const SwitchKey = () => {
                <div className={styles.title}>请选择您的P盘公钥</div>
                <div className={styles.choice}>
                  <SelectBox 
-                 titleAlwayShow={true} 
-                 title="farm key" 
-                 value={key.farm_key} 
-                 ableInput={true} 
-                 placeHold="请选择/输入farm key"
-                 list={list} 
-                 dragShowName="farm_key" 
-                 inputChange={(v)=>farmKey(v)}
-                 onChange={(v)=>onChange(v)}
+                  titleAlwayShow={true} 
+                  title="farm key" 
+                  value={key.farm_key} 
+                  ableInput={true} 
+                  placeHold="请选择/输入farm key"
+                  list={list} 
+                  dragShowName="farm_key" 
+                  inputChange={(v)=>farmKey(v)}
+                  onChange={(v)=>onChange(v)}
                  />
                  </div>
                <div className={styles.choice}>
@@ -70,9 +74,8 @@ const SwitchKey = () => {
                   value={key.pool_key}
                   ableInput={true} 
                   placeHold="请选择/输入pool key" 
-                 inputChange={(v)=>poolKey(v)}
-                 list={[]}/></div>
-                 <div className={styles.btnBar}>
+                  inputChange={(v)=>poolKey(v)}/></div>
+                 <div>
                     <div className={styles.btn+' '+styles.flexCenter} onClick={()=>{
                       comfirm()
                     }}>确认</div>
