@@ -19,9 +19,13 @@ const getKey = ()=>{
 export const counterSlice = createSlice({
   name: 'Global',
   initialState: {
-    chia_key:getKey()
+    chia_key:getKey(),
+    has_switch:false // 切换过吗
   },
   reducers: {
+    updateSwitchFlag(state,action){
+       state.has_switch = action.payload;
+    },
     updateKey(state,action){
       state.chia_key = action.payload
     },
@@ -57,7 +61,7 @@ export const queryUpdateKey = (
 
   };
 // Action creators are generated for each case reducer function
-export const { noOperate } = counterSlice.actions;
+export const { noOperate,updateSwitchFlag } = counterSlice.actions;
 
 
 

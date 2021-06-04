@@ -40,7 +40,7 @@ export const call = (name: string) => {
 
 export const fetch = <
   K,
-  T extends { result?: number; errno?: string; data: K }
+  T extends { result?: number; error?: string; data: K }
 >(
   params: any
 ) => {
@@ -59,15 +59,15 @@ export const fetch = <
           res = JSON.parse(res);
         }
           const rResult = res.data;
-          if(rResult.errno == null){
+          if(rResult.error == null){
             resolve(rResult);
           }else{
-            if (rResult.errno == '1030' || rResult.errno == '1040') {
+            if (rResult.error == '1030' || rResult.error == '1040') {
               //没有登录 或者 被挤下来了
               //store.commit('noLogin');
             }
-            Alert(msgCode(rResult.errno));
-            reject(rResult.errno);
+            Alert(msgCode(rResult.error));
+            reject(rResult.error);
           }   
       })
       .catch((error) => {
