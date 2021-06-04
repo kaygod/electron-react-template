@@ -91,23 +91,20 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
 /**
  *  开始p盘
  */
- export const startWorkAsync = () => async (dispatch: Function, getState: Function) => {
+ export const startWorkAsync = () => (dispatch: Function, getState: Function) => {
   const { k_type } = getter(getState());
   if(k_type == null){
     alert(DRAW_IS_REQUIRE);
     return;
   }
-  try {
-    await fetch({
+  return fetch({
       url:"/startWork",
       data:{
         k_type
       }
-    })
-    dispatch(updateStatus(statusType.working)); 
-  } catch (error) {
-     console.log(error);
-  }
+    }).then(()=>{
+      dispatch(updateStatus(statusType.working));
+    })  
 };
 
 
@@ -137,38 +134,32 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
 /**
  *  切换p盘
  */
- export const switchMachineAsync = () => async (dispatch: Function, getState: Function) => {
+ export const switchMachineAsync = () => (dispatch: Function, getState: Function) => {
   const { k_type } = getter(getState());
   if(k_type == null){
     alert(DRAW_IS_REQUIRE);
     return;
   }
-  try {
-    await fetch({
+  return fetch({
       url:"/switchMachine",
       data:{
         k_type
       }
-    })
-    dispatch(noOperate());
-  } catch (error) {
-     console.log(error);
-  }
+    }).then(()=>{
+      dispatch(noOperate());
+  })
 };
 
 /**
  *  全部停止
  */
- export const stopAsync = () => async (dispatch: Function, getState: Function) => {
-  try {
-    await fetch({
+ export const stopAsync = () => (dispatch: Function, getState: Function) => {
+   return fetch({
       url:"/stop",
       data:{}
-    })
-    dispatch(updateStatus(statusType.stop));
-  } catch (error) {
-     console.log(error);
-  }
+    }).then(()=>{
+      dispatch(updateStatus(statusType.stop));
+    })  
 };
 
 

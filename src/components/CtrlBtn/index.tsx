@@ -91,11 +91,16 @@ const useMethods = ()=>{
            Alert(KEY_IS_REQUIRED);
            return;
          }
-         await dispatch(startWorkAsync()); // 开始P盘
-         if(status === statusType.stop){
-          toggleLoop(true);//开启定时器
-         }
-         dispatch(getMachineDataAsync()); // 获取P盘数据
+         // 开始P盘
+         try {  
+          await dispatch(startWorkAsync());
+          if(status === statusType.stop){
+            toggleLoop(true);//开启定时器
+          }
+          dispatch(getMachineDataAsync()); // 获取P盘数据
+         } catch (error) {
+            console.log(error);
+         }     
     }
   }
 
@@ -103,17 +108,25 @@ const useMethods = ()=>{
   * 切换P盘
   */
   const switchMachine = async ()=>{
-    await dispatch(switchMachineAsync()); // 切换P盘
-    dispatch(getMachineDataAsync()); // 获取P盘数据  
+    try {
+      await dispatch(switchMachineAsync()); // 切换P盘
+      dispatch(getMachineDataAsync()); // 获取P盘数据   
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   /**
   * 全部停止
   */
   const stop = async ()=>{
-    await dispatch(stopAsync()); // 全部停止
-    toggleLoop(false);//关掉定时器
-    dispatch(getMachineDataAsync()); // 获取P盘数据  
+    try {
+      await dispatch(stopAsync()); // 全部停止
+      toggleLoop(false);//关掉定时器
+      dispatch(getMachineDataAsync()); // 获取P盘数据         
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
