@@ -17,7 +17,7 @@ const LeftSider = () => {
       {
         routerList.map((val,index)=>{
           return (
-             <div className={`${styles.lines} ${pathname==val.path?styles.current:''}`} onClick={()=>{
+             <div key={index} className={`${styles.lines} ${pathname==val.path?styles.current:''}`} onClick={()=>{
                history.push(val.path)
               }}><span className={"iconfont "+val.icon }></span><p>{val.name}</p> </div>
           )

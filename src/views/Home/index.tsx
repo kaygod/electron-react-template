@@ -5,6 +5,7 @@ import Table from "./components/Table/index"
 import styles from "./index.scss";
 import { useSelector, useDispatch } from 'react-redux'
 import { getter as globalGetter,updateSwitchFlag } from "store/reducers/Global";
+import { getStatusAsync } from "store/reducers/Home";
 import { useHistory } from "react-router";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
   const dispatch = useDispatch();
   
   useEffect(()=>{
+    dispatch(getStatusAsync())
     if(chia_key == null && has_switch === false){
       history.replace("/update_key");
       dispatch(updateSwitchFlag(true));

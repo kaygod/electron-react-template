@@ -47,6 +47,7 @@ export const counterSlice = createSlice({
     // 更新状态
     updateStatus(state,action){
       const status= action.payload;
+      console.log(status)
       state.status = status;
     },
     noOperate(state) {
@@ -84,6 +85,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
      url:"/getStatus",
      data:{}
    })
+   console.log(response)
    dispatch(updateStatus(response.status));
 };
 
@@ -95,7 +97,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   const { k_type } = getter(getState());
   if(k_type == null){
     alert(DRAW_IS_REQUIRE);
-    return;
+    return Promise.reject(null);
   }
   return fetch({
       url:"/startWork",
@@ -126,6 +128,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   }
   //更新后端数据
   dispatch(updateState(response));
+  console.log(page)
   if(page != null){
    dispatch(updatePage(page));
   }

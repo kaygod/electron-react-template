@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './index.scss';
 import { useSelector, useDispatch } from 'react-redux'
-import { getter,statusType,startWorkAsync,getMachineDataAsync,switchMachineAsync,stopAsync } from "store/reducers/Home";
+import { getter,statusType,startWorkAsync,getMachineDataAsync,switchMachineAsync,stopAsync,updateStatus } from "store/reducers/Home";
 import  { getter as globalGetter } from "store/reducers/Global";
 import { KEY_IS_REQUIRED } from "util/constants";
 import { Alert } from "util/common";
@@ -68,8 +68,8 @@ const useMethods = ()=>{
   const global_state = useSelector(globalGetter);
 
   const toggleLoop = useLoop(()=>{
-    dispatch(getMachineDataAsync());
-  });
+      dispatch(getMachineDataAsync());
+  },state.status === statusType.working);
 
 
      /**
@@ -91,13 +91,16 @@ const useMethods = ()=>{
            Alert(KEY_IS_REQUIRED);
            return;
          }
+         //dispatch(updateStatus(statusType.working))
          // 开始P盘
          try {  
           await dispatch(startWorkAsync());
-          if(status === statusType.stop){
+          if(status === statusType.stop || status === statusType.initial){
             toggleLoop(true);//开启定时器
+          }else{
+
           }
-          dispatch(getMachineDataAsync()); // 获取P盘数据
+          // dispatch(getMachineDataAsync()); // 获取P盘数据
          } catch (error) {
             console.log(error);
          }     
@@ -122,8 +125,10 @@ const useMethods = ()=>{
   const stop = async ()=>{
     try {
       await dispatch(stopAsync()); // 全部停止
+      console.log(state.status)     
       toggleLoop(false);//关掉定时器
-      dispatch(getMachineDataAsync()); // 获取P盘数据         
+      dispatch(getMachineDataAsync()); // 获取P盘数据    
+      console.log(state.status)     
     } catch (error) {
       console.log(error);
     }

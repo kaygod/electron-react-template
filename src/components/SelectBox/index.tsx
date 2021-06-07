@@ -62,9 +62,9 @@ const ctrlBtn = (props: defaultProps) => {
         {
             dropShow&&<div className={style.selectBox}>
             {
-                list.map((val)=>{
+                list.map((val,index)=>{
                     return (
-                        <div className={style.selectItem+' '+style.textEllips} onClick={()=>{
+                        <div key={index} className={style.selectItem+' '+style.textEllips} onClick={()=>{
                             onChange(val) 
                             setdropShow(false)
                             }}>

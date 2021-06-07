@@ -3,6 +3,7 @@ import styles from "./index.scss";
 import SelectBox from "components/SelectBox/index";
 import CtrlBtn from "components/CtrlBtn/index"
 import { queryAsync, getter, updateKey,updateKeyList } from 'store/reducers/SwitchKey';
+import { stopAsync } from 'store/reducers/home';
 import { queryUpdateKey,getter as globalGetter } from 'store/reducers/Global';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Confirm } from 'util/common'
@@ -42,6 +43,7 @@ const SwitchKey = () => {
       return
     }else{
       Confirm(COMFIRM_UPDATE_KEY).then(()=>{
+        dispatch(stopAsync())
       dispatch(queryUpdateKey(key))
       }).catch(()=>{
         return

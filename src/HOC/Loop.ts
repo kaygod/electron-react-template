@@ -3,7 +3,7 @@ import {useEffect,useState,useRef} from "react";
 /**
  * 启用延时调用函数
  */
-export const useLoop = (fn:Function)=>{
+export const useLoop = (fn:Function,payload = true)=>{
 
   const [enable,setEnable] = useState(false); // 当前正在进行定时访问吗 
 
@@ -26,7 +26,7 @@ export const useLoop = (fn:Function)=>{
   }
 
   useEffect(()=>{
-    toggle(true); // 开启定时器
+    toggle(payload); // 开启定时器
     return ()=>{
       toggle(false);
     }

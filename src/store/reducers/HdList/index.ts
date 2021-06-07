@@ -53,7 +53,7 @@ export const queryAsync = (
     const { table_data } = getter(getState()) as dataType;
 
     const response: any = await fetch({
-      url: '/getStatus',
+      url: '/getHardStatus',
       data: {
         page_no: page_no == null ? table_data.page_no : page_no,
       },

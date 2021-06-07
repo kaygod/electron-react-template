@@ -10,15 +10,22 @@ app.use(function(req, res, next) {
   next();
 });
 
-
+let status = 1
 
 app.listen(3001, () => {
     console.log(`监听端口${3001}`)
 })
 
-
+app.post('/getStatus',function(req, res){
+  res.json(
+    {
+      status:status
+    }
+  );
+})
 
 app.post('/startWork',function(req, res){
+  status = 2
   res.json(
     {
       result:1
@@ -92,6 +99,7 @@ app.post('/switchMachine',function(req, res){
 
 
 app.post('/stop',function(req, res){
+  status = 3
   res.json(
     {
       result:1
@@ -101,7 +109,7 @@ app.post('/stop',function(req, res){
 
 
 
-app.post('/getStatus',function(req, res){
+app.post('/getHardStatus',function(req, res){
   res.json(
     {
       cpu_rate:10,
