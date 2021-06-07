@@ -3,7 +3,7 @@ import styles from "./index.scss";
 import SelectBox from "components/SelectBox/index";
 import CtrlBtn from "components/CtrlBtn/index"
 import { queryAsync, getter, updateKey,updateKeyList } from 'store/reducers/SwitchKey';
-import { stopAsync } from 'store/reducers/home';
+import { stopAsync } from 'store/reducers/Home';
 import { queryUpdateKey,getter as globalGetter } from 'store/reducers/Global';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Confirm } from 'util/common'
