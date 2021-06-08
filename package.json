@@ -15,7 +15,8 @@
     "start:renderer": "cross-env NODE_ENV=development webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
     "test": "jest",
     "mock": "node ./src/mock/api.js",
-    "dev": "concurrently \"yarn start\" \"yarn mock\""
+    "dev": "concurrently \"yarn start\" \"yarn mock\"",
+    "package-win":"yarn build && electron-builder build --publish never"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

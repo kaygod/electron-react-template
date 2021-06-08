@@ -42,7 +42,7 @@ export default merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /.s?css$/,
+        test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -62,6 +62,20 @@ export default merge(baseConfig, {
             },
           },
           'sass-loader'
+        ],
+      },
+      {
+        test: /\.global.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          }
         ],
       },
       // WOFF Font
