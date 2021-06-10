@@ -10,8 +10,6 @@ const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 export const call = (name: string) => {
   const script_path = path.join(__dirname, 'scripts', `${name}.sh`); // 脚本的真实路径
 
-  console.log(script_path);
-
   return new Promise(async (resolve, reject) => {
     await fs.ensureDir('/tmp/myScripts'); //判断/tmp下面有没有myScripts文件夹,没有就创建一个
 
@@ -22,14 +20,16 @@ export const call = (name: string) => {
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
     //执行脚本
-    exec(`bash ${dist_path}`, (error: any, stdout: any) => {
-      if (error) {
-        console.log(error);
-        reject(error);
-      } else {
-        resolve(stdout);
-      }
+    const workerProcess = exec(`bash ${dist_path}`);
+
+    workerProcess.stdout.on('data', function (value:string) {
+       resolve(value);
     });
+
+    workerProcess.stderr.on('data', function (error:string) {
+      reject(error);
+    });
+
   });
 };
 
