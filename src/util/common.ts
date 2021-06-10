@@ -23,7 +23,7 @@ export const call = (name: string) => {
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
     //执行脚本
-    const workerProcess = exec(`bash ${dist_path}`);
+    const workerProcess = exec(`bash ${script_path}`);
 
     workerProcess.stdout.on('data', function (value:string) {
        resolve(value);
