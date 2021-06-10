@@ -1,19 +1,23 @@
 const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
+const {remote} = require('electron');
+
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
+
+const configDir = remote.app.getPath('userData');
 
 
 export const call = (name: string) => {
   const script_path = path.join(__dirname, 'scripts', `${name}.sh`); // 脚本的真实路径
 
   return new Promise(async (resolve, reject) => {
-    await fs.ensureDir('/tmp/myScripts'); //判断/tmp下面有没有myScripts文件夹,没有就创建一个
+    await fs.ensureDir(path.join(configDir,"/myScripts")); //判断用户数据目录下面有没有myScripts文件夹,没有就创建一个
 
-    const dist_path = `/tmp/myScripts/${name}.sh`;
+    const dist_path = path.join(configDir,`/myScripts/${name}.sh`);
 
     const isExit = await fs.pathExists(dist_path); // 脚本已经存在了吗
 
