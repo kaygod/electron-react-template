@@ -150,6 +150,6 @@ ipcMain.on('min',()=>{
   }
 })
 
-ipcMain.on('getDataPath',()=>{
-  return app.getPath("userData");
+ipcMain.on('getDataPath',(event)=>{
+  event.returnValue = app.getPath("userData");
 })
