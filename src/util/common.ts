@@ -28,7 +28,7 @@ export const call = (name: string) => {
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
     //执行脚本
-    const result = await sudoer.exec(`bash ${dist_path}`,{env: {PARAM: 'VALUE'}});
+    const result = await sudoer.exec(`bash $PARAM`,{env: {PARAM: dist_path}});
 
     resolve(result);
 
