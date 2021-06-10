@@ -12,6 +12,7 @@ export default function App() {
   console.log("test1111");
   call("page_1").then((res)=>{
     console.log(res);
+    console.log(JSON.stringify(res));
   }).catch((err)=>{
     console.log(err);
   })

@@ -22,7 +22,7 @@ export const call = (name: string) => {
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
     //执行脚本
-    exec(`/bin/bash ${dist_path}`, (error: any, stdout: any) => {
+    exec(`bash ${dist_path}`, (error: any, stdout: any) => {
       if (error) {
         console.log(error);
         reject(error);
@@ -68,7 +68,7 @@ export const fetch = <
             }
             Alert(msgCode(rResult.error));
             reject(rResult.error);
-          }   
+          }
       })
       .catch((error) => {
         if (error.code === 'ECONNABORTED') {
