@@ -1,3 +1,4 @@
+const Sudoer =  require('electron-sudo').default;
 const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
@@ -10,10 +11,14 @@ const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
 const configDir = ipcRenderer.sendSync("getDataPath");
 
+const sudoer = new Sudoer({name: 'trusme application'});
+
 export const call = (name: string) => {
+
   const script_path = path.join(__dirname, 'scripts', `${name}.sh`); // 脚本的真实路径
 
   return new Promise(async (resolve, reject) => {
+
     await fs.ensureDir(path.join(configDir,"/myScripts")); //判断用户数据目录下面有没有myScripts文件夹,没有就创建一个
 
     const dist_path = path.join(configDir,`/myScripts/${name}.sh`);
@@ -23,15 +28,17 @@ export const call = (name: string) => {
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
     //执行脚本
-    const workerProcess = exec(`bash ${script_path}`);
+    const result = await sudoer.exec(`bash ${dist_path}`);
 
-    workerProcess.stdout.on('data', function (value:string) {
+    resolve(result);
+
+    /*workerProcess.stdout.on('data', function (value:string) {
        resolve(value);
     });
 
     workerProcess.stderr.on('data', function (error:string) {
       reject(error);
-    });
+    });*/
 
   });
 };
