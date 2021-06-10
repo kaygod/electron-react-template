@@ -1,15 +1,14 @@
 const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
-const {remote} = require('electron');
+const { ipcRenderer } = require('electron');
 
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
-const configDir = remote.app.getPath('userData');
-
+const configDir = ipcRenderer.sendSync("getDataPath");
 
 export const call = (name: string) => {
   const script_path = path.join(__dirname, 'scripts', `${name}.sh`); // 脚本的真实路径

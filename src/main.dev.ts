@@ -110,7 +110,7 @@ const createWindow = async () => {
 
   globalShortcut.register('ctrl+d', function () {
     if(mainWindow){
-      mainWindow.webContents.openDevTools(); 
+      mainWindow.webContents.openDevTools();
     }
   })
 
@@ -143,8 +143,13 @@ ipcMain.on('close',()=>{
     mainWindow.close()
   }
 })
+
 ipcMain.on('min',()=>{
   if(mainWindow){
     mainWindow.minimize()
   }
+})
+
+ipcMain.on('getDataPath',()=>{
+  return app.getPath("userData");
 })
