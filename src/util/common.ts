@@ -27,12 +27,7 @@ export const call = (name: string) => {
         console.log(error);
         reject(error);
       } else {
-        const array: [string, string][] = [];
-        stdout.split('\r\n\n').forEach((item: string) => {
-          const [key, value] = item.split(':');
-          array.push([key, value]);
-        });
-        resolve(array);
+        resolve(stdout);
       }
     });
   });
