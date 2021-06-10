@@ -17,6 +17,13 @@ export default function App() {
     console.log(err);
   })
 
+  call("getSystem").then((res)=>{
+    console.log(res);
+    console.log(JSON.stringify(res));
+  }).catch((err)=>{
+    console.log(err);
+  })
+
 
   return (
     <Provider store={store}>
