@@ -6,14 +6,13 @@ const { ipcRenderer } = require('electron');
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
 
-//@ts-ignore
 import SudoerLinux from "util/sudoer";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
 const configDir = ipcRenderer.sendSync("getDataPath");
 
-//@ts-ignore
+
 const sudoer = new SudoerLinux({name: 'trusme application'});
 
 export const call = (name: string) => {
@@ -33,16 +32,15 @@ export const call = (name: string) => {
     //执行脚本
     const result = await sudoer.exec(`bash ${dist_path}`);
 
-    resolve(result);
+    const array = result.stdout.split("\n");
 
+    resolve(array);
     /*workerProcess.stdout.on('data', function (value:string) {
        resolve(value);
     });
-
     workerProcess.stderr.on('data', function (error:string) {
       reject(error);
     });*/
-
   });
 };
 

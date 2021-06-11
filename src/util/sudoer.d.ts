@@ -1,6 +1,7 @@
 declare class Sudoer
 {
-  exec(): string;
+  constructor(params:{name:string})
+  exec: (payload:string)=> {stdout:string,stderr:string}
 }
 
 
