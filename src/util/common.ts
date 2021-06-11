@@ -52,7 +52,7 @@ const execuate = async (path:string)=>{
     //执行脚本
     try {
       result = await sudoer.exec(`bash ${path}`);
-      if(result.stderr != null){
+      if(result.stderr !== "" && result.stderr != null){
          result = null;
       }else{
         result = result.stdout;
