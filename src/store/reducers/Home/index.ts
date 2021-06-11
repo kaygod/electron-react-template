@@ -7,7 +7,7 @@ export enum statusType {
   working = 2, // 正在p盘过程中
   stop = 3,    // 点击全部停止后的状态
   completed = 4 // p盘完成了
-} 
+}
 
 interface listItem {
   k_value:string; // k的大小
@@ -20,7 +20,7 @@ interface defaultType {
   status:statusType,
   k_type:number | null, // 绘图大小对应的类型
   list:listItem[], // 表格数据
-  page_no:number, 
+  page_no:number,
   total_page:number,
   end_tasks:string, // 已完成p盘数
   working_tasks:string, // 正在进行p盘数
@@ -110,7 +110,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
       }
     }).then(()=>{
       dispatch(updateStatus(statusType.working));
-    })  
+    })
 };
 
 
@@ -126,6 +126,9 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
       type
     }
   })
+
+  console.log(response);
+
   const { is_complete } = response;
   //说明已经p完了
   if(is_complete){
@@ -166,7 +169,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
       data:{}
     }).then(()=>{
       dispatch(updateStatus(statusType.stop));
-    })  
+    })
 };
 
 
