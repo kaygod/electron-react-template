@@ -138,7 +138,7 @@ const initFilterData = (column: any[]) => {
 };
 
 const Table = forwardRef((props: defaulProps, ref) => {
-  const { column, data } = props;
+  const { column, data} = props;
 
   const [filter_data, setFilters] = useState<obType>(initFilterData(column));
 
@@ -194,7 +194,7 @@ const Table = forwardRef((props: defaulProps, ref) => {
           })}
         </tr>
       </thead>
-      <tbody className={styles.tbody}>
+      <tbody className={styles.tbody}>    
         {data.map((item, index) => {
           return (
             <tr key={index} className={styles.tr}>

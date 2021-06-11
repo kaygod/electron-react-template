@@ -23,7 +23,8 @@ interface defaultType {
   page_no:number, 
   total_page:number,
   end_tasks:string, // 已完成p盘数
-  working_tasks:string // 正在进行p盘数
+  working_tasks:string, // 正在进行p盘数
+  type:string
 }
 
 
@@ -36,7 +37,8 @@ export const counterSlice = createSlice({
      page_no:1,
      total_page:1,
      end_tasks:"0",
-     working_tasks:"0"
+     working_tasks:"0",
+     type:'1'
   } as defaultType,
   reducers: {
     // 更新k值
@@ -47,7 +49,6 @@ export const counterSlice = createSlice({
     // 更新状态
     updateStatus(state,action){
       const status= action.payload;
-      console.log(status)
       state.status = status;
     },
     noOperate(state) {
@@ -65,6 +66,10 @@ export const counterSlice = createSlice({
     },
     updatePage(state,action){
       state.page_no = action.payload;
+    },
+    updateType(state,action){
+      state.page_no = 1
+      state.type = action.payload
     }
   },
 });
@@ -74,7 +79,7 @@ export const getter = (state: any) => {
 };
 
 // Action creators are generated for each case reducer function
-export const {  noOperate,updateStatus,updateState,updateKType,updatePage } = counterSlice.actions;
+export const {  noOperate,updateStatus,updateState,updateKType,updatePage,updateType } = counterSlice.actions;
 
 
 /**
@@ -85,7 +90,6 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
      url:"/getStatus",
      data:{}
    })
-   console.log(response)
    dispatch(updateStatus(response.status));
 };
 
@@ -94,7 +98,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
  *  开始p盘
  */
  export const startWorkAsync = () => (dispatch: Function, getState: Function) => {
-  const { k_type } = getter(getState());
+  const { k_type,type } = getter(getState());
   if(k_type == null){
     alert(DRAW_IS_REQUIRE);
     return Promise.reject(null);
@@ -102,7 +106,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   return fetch({
       url:"/startWork",
       data:{
-        k_type
+        k_type,
       }
     }).then(()=>{
       dispatch(updateStatus(statusType.working));
@@ -114,11 +118,12 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
  *  获取P盘数据
  */
  export const getMachineDataAsync = (page:number | undefined = undefined) => async (dispatch: Function, getState: Function) => {
-  const { page_no } = getter(getState());
+  const { page_no,type } = getter(getState());
   const response = await fetch({
     url:"/getMachineData",
     data:{
-      page_no:page != null ? page:page_no
+      page_no:page != null ? page:page_no,
+      type
     }
   })
   const { is_complete } = response;
@@ -128,7 +133,6 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   }
   //更新后端数据
   dispatch(updateState(response));
-  console.log(page)
   if(page != null){
    dispatch(updatePage(page));
   }

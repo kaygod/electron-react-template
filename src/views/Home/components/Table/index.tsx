@@ -8,11 +8,11 @@ import { getter,getMachineDataAsync } from "store/reducers/Home";
 const Table = () => {
 
 
-    const { page_no,total_page,list } = useSelector(getter);
+    const { page_no,total_page,list,type } = useSelector(getter);
     
     const dispatch = useDispatch();
 
-    const column = [
+    let column = [
         {
             name:'编号', 
             dataIndex:"num",
@@ -31,7 +31,7 @@ const Table = () => {
                 return <p style={{textAlign:'left'}}>{value}</p>
             }
         },
-        {
+        type=='2'&&{
             name:'文件名', 
             dataIndex:"file_name",
             key:"file_name",
@@ -48,9 +48,17 @@ const Table = () => {
             render(value:string){
                 return <StatusSize value={value} />
             }
+        },
+        type=='2'&&{
+            name:'操作', 
+            dataIndex:"operval",
+            key:"operval",
+            className:'text_left',
+            render(value:string){
+                return <div style={{textAlign:'left'}}>123</div>
+            }
         }
     ]
-
     useEffect(()=>{
         dispatch(getMachineDataAsync());
     },[])
@@ -59,10 +67,12 @@ const Table = () => {
     const updatePage = (v:number)=>{
        dispatch(getMachineDataAsync(v));
     }
-
+    column = column.filter((val)=>{
+        return val!==false
+    })
   return (
     <div>
-      <TableGrid column={column} data={list} page_no={page_no} total_page={total_page} updatePage={updatePage} min_height={479}/>
+      <TableGrid column={column} emptyTips="暂无P盘数据" data={list} page_no={page_no} total_page={total_page} updatePage={updatePage} min_height={479}/>
     </div>
   );
 };

@@ -125,10 +125,8 @@ const useMethods = ()=>{
   const stop = async ()=>{
     try {
       await dispatch(stopAsync()); // 全部停止
-      console.log(state.status)     
       toggleLoop(false);//关掉定时器
       dispatch(getMachineDataAsync()); // 获取P盘数据    
-      console.log(state.status)     
     } catch (error) {
       console.log(error);
     }
