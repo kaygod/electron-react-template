@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
 import SudoerLinux from "util/sudoer";
 import { SCRIPT_ERROR } from "util/constants";
+import { callScript } from "interfaces/index";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
@@ -37,7 +38,10 @@ export const call = (name: string) => {
       alert(SCRIPT_ERROR);
     }else{
       const array = result.split("\n");
-      resolve(array);
+      const output = array.filter((item:string)=>{
+        return item !== "";
+      })
+      resolve(output);
     }
 
   });
@@ -96,9 +100,52 @@ export const fetch = <
 >(
   params: any
 ) => {
-  return new Promise<any>((resolve, reject) => {
-    params.url = `${service_ip}${params.url}`;
-    const data = params.data || {};
+  return new Promise<any>(async (resolve, reject) => {
+    let result = null;
+    // windows系统
+    if(process.platform === "win32"){
+        try {
+          result = await windowFetch(params);
+          resolve(result);
+        } catch (error) {
+          console.log(error);
+          reject(error);
+        }
+    }else{ // linux系统
+       try {
+         result = await linuxFetch(params);
+         resolve(result);
+       } catch (error) {
+          console.log(error);
+          reject(error);
+       }
+    }
+  });
+};
+
+
+/**
+ * @param params
+ * @returns
+ *  linux下调用脚本
+ */
+const linuxFetch = async (params:any)=>{
+  return new Promise((resolve,reject)=>{
+    callScript(params).then((data)=>{
+      resolve(data);
+    }).catch((error)=>{
+      reject(error);
+    })
+  })
+}
+
+/**
+ * windows下获取数据
+ */
+const windowFetch = (params:any)=>{
+  params.url = `${service_ip}${params.url}`;
+  const data = params.data || {};
+  return new Promise((resolve,reject)=>{
     axios({
       ...params,
       method: params.method || 'post',
@@ -106,7 +153,7 @@ export const fetch = <
       withCredentials: true,
       crossDomain: true,
     })
-      .then((res: AxiosResponse<T>) => {
+      .then((res: AxiosResponse<any>) => {
         if (typeof res == 'string') {
           res = JSON.parse(res);
         }
@@ -127,11 +174,11 @@ export const fetch = <
           Alert('请求超时');
           return false;
         }
-        console.log(error);
         reject(error);
       });
-  });
-};
+  })
+}
+
 
 
 //错误码
