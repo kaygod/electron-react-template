@@ -52,7 +52,7 @@ export const call = (name: string,payload:any[] = []) => {
  */
 const execuate = async (path:string,payload:any[])=>{
   let result = null;
-  if(!has_right){
+  if(true){
     //执行脚本
     try {
       result = await sudoer.exec(`bash ${path} ${payload.join(" ")}`);
