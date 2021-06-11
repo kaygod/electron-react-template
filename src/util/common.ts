@@ -18,7 +18,7 @@ const sudoer = new SudoerLinux({name: 'trusme application'});
 
 let has_right = false; //有权限吗
 
-export const call = (name: string) => {
+export const call = (name: string,payload:any[] = []) => {
 
   const script_path = path.join(__dirname, 'scripts', `${name}.sh`); // 脚本的真实路径
 
@@ -32,7 +32,7 @@ export const call = (name: string) => {
 
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
-    const result = await execuate(dist_path);
+    const result = await execuate(dist_path,payload);
 
     if(result == null){
       alert(SCRIPT_ERROR);
@@ -50,12 +50,12 @@ export const call = (name: string) => {
 /**
  * 执行命令
  */
-const execuate = async (path:string)=>{
+const execuate = async (path:string,payload:any[])=>{
   let result = null;
   if(!has_right){
     //执行脚本
     try {
-      result = await sudoer.exec(`bash ${path}`);
+      result = await sudoer.exec(`bash ${path} ${payload.join(" ")}`);
       if(result.stderr !== "" && result.stderr != null){
          result = null;
       }else{
@@ -68,7 +68,7 @@ const execuate = async (path:string)=>{
     }
   }else{
      try {
-        result = await direct_exec(path);
+        result = await direct_exec(path,payload);
         result = JSON.stringify(result);
      } catch (error) {
         console.log(error);
@@ -81,9 +81,9 @@ const execuate = async (path:string)=>{
 /**
  * 直接执行
  */
-const direct_exec = (path:string)=>{
+const direct_exec = (path:string,payload:any[])=>{
   return new Promise((resolve,reject)=>{
-    const workerProcess  = exec(`bash ${path}`,{});
+    const workerProcess  = exec(`bash ${path} ${payload.join(" ")}`,{});
     workerProcess.stdout.on('data', function (value:string) {
        resolve(value);
     });
