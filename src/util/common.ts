@@ -1,4 +1,3 @@
-const Sudoer =  require('electron-sudo').default;
 const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
@@ -6,6 +5,9 @@ const { ipcRenderer } = require('electron');
 
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
+
+//@ts-ignore
+import {Sudoer} from "util/sudoer";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
