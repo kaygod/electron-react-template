@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.global.css';
 import store from './store/store';
 import { Provider } from 'react-redux';
@@ -9,12 +9,11 @@ import { call } from "util/common";
 
 export default function App() {
 
-  console.log("test1111");
-  call("page_1").then((res)=>{
+  /*call("page_1").then((res)=>{
     console.log(JSON.stringify(res));
   }).catch((err)=>{
     console.log(err);
-  })
+  })*/
 
   return (
     <Provider store={store}>
