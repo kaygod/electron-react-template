@@ -27,6 +27,8 @@ export default merge(baseConfig, {
 
   target: 'electron-renderer',
 
+  devtool:"eval-source-map",
+
   entry: [
     'core-js',
     'regenerator-runtime/runtime',
