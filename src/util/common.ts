@@ -2,6 +2,7 @@ const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
 const { ipcRenderer } = require('electron');
+const sudo = require('sudo-prompt');
 
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
@@ -55,13 +56,9 @@ const execuate = async (path:string,payload:any[])=>{
   if(!has_right){
     //执行脚本
     try {
-      result = await sudoer.exec(`bash ${path} ${payload.join(" ")}`);
-      if(result.stderr !== "" && result.stderr != null){
-         result = null;
-      }else{
-        result = result.stdout;
-        has_right = true;
-      }
+      //result = await sudoer.exec(`bash ${path} ${payload.join(" ")}`);
+      result =  await lib_exec(path,payload);
+      has_right = true;
     } catch (error) {
       console.log(error);
       result = null;
@@ -69,7 +66,6 @@ const execuate = async (path:string,payload:any[])=>{
   }else{
      try {
         result = await direct_exec(path,payload);
-        result = JSON.stringify(result);
      } catch (error) {
         console.log(error);
         result = null;
@@ -78,17 +74,35 @@ const execuate = async (path:string,payload:any[])=>{
   return result;
 }
 
+const lib_exec = (path:string,payload:any[])=>{
+    const options = {
+      name: 'Electron'
+    };
+    return new Promise((resolve,reject)=>{
+      sudo.exec(`bash ${path} ${payload.join(" ")}`, options,
+        function(error, stdout, stderr) {
+           if (error){
+             reject(error)
+           }
+           else{
+             resolve(stdout);
+           }
+         }
+       ); 
+    })
+}
+
 /**
  * 直接执行
  */
 const direct_exec = (path:string,payload:any[])=>{
   return new Promise((resolve,reject)=>{
-    const workerProcess  = exec(`bash ${path} ${payload.join(" ")}`,{});
-    workerProcess.stdout.on('data', function (value:string) {
-       resolve(value);
-    });
-    workerProcess.stderr.on('data', function (error:string) {
-      reject(error);
+    exec(`bash ${path} ${payload.join(" ")}`,(error, stdout, stderr)=>{ 
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(stdout);
     });
   })
 }
