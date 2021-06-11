@@ -9,17 +9,21 @@ import { call } from "util/common";
 
 export default function App() {
 
-  console.log("test");
-  call("page_1").then((res)=>{
-    console.log(res);
-  }).catch((err)=>{
-    console.log(err);
-  })
+  const execute = ()=>{
+    call("page_1").then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
 
   return (
     <Provider store={store}>
       <Layout>
-        <RouteList />
+        <>
+          <div onClick={execute}><button>点击</button></div>
+          <RouteList />
+        </>
       </Layout>
     </Provider>
   );
