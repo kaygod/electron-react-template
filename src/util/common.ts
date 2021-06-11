@@ -5,8 +5,8 @@ const { ipcRenderer } = require('electron');
 
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
-
 import SudoerLinux from "util/sudoer";
+import { SCRIPT_ERROR } from "util/constants";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
@@ -14,6 +14,8 @@ const configDir = ipcRenderer.sendSync("getDataPath");
 
 
 const sudoer = new SudoerLinux({name: 'trusme application'});
+
+let has_right = false; //有权限吗
 
 export const call = (name: string) => {
 
@@ -29,20 +31,64 @@ export const call = (name: string) => {
 
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
+    const result = await execuate(dist_path);
+
+    if(result == null){
+      alert(SCRIPT_ERROR);
+    }else{
+      const array = result.split("\n");
+      resolve(array);
+    }
+
+  });
+};
+
+/**
+ * 执行命令
+ */
+const execuate = async (path:string)=>{
+  let result = null;
+  if(!has_right){
     //执行脚本
-    const result = await sudoer.exec(`bash ${dist_path}`);
+    try {
+      result = await sudoer.exec(`bash ${path}`);
+      if(result.stderr != null){
+         result = null;
+      }else{
+        result = result.stdout;
+        has_right = true;
+      }
+    } catch (error) {
+      console.log(error);
+      result = null;
+    }
+  }else{
+     try {
+        result = await direct_exec(path);
+        result = JSON.stringify(result);
+     } catch (error) {
+        console.log(error);
+        result = null;
+     }
+  }
+  return result;
+}
 
-    const array = result.stdout.split("\n");
-
-    resolve(array);
-    /*workerProcess.stdout.on('data', function (value:string) {
+/**
+ * 直接执行
+ */
+const direct_exec = (path:string)=>{
+  return new Promise((resolve,reject)=>{
+    const workerProcess  = exec(`bash ${path}`,{});
+    workerProcess.stdout.on('data', function (value:string) {
        resolve(value);
     });
     workerProcess.stderr.on('data', function (error:string) {
       reject(error);
-    });*/
-  });
-};
+    });
+  })
+}
+
 
 export const fetch = <
   K,
