@@ -7,13 +7,14 @@ import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
 
 //@ts-ignore
-import {Sudoer} from "util/sudoer";
+import SudoerLinux from "util/sudoer";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
 const configDir = ipcRenderer.sendSync("getDataPath");
 
-const sudoer = new Sudoer({name: 'trusme application'});
+//@ts-ignore
+const sudoer = new SudoerLinux({name: 'trusme application'});
 
 export const call = (name: string) => {
 

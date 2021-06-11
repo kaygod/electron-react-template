@@ -1,5 +1,5 @@
 import {tmpdir} from 'os';
-import {watchFile, unwatchFile, unlinkSync, createReadStream, createWriteStream},fs from 'fs';
+import fs,{watchFile, unwatchFile, unlinkSync, createReadStream, createWriteStream} from 'fs';
 import {normalize, join, dirname} from 'path';
 import {createHash} from 'crypto';
 import child from 'child_process';
@@ -263,6 +263,4 @@ class SudoerLinux extends SudoerUnix {
 }
 
 
-export {
-  Sudoer:SudoerLinux
-}
+export default SudoerLinux;
