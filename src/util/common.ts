@@ -1,4 +1,3 @@
-const Sudoer =  require('electron-sudo').default;
 const path = require('path');
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
@@ -6,12 +5,18 @@ const { ipcRenderer } = require('electron');
 
 import axios, { AxiosResponse } from 'axios';
 import { api_url } from "mock/config";
+import SudoerLinux from "util/sudoer";
+import { SCRIPT_ERROR } from "util/constants";
+import { callScript } from "interfaces/index";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
 const configDir = ipcRenderer.sendSync("getDataPath");
 
-const sudoer = new Sudoer({name: 'trusme application'});
+
+const sudoer = new SudoerLinux({name: 'trusme application'});
+
+let has_right = false; //有权限吗
 
 export const call = (name: string) => {
 
@@ -27,21 +32,67 @@ export const call = (name: string) => {
 
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
-    //执行脚本
-    const result = await sudoer.exec(`bash $PARAM`,{env: {PARAM: dist_path}});
+    const result = await execuate(dist_path);
 
-    resolve(result);
-
-    /*workerProcess.stdout.on('data', function (value:string) {
-       resolve(value);
-    });
-
-    workerProcess.stderr.on('data', function (error:string) {
-      reject(error);
-    });*/
+    if(result == null){
+      alert(SCRIPT_ERROR);
+    }else{
+      const array = result.split("\n");
+      const output = array.filter((item:string)=>{
+        return item !== "";
+      })
+      resolve(output);
+    }
 
   });
 };
+
+/**
+ * 执行命令
+ */
+const execuate = async (path:string)=>{
+  let result = null;
+  if(!has_right){
+    //执行脚本
+    try {
+      result = await sudoer.exec(`bash ${path}`);
+      if(result.stderr !== "" && result.stderr != null){
+         result = null;
+      }else{
+        result = result.stdout;
+        has_right = true;
+      }
+    } catch (error) {
+      console.log(error);
+      result = null;
+    }
+  }else{
+     try {
+        result = await direct_exec(path);
+        result = JSON.stringify(result);
+     } catch (error) {
+        console.log(error);
+        result = null;
+     }
+  }
+  return result;
+}
+
+/**
+ * 直接执行
+ */
+const direct_exec = (path:string)=>{
+  return new Promise((resolve,reject)=>{
+    const workerProcess  = exec(`bash ${path}`,{});
+    workerProcess.stdout.on('data', function (value:string) {
+       resolve(value);
+    });
+    workerProcess.stderr.on('data', function (error:string) {
+      reject(error);
+    });
+  })
+}
+
 
 export const fetch = <
   K,
@@ -49,9 +100,52 @@ export const fetch = <
 >(
   params: any
 ) => {
-  return new Promise<any>((resolve, reject) => {
-    params.url = `${service_ip}${params.url}`;
-    const data = params.data || {};
+  return new Promise<any>(async (resolve, reject) => {
+    let result = null;
+    // windows系统
+    if(process.platform === "win32"){
+        try {
+          result = await windowFetch(params);
+          resolve(result);
+        } catch (error) {
+          console.log(error);
+          reject(error);
+        }
+    }else{ // linux系统
+       try {
+         result = await linuxFetch(params);
+         resolve(result);
+       } catch (error) {
+          console.log(error);
+          reject(error);
+       }
+    }
+  });
+};
+
+
+/**
+ * @param params
+ * @returns
+ *  linux下调用脚本
+ */
+const linuxFetch = async (params:any)=>{
+  return new Promise((resolve,reject)=>{
+    callScript(params).then((data)=>{
+      resolve(data);
+    }).catch((error)=>{
+      reject(error);
+    })
+  })
+}
+
+/**
+ * windows下获取数据
+ */
+const windowFetch = (params:any)=>{
+  params.url = `${service_ip}${params.url}`;
+  const data = params.data || {};
+  return new Promise((resolve,reject)=>{
     axios({
       ...params,
       method: params.method || 'post',
@@ -59,7 +153,7 @@ export const fetch = <
       withCredentials: true,
       crossDomain: true,
     })
-      .then((res: AxiosResponse<T>) => {
+      .then((res: AxiosResponse<any>) => {
         if (typeof res == 'string') {
           res = JSON.parse(res);
         }
@@ -80,11 +174,11 @@ export const fetch = <
           Alert('请求超时');
           return false;
         }
-        console.log(error);
         reject(error);
       });
-  });
-};
+  })
+}
+
 
 
 //错误码
