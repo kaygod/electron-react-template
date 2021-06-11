@@ -52,7 +52,7 @@ export const call = (name: string,payload:any[] = []) => {
  */
 const execuate = async (path:string,payload:any[])=>{
   let result = null;
-  if(true){
+  if(!has_right){
     //执行脚本
     try {
       result = await sudoer.exec(`bash ${path} ${payload.join(" ")}`);
@@ -94,10 +94,7 @@ const direct_exec = (path:string,payload:any[])=>{
 }
 
 
-export const fetch = <
-  K,
-  T extends { result?: number; error?: string; data: K }
->(
+export const fetch = (
   params: any
 ) => {
   return new Promise<any>(async (resolve, reject) => {
