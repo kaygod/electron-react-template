@@ -9,11 +9,12 @@ import { call } from "util/common";
 
 export default function App() {
 
-  /*call("page_1").then((res)=>{
+  console.log("test");
+  call("page_1").then((res)=>{
     console.log(JSON.stringify(res));
   }).catch((err)=>{
     console.log(err);
-  })*/
+  })
 
   return (
     <Provider store={store}>
