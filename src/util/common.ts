@@ -73,6 +73,7 @@ const execuate = async (path:string,payload:any[])=>{
         result = null;
      }
   }
+  console.log('=============',result)
   return result;
 }
 
@@ -87,7 +88,8 @@ const lib_exec = (path:string,payload:any[])=>{
              reject(error)
            }
            else{
-             resolve(stdout);
+              console.log('=============',stdout)
+              resolve(stdout);
            }
          }
        );
