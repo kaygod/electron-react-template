@@ -16,9 +16,10 @@ export const handler = async (params:any)=>{
     if(type == 1 ){
         // 1为已完成P盘总数除每页数量
         data['total_page'] =Math.ceil(data['end_tasks']/10)
+        console.log(Math.ceil(data['end_tasks']/10))
     }else{
         data['total_page'] =Math.ceil(data['p_complete']/10)
-
+        console.log(Math.ceil(data['p_complete']/10))
     }
     console.log(data)
     return data;
