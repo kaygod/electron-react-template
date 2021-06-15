@@ -9,6 +9,7 @@ import { api_url } from "mock/config";
 import SudoerLinux from "util/sudoer";
 import { SCRIPT_ERROR } from "util/constants";
 import { callScript } from "interfaces/index";
+import { mockDataList } from "./mockData";
 
 const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
 
@@ -169,6 +170,11 @@ const linuxFetch = async (params:any)=>{
  * windows下获取数据
  */
 const windowFetch = (params:any)=>{
+
+  if(process.env.NODE_ENV === 'production'){ // windows下的生产环境
+    return mockData(params);
+  }
+
   params.url = `${service_ip}${params.url}`;
   const data = params.data || {};
   return new Promise((resolve,reject)=>{
@@ -205,6 +211,13 @@ const windowFetch = (params:any)=>{
   })
 }
 
+/**
+ * 模拟的假数据
+ */
+const mockData = (params:{url:keyof typeof mockDataList})=>{
+  const result = mockDataList[params.url];
+  return Promise.resolve(result);
+}
 
 
 //错误码
