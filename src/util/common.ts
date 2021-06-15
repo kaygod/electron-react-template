@@ -39,11 +39,11 @@ export const call = (name: string,payload:any[] = []) => {
     if(result == null){
       alert(SCRIPT_ERROR);
     }else{
-      /*const array = result.split("\n");
+      const array = result.split("\n");
       const output = array.filter((item:string)=>{
         return item !== "";
-      })*/
-      resolve(result);
+      })
+      resolve(output);
     }
 
   });
