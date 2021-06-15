@@ -13,9 +13,9 @@ export const handler = async (params:any)=>{
     console.log(result)
     console.log(evalRes)
     data['list'] = formatExchange(result[0],['hard_disk','draw_num','draw_capacity'])//数据转换
-    // data['cpu_rate'] = 
-    // data['memory_rate'] = 
-    // data['page_no'] = page_no
-    // data['total_page']
+    data['cpu_rate'] = evalRes.cpu_use
+    data['memory_rate'] = evalRes.mem_use
+    data['page_no'] = page_no
+    data['total_page'] = Math.ceil(data['end_tasks']/10)
     return data;
 }

@@ -14,6 +14,7 @@ export const handler = async (params:any)=>{
     data['list'] = formatExchange(result[0],['k_value','file_name','status'])//数据转换
     data['working_tasks'] = evalRes['p_ing']
     data['end_tasks'] = evalRes['p_complete']
+    data['page_no'] = page_no
     if(type == 1 ){
         // 1为已完成P盘总数除每页数量
         data['total_page'] =Math.ceil(data['working_tasks']/10)
