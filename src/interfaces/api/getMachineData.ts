@@ -5,6 +5,6 @@ import { call } from "util/common";
  */
 export const handler = async (params:any)=>{
     //the two params must be array
-    const result = await call("list_1");
+    const result = await call("list_2");
     return result;
 }
