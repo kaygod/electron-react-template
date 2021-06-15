@@ -4,6 +4,7 @@ import { call,formatExchange } from "util/common";
  * 执行函数
  */
 export const handler = async (params:any)=>{
+    console.log('params',params)
     //the two params must be array
     const data:any = {}
     const result:any = await call("list_2")
