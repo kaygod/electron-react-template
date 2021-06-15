@@ -132,6 +132,18 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   if(is_complete){
     dispatch(updateStatus(statusType.completed));
   }
+  response.list.forEach((item: any, index: number) => {
+    let code: string | number = index + 1;
+    code = page_no ? (page_no - 1) * 10 + code : code
+    if (code < 10) {
+      code = '00' + code;
+    } else if (code < 100) {
+      code = '0' + code;
+    } else if (code > 999) {
+      return code;
+    }
+    item.code = code;
+  });
   //更新后端数据
   dispatch(updateState(response));
   if(page != null){

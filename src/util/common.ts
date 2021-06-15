@@ -109,6 +109,7 @@ const direct_exec = (path:string,payload:any[])=>{
 }
 
 export const formatExchange = (data:string,fields:string[])=>{
+  console.log(data)
   let new_data = eval("("+data+")")
   new_data = new_data.msg_list.map((val:any,index:number)=>{
   let new_item:any = {}
