@@ -39,6 +39,7 @@ export const call = (name: string,payload:any[] = []) => {
     if(result == null){
       alert(SCRIPT_ERROR);
     }else{
+      console.log(result)
       const array = result.split("\n");
       const output = array.filter((item:string)=>{
         return item !== "";
