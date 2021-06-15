@@ -33,7 +33,7 @@ export const call = (name: string,payload:any[] = []) => {
 
     !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
-    const result = await execuate(dist_path,payload);
+    const result:any = await execuate(dist_path,payload);
 
     if(result == null){
       alert(SCRIPT_ERROR);
@@ -80,7 +80,7 @@ const lib_exec = (path:string,payload:any[])=>{
     };
     return new Promise((resolve,reject)=>{
       sudo.exec(`bash ${path} ${payload.join(" ")}`, options,
-        function(error, stdout, stderr) {
+        function(error:string, stdout:string) {
            if (error){
              reject(error)
            }
@@ -88,7 +88,7 @@ const lib_exec = (path:string,payload:any[])=>{
              resolve(stdout);
            }
          }
-       ); 
+       );
     })
 }
 
@@ -97,7 +97,7 @@ const lib_exec = (path:string,payload:any[])=>{
  */
 const direct_exec = (path:string,payload:any[])=>{
   return new Promise((resolve,reject)=>{
-    exec(`bash ${path} ${payload.join(" ")}`,(error, stdout, stderr)=>{ 
+    exec(`bash ${path} ${payload.join(" ")}`,(error:string, stdout:string)=>{
       if (error) {
         reject(error);
         return;
