@@ -114,9 +114,7 @@ export const formatExchange = (data:string,fields:string[])=>{
   let new_item:any = {}
   const item = val.split('|')
     fields.forEach((ele,i) => {
-      if(ele!='code'){
-        new_item[ele] = item[i]
-      }
+      new_item[ele] = item[i]
     });
     return new_item
   })
