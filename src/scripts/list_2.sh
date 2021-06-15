@@ -25,10 +25,10 @@ done > $file
 msg_list=$(cat $file)
 if [ '$msg_list' = '' ]
 then
-  json="$json]"
+  json="$json"
 else
   msg_list=${msg_list:0:-1}
-  json="$json$msg_list]"
+  json="$json$msg_list"
 fi
-json="$json}"
+json="$json]}"
 echo $json
