@@ -15,15 +15,15 @@ const Header = () => {
           dispatch(updateType('1'))
           dispatch(getMachineDataAsync())
         }}>
-            <div className={styles.itemName}>已完成P盘数</div>
-            <div className={styles.itemVal}>{end_tasks}</div>
+            <div className={styles.itemName}>正在运行的P盘数</div>
+            <div className={styles.itemVal}>{working_tasks}</div>
         </div>
         <div className={`${styles.headerItem} ${type=='2'&&styles.active}`} onClick={()=>{
             dispatch(updateType('2'))
             dispatch(getMachineDataAsync())
           }}>
-            <div className={styles.itemName}>正在运行的P盘数</div>
-            <div className={styles.itemVal}>{working_tasks}</div>
+            <div className={styles.itemName}>已完成P盘数</div>
+            <div className={styles.itemVal}>{end_tasks}</div>
         </div>
     </div>
   );

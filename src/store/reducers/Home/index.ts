@@ -132,6 +132,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   if(is_complete){
     dispatch(updateStatus(statusType.completed));
   }
+  console.log(response)
   response.list.forEach((item: any, index: number) => {
     let code: string | number = index + 1;
     code = page_no ? (page_no - 1) * 10 + code : code
