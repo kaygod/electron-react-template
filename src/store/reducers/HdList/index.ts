@@ -5,14 +5,14 @@ interface tableItemType {
     hard_disk:string,
     draw_num:string,
     draw_capacity:string
-} 
+}
 interface tableDataType {
     cpu_rate:string,
     memory_rate:string,
     page_no:number,
     total_page: number,
     list:tableItemType
-} 
+}
 export interface dataType {
     table_data: tableDataType;
 }
@@ -58,19 +58,12 @@ export const queryAsync = (
         page_no: page_no == null ? table_data.page_no : page_no,
       },
     });
-    response.list.forEach((item: any, index: number) => {
-      let code: string | number = index + 1;
-      code = page_no?(Number(page_no)-1)*20 + code:code
-      if (code < 10) {
-        code = '00' + code;
-      } else if (code < 100) {
-        code = '0' + code;
-      } else if (code > 999) {
-        return code;
-      }
-      item.code = code;
-    });
-      dispatch(updatePage(response));
+
+    if(page_no != null){
+      response.page_no = page_no;
+    }
+
+    dispatch(updatePage(response));
   };
 // Action creators are generated for each case reducer function
 

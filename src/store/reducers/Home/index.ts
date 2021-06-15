@@ -127,8 +127,6 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
     }
   })
 
-  console.log(response);
-
   const { is_complete } = response;
   //说明已经p完了
   if(is_complete){
