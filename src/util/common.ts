@@ -107,7 +107,22 @@ const direct_exec = (path:string,payload:any[])=>{
   })
 }
 
-
+export const formatExchange = (data:string,fields:string[])=>{
+  let new_data = eval("("+data+")")
+  new_data = new_data.msg_list.map((val:any,index:number)=>{
+  let new_item:any = {}
+  const item = val.split('|')
+    console.log(item)
+    fields.forEach((ele,i) => {
+      if(ele!='code'){
+        new_item[ele] = item[i]
+      }
+    });
+    console.log(new_item)
+    return new_item
+  })
+  return new_data
+}
 export const fetch = (
   params: any
 ) => {
