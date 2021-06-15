@@ -1,5 +1,5 @@
 #!/bin/sh
-offer=20
+offer=10
 if [ ! -n "$1" ];
 then
   page=1
