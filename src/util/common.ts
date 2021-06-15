@@ -114,22 +114,25 @@ const direct_exec = (path:string,payload:any[])=>{
 }
 
 export const formatExchange = (data:string,fields:string[])=>{
-  console.log(data)
-  let new_data = eval("("+data+")")
-  new_data = new_data.msg_list.map((val:any,index:number)=>{
-  let new_item:any = {}
-  const item = val.split('|')
-    fields.forEach((ele,i) => {
-      new_item[ele] = item[i]
-      if(ele == 'status'){
-        if(item[i]==101){
-          new_item[ele] = 100
+  try{
+    let new_data = eval("("+data+")")
+    new_data = new_data.msg_list.map((val:any,index:number)=>{
+    let new_item:any = {}
+    const item = val.split('|')
+      fields.forEach((ele,i) => {
+        new_item[ele] = item[i]
+        if(ele == 'status'){
+          if(item[i]==101){
+            new_item[ele] = 100
+          }
         }
-      }
-    });
-    return new_item
-  })
-  return new_data
+      });
+      return new_item
+    })
+    return new_data
+  }catch{
+    return []
+  } 
 }
 
 
