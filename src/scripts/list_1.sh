@@ -24,7 +24,7 @@ do
   echo "'$knum||25|$pid',"
 done > $file
 msg_list=$(cat $file)
-if [ $msg_list = '' ]
+if [ '$msg_list' = '' ]
 then
   json="$json]"
 else

@@ -121,6 +121,13 @@ export const formatExchange = (data:string,fields:string[])=>{
   const item = val.split('|')
     fields.forEach((ele,i) => {
       new_item[ele] = item[i]
+      if(ele == 'status'){
+        if(item[i]==101){
+          new_item[ele] = '100%'
+        }else{
+          new_item[ele] = item[i]+'%'
+        }
+      }
     });
     return new_item
   })
