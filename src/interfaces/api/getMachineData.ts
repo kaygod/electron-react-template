@@ -7,7 +7,7 @@ export const handler = async (params:any)=>{
     const {page_no,type} = params
     //the two params must be array
     const data:any = {}
-    const result:any = type==1?await call(`list_2`, [page_no]):await call(`list_1`, [page_no])//获取列表
+    const result:any = await call(`list_${type}`, [page_no])//获取列表
     const result2:any = await call(`page_1`) //获取首页头部已批正在p的数量
     console.log(result)
     data['list'] = formatExchange(result[0],['k_value','file_name','status'])//数据转换
