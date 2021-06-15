@@ -134,7 +134,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   }
   response.list.forEach((item: any, index: number) => {
     let code: string | number = index + 1;
-    code = page_no ? (page_no - 1) * 10 + code : code
+    code = page ? (page - 1) * 10 + code : code
     if (code < 10) {
       code = '0' + code;
     }

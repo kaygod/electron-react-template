@@ -15,6 +15,5 @@ export const handler = async (params:any)=>{
     data['memory_rate'] = evalRes.mem_use
     data['page_no'] = page_no
     data['total_page'] = Math.ceil(evalRes['dir_total']/1)
-    console.log(data)
     return data;
 }
