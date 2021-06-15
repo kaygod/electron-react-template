@@ -123,9 +123,7 @@ export const formatExchange = (data:string,fields:string[])=>{
       new_item[ele] = item[i]
       if(ele == 'status'){
         if(item[i]==101){
-          new_item[ele] = '100%'
-        }else{
-          new_item[ele] = item[i]+'%'
+          new_item[ele] = 100
         }
       }
     });
