@@ -74,7 +74,6 @@ const execuate = async (path:string,payload:any[])=>{
         result = null;
      }
   }
-  console.log('=============',result)
   return result;
 }
 
@@ -89,7 +88,6 @@ const lib_exec = (path:string,payload:any[])=>{
              reject(error)
            }
            else{
-              console.log('=============',stdout)
               resolve(stdout);
            }
          }
@@ -115,9 +113,7 @@ const direct_exec = (path:string,payload:any[])=>{
 export const formatExchange = (data:string,fields:string[])=>{
   try{
     let new_data = eval("("+data+")")
-    console.log(new_data)
     new_data = new_data.msg_list.map((val:any,index:number)=>{
-      console.log(val)
     let new_item:any = {}
     const item = val.split('|')
       fields.forEach((ele,i) => {
