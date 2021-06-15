@@ -5,9 +5,13 @@ import { call,formatExchange } from "util/common";
  */
 export const handler = async (params:any)=>{
     //the two params must be array
-    const result:any = await call("list_2");
+    const data:any = {}
+    const result:any = await call("list_2")
     const result2:any = await call("page_1")
-    console.log(result2)
-    console.log(formatExchange(result[0],['k_value','file_name','status','code']))
-    return result;
+    // "{'p_complete':'173','p_ing':'0'}"
+    data['list'] = formatExchange(result[0],['k_value','file_name','status','code'])
+    data['working_tasks'] = eval("("+result2+")")['p_ing']
+    data['end_tasks'] = eval("("+result2+")")['p_complete']
+    console.log(data)
+    return data;
 }
