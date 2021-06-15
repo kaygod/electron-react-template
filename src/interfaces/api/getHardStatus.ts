@@ -16,6 +16,6 @@ export const handler = async (params:any)=>{
     data['cpu_rate'] = evalRes.cpu_use
     data['memory_rate'] = evalRes.mem_use
     data['page_no'] = page_no
-    data['total_page'] = Math.ceil(data['end_tasks']/10)
+    data['total_page'] = Math.ceil(evalRes['dir_total']/10)
     return data;
 }
