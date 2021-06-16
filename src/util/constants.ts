@@ -8,6 +8,8 @@ export const CONFIRM_SWITCH = '切换P盘会清除当前正在P的任务，你�
 
 export const CONFIRM_STOP = '停止P盘会清除当前正在P的任务，你确定操作吗？'
 
+export const CONFIRM_DELETE = '你确定删除吗？'
+
 export const KEY_FARM_IS_REQUIRED = "请输入farm key"
 
 export const POOL_KEY_IS_REQUIRED = "请输入pool key"

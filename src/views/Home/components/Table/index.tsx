@@ -3,6 +3,8 @@ import TableGrid from "components/TableGrid/index"
 import StatusSize from "./components/StatusSize/index"
 import { useSelector,useDispatch } from 'react-redux'
 import { getter,getMachineDataAsync } from "store/reducers/Home";
+import { Confirm } from 'util/common';
+import {CONFIRM_DELETE} from 'util/constants'
 
 
 const Table = () => {
@@ -11,7 +13,14 @@ const Table = () => {
     const { page_no,total_page,list,type } = useSelector(getter);
     
     const dispatch = useDispatch();
-
+    const deleteLog = ()=>{
+        Confirm(CONFIRM_DELETE).then(res=>{
+            if(res){
+            }
+        },err=>{
+            console.log(err)
+        })
+    }
     let column = [
         {
             name:'编号', 
@@ -55,7 +64,7 @@ const Table = () => {
             key:"operval",
             className:'text_left',
             render(value:string){
-                return <div style={{textAlign:'left'}}>123</div>
+                return <div style={{textAlign:'left'}} onClick={()=>{deleteLog()}}>123</div>
             }
         }
     ]

@@ -8,9 +8,11 @@ import { queryUpdateKey,getter as globalGetter } from 'store/reducers/Global';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Confirm } from 'util/common'
 import { KEY_FARM_IS_REQUIRED, POOL_KEY_IS_REQUIRED, COMFIRM_UPDATE_KEY } from 'util/constants'
+import { useHistory } from 'react-router'
 
-const SwitchKey = () => {
+  const SwitchKey = () => {
   const dispatch = useDispatch()
+  const history = useHistory();
   const prop = useSelector(getter)
   const globalProp = useSelector(globalGetter)
   const {list,key} = prop
@@ -42,9 +44,12 @@ const SwitchKey = () => {
       Alert(POOL_KEY_IS_REQUIRED)
       return
     }else{
-      Confirm(COMFIRM_UPDATE_KEY).then(()=>{
+      Confirm(COMFIRM_UPDATE_KEY).then(async ()=>{
         dispatch(stopAsync())
-      dispatch(queryUpdateKey(key))
+       const suc =await dispatch(queryUpdateKey(key))
+       if(suc){
+        history.replace('/')
+       }
       }).catch(()=>{
         return
       })

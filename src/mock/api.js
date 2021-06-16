@@ -19,7 +19,8 @@ app.listen(3001, () => {
 app.post('/getStatus',function(req, res){
   res.json(
     {
-      status:status
+      status:status,
+      k_type:null
     }
   );
 })
@@ -109,7 +110,7 @@ app.post('/switchMachine',function(req, res){
 
 
 app.post('/stop',function(req, res){
-  status = 3
+  status = 1
   res.json(
     {
       result:1
@@ -207,7 +208,7 @@ app.post('/getHardStatus',function(req, res){
 app.post('/switchKey',function(req, res){
   res.json(
     {
-      result:1
+      result:0
     }
   );
 })

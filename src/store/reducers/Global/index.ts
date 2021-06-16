@@ -53,11 +53,13 @@ export const queryUpdateKey = (
       Alert('切换成功')
       try {
         localStorage.setItem('chia_key',JSON.stringify(key))
+        return true
       } catch (error) {
-        return
+        return false
       }
+    }else{
+     return false
     }
-
   };
 // Action creators are generated for each case reducer function
 export const { noOperate,updateSwitchFlag } = counterSlice.actions;

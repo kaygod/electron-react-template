@@ -18,7 +18,7 @@ export const handler = async (params:any)=>{
     if(list.length>0){
         data['k_type'] = list['k_value'].substring(1)
     }else{
-        data['k_type'] = ''
+        data['k_type'] = null
     }
         localStorage.setItem('Ping_key', data['k_type'])
     return data;
