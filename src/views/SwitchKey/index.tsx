@@ -47,6 +47,7 @@ import { useHistory } from 'react-router'
       Confirm(COMFIRM_UPDATE_KEY).then(async ()=>{
         dispatch(stopAsync())
        const suc =await dispatch(queryUpdateKey(key))
+       console.log(suc)
        if(suc){
         history.replace('/')
        }

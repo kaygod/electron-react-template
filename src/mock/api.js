@@ -208,7 +208,7 @@ app.post('/getHardStatus',function(req, res){
 app.post('/switchKey',function(req, res){
   res.json(
     {
-      result:0
+      result:1
     }
   );
 })
