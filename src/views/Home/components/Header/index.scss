@@ -1,17 +1,28 @@
 .header{
     width: 100%;
     color: #fff;
-    padding: 20px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #355664;
+    background-color: rgb(25,55,66);
     border-radius: 5px;
 }
 .headerItem{
     text-align: center;
+    height: 82px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover{
+      background-color: rgb(53,86,101);
+    }
+}
+.active{
+  background-color: rgb(53,86,101);
 }
 .itemName{
     color:#02d7db;
@@ -20,6 +31,3 @@
     font-size: 20px;
     margin-top: 10px;
   }
-.headerItem:not(:first-child){
-    border-left: 1px solid #02d7db;
-}

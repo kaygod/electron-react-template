@@ -144,13 +144,13 @@ const Page = (props: defaultProps) => {
 
   return (
     <div className={styles.page}>
-      <span className={styles.cube} style={{width:'44px'}} onClick={() => { updatePage(1); }}>首页</span>
+      {page_no!=1&&<span className={styles.cube} style={{width:'44px'}} onClick={() => { updatePage(1); }}>首页</span>}
       {renderLeft(page_no, updatePage)}
       {content.map((item, index) => {
         return <span key={index}>{item}</span>;
       })}
       {renderRight(page_no, total_page, updatePage)}
-      <span className={styles.cube} style={{width:'44px'}} onClick={() => { updatePage(total_page); }}>尾页</span>
+      {page_no!=total_page&&<span className={styles.cube} style={{width:'44px'}} onClick={() => { updatePage(total_page); }}>尾页</span>}
     </div>
   );
 };

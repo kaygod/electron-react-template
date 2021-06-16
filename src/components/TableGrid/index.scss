@@ -26,4 +26,13 @@
 }
 .allpage{
   position: relative;
+  margin-top: 21px;
+}
+.emptyTips{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(253,97,72);
 }

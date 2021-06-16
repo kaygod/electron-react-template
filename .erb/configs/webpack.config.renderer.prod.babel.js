@@ -27,6 +27,8 @@ export default merge(baseConfig, {
 
   target: 'electron-renderer',
 
+  devtool:"eval-source-map",
+
   entry: [
     'core-js',
     'regenerator-runtime/runtime',
@@ -42,7 +44,7 @@ export default merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /.s?css$/,
+        test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -51,8 +53,31 @@ export default merge(baseConfig, {
               publicPath: './',
             },
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                  localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+              sourceMap: true,
+              importLoaders: 1,
+            },
+          },
           'sass-loader'
+        ],
+      },
+      {
+        test: /\.global.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          }
         ],
       },
       // WOFF Font
@@ -124,7 +149,7 @@ export default merge(baseConfig, {
   },
 
   optimization: {
-    minimize: true,
+    minimize: false,
     minimizer:
       [
         new TerserPlugin({

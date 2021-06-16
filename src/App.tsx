@@ -1,13 +1,12 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.global.css';
 import store from './store/store';
 import { Provider } from 'react-redux';
 import RouteList from 'route/index';
 import Layout from "components/Layout/index";
 
-
-
 export default function App() {
+
   return (
     <Provider store={store}>
       <Layout>

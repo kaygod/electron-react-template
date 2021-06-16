@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
-import { call } from '../../util/common';
-import { useSelector } from 'react-redux'
-import { getter } from "store/reducers/Global";
+import React,{useEffect} from 'react';
 import Header from "./components/Header/index"
 import ChooseBox from "./components/ChooseBox/index"
 import Table from "./components/Table/index"
 import styles from "./index.scss";
+import { useSelector, useDispatch } from 'react-redux'
+import { getter as globalGetter,updateSwitchFlag } from "store/reducers/Global";
+import { getStatusAsync } from "store/reducers/Home";
+import { useHistory } from "react-router";
 
 const Home = () => {
 
-  const data = useSelector(getter);
+  const { chia_key,has_switch } = useSelector(globalGetter);
 
-  console.log(data);
+  const history = useHistory();
 
-  let [list, setList] = useState([{}]);
- 
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    dispatch(getStatusAsync())
+    if(chia_key == null && has_switch === false){
+      history.replace("/update_key");
+      dispatch(updateSwitchFlag(true));
+    }
+  },[])
 
   return (
     <div className={styles.home}>

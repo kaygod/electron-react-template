@@ -90,6 +90,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  -webkit-user-select:none;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -135,7 +136,7 @@ table {
 
 body,
 html {
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.8);
   width: 1200px;
   margin: 0 auto;
   overflow-x:hidden;

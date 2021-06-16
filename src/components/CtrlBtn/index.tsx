@@ -1,9 +1,11 @@
 import React from 'react';
 import style from './index.scss';
 import { useSelector, useDispatch } from 'react-redux'
-import { getter,statusType,startWorkAsync,getMachineDataAsync,switchMachineAsync,stopAsync } from "store/reducers/Home";
+import { getter,statusType,startWorkAsync,getMachineDataAsync,switchMachineAsync,stopAsync,updateStatus } from "store/reducers/Home";
+import  { getter as globalGetter } from "store/reducers/Global";
 import { KEY_IS_REQUIRED } from "util/constants";
 import { Alert } from "util/common";
+import { useLoop } from "HOC/Loop";
 
 type defaultProps = {
   bgStart?: string
@@ -63,6 +65,13 @@ const useMethods = ()=>{
 
   const state = useSelector(getter);
 
+  const global_state = useSelector(globalGetter);
+
+  const toggleLoop = useLoop(()=>{
+      dispatch(getMachineDataAsync());
+  },state.status === statusType.working);
+
+
      /**
    * 开始P盘.对应几种情况
    *
@@ -74,7 +83,7 @@ const useMethods = ()=>{
   
     const status =  state.status;
 
-    const is_login = true; // 是否登录
+    const is_login = global_state.chia_key == null ?false:true; // 是否登录
 
     // 对应情况1 和 情况 2 还有 情况 3
     if(status === statusType.initial || status === statusType.stop || status === statusType.completed){ 
@@ -82,8 +91,19 @@ const useMethods = ()=>{
            Alert(KEY_IS_REQUIRED);
            return;
          }
-         await dispatch(startWorkAsync()); // 开始P盘
-         dispatch(getMachineDataAsync()); // 获取P盘数据
+         //dispatch(updateStatus(statusType.working))
+         // 开始P盘
+         try {  
+          await dispatch(startWorkAsync());
+          if(status === statusType.stop || status === statusType.initial){
+            toggleLoop(true);//开启定时器
+          }else{
+
+          }
+          // dispatch(getMachineDataAsync()); // 获取P盘数据
+         } catch (error) {
+            console.log(error);
+         }     
     }
   }
 
@@ -91,16 +111,25 @@ const useMethods = ()=>{
   * 切换P盘
   */
   const switchMachine = async ()=>{
-    await dispatch(switchMachineAsync()); // 切换P盘
-    dispatch(getMachineDataAsync()); // 获取P盘数据  
+    try {
+      await dispatch(switchMachineAsync()); // 切换P盘
+      dispatch(getMachineDataAsync()); // 获取P盘数据   
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   /**
   * 全部停止
   */
   const stop = async ()=>{
-    await dispatch(stopAsync()); // 全部停止
-    dispatch(getMachineDataAsync()); // 获取P盘数据  
+    try {
+      await dispatch(stopAsync()); // 全部停止
+      toggleLoop(false);//关掉定时器
+      dispatch(getMachineDataAsync()); // 获取P盘数据    
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 

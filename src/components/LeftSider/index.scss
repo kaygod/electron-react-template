@@ -3,7 +3,7 @@
   width: 193px;
   height: 203px;
   background:url('../../images/bar.png') no-repeat;
-  padding-top: 53px;
+  padding-top: 40px;
   margin-left: 10px;
 }
 .lines{
@@ -31,7 +31,11 @@
     }
   }
 }
-.current{
+.lines:nth-child(2),.lines:nth-child(3){
+   margin: 10px 0;
+}
+.current
+{
   background:url('../../images/bar_cur.png') no-repeat 10px;
 }
 

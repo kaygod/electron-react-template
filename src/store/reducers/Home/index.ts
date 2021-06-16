@@ -7,7 +7,7 @@ export enum statusType {
   working = 2, // 正在p盘过程中
   stop = 3,    // 点击全部停止后的状态
   completed = 4 // p盘完成了
-} 
+}
 
 interface listItem {
   k_value:string; // k的大小
@@ -20,10 +20,11 @@ interface defaultType {
   status:statusType,
   k_type:number | null, // 绘图大小对应的类型
   list:listItem[], // 表格数据
-  page_no:number, 
+  page_no:number,
   total_page:number,
   end_tasks:string, // 已完成p盘数
-  working_tasks:string // 正在进行p盘数
+  working_tasks:string, // 正在进行p盘数
+  type:string
 }
 
 
@@ -36,7 +37,8 @@ export const counterSlice = createSlice({
      page_no:1,
      total_page:1,
      end_tasks:"0",
-     working_tasks:"0"
+     working_tasks:"0",
+     type:'1'
   } as defaultType,
   reducers: {
     // 更新k值
@@ -61,6 +63,13 @@ export const counterSlice = createSlice({
         state.end_tasks = end_tasks;
         state.working_tasks= working_tasks;
         state.list = list;
+    },
+    updatePage(state,action){
+      state.page_no = action.payload;
+    },
+    updateType(state,action){
+      state.page_no = 1
+      state.type = action.payload
     }
   },
 });
@@ -70,7 +79,7 @@ export const getter = (state: any) => {
 };
 
 // Action creators are generated for each case reducer function
-export const {  noOperate,updateStatus,updateState,updateKType } = counterSlice.actions;
+export const {  noOperate,updateStatus,updateState,updateKType,updatePage,updateType } = counterSlice.actions;
 
 
 /**
@@ -88,37 +97,36 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
 /**
  *  开始p盘
  */
- export const startWorkAsync = () => async (dispatch: Function, getState: Function) => {
-  const { k_type } = getter(getState());
+ export const startWorkAsync = () => (dispatch: Function, getState: Function) => {
+  const { k_type,type } = getter(getState());
   if(k_type == null){
     alert(DRAW_IS_REQUIRE);
-    return;
+    return Promise.reject(null);
   }
-  try {
-    await fetch({
+  return fetch({
       url:"/startWork",
       data:{
-        k_type
+        k_type,
       }
+    }).then(()=>{
+      dispatch(updateStatus(statusType.working));
     })
-    dispatch(updateStatus(statusType.working)); 
-  } catch (error) {
-     console.log(error);
-  }
 };
 
 
 /**
  *  获取P盘数据
  */
- export const getMachineDataAsync = () => async (dispatch: Function, getState: Function) => {
-  const { page_no } = getter(getState());
+ export const getMachineDataAsync = (page:number | undefined = undefined) => async (dispatch: Function, getState: Function) => {
+  const { page_no,type } = getter(getState());
   const response = await fetch({
     url:"/getMachineData",
     data:{
-      page_no
+      page_no:page != null ? page:page_no,
+      type
     }
   })
+
   const { is_complete } = response;
   //说明已经p完了
   if(is_complete){
@@ -126,43 +134,40 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   }
   //更新后端数据
   dispatch(updateState(response));
+  if(page != null){
+   dispatch(updatePage(page));
+  }
 };
 
 /**
  *  切换p盘
  */
- export const switchMachineAsync = () => async (dispatch: Function, getState: Function) => {
+ export const switchMachineAsync = () => (dispatch: Function, getState: Function) => {
   const { k_type } = getter(getState());
   if(k_type == null){
     alert(DRAW_IS_REQUIRE);
     return;
   }
-  try {
-    await fetch({
+  return fetch({
       url:"/switchMachine",
       data:{
         k_type
       }
-    })
-    dispatch(noOperate());
-  } catch (error) {
-     console.log(error);
-  }
+    }).then(()=>{
+      dispatch(noOperate());
+  })
 };
 
 /**
  *  全部停止
  */
- export const stopAsync = () => async (dispatch: Function, getState: Function) => {
-  try {
-    await fetch({
+ export const stopAsync = () => (dispatch: Function, getState: Function) => {
+   return fetch({
       url:"/stop",
       data:{}
+    }).then(()=>{
+      dispatch(updateStatus(statusType.stop));
     })
-    dispatch(updateStatus(statusType.stop));
-  } catch (error) {
-     console.log(error);
-  }
 };
 
 

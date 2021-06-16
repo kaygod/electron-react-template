@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell,globalShortcut } from 'electron';
+import { app, BrowserWindow, shell,globalShortcut,ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -73,6 +73,7 @@ const createWindow = async () => {
     height: 800,
     icon: getAssetPath('icon.png'),
     frame:false,
+    resizable:false,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -109,7 +110,7 @@ const createWindow = async () => {
 
   globalShortcut.register('ctrl+d', function () {
     if(mainWindow){
-      mainWindow.webContents.openDevTools(); 
+      mainWindow.webContents.openDevTools();
     }
   })
 
@@ -137,3 +138,18 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
+ipcMain.on('close',()=>{
+  if(mainWindow){
+    mainWindow.close()
+  }
+})
+
+ipcMain.on('min',()=>{
+  if(mainWindow){
+    mainWindow.minimize()
+  }
+})
+
+ipcMain.on('getDataPath',(event)=>{
+  event.returnValue = app.getPath("userData");
+})

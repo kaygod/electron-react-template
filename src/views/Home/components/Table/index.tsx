@@ -1,16 +1,25 @@
-import React,{useState} from 'react';
-import styles from "./index.scss";
+import React,{useEffect} from 'react';
 import TableGrid from "components/TableGrid/index"
 import StatusSize from "./components/StatusSize/index"
+import { useSelector,useDispatch } from 'react-redux'
+import { getter,getMachineDataAsync } from "store/reducers/Home";
+
+
 const Table = () => {
-    const column = [
+
+
+    const { page_no,total_page,list,type } = useSelector(getter);
+    
+    const dispatch = useDispatch();
+
+    let column = [
         {
             name:'编号', 
             dataIndex:"num",
             key:"num",
             className:'text_padding20',
-            render(value:string){
-                return <p style={{textAlign:'left',paddingLeft:'25px'}}>{value}</p>
+            render(value:string,ob:Object,index:number){
+                return <p style={{textAlign:'left',paddingLeft:'25px'}}>{index+1}</p>
             }
         },
         {
@@ -22,7 +31,7 @@ const Table = () => {
                 return <p style={{textAlign:'left'}}>{value}</p>
             }
         },
-        {
+        type=='2'&&{
             name:'文件名', 
             dataIndex:"file_name",
             key:"file_name",
@@ -39,44 +48,31 @@ const Table = () => {
             render(value:string){
                 return <StatusSize value={value} />
             }
-        }
-      ]
-      const [tableData,setTable] = useState({
-        page_no:1,
-        total_page:11
-      })
-    const updatePage = (v)=>{
-        setTable({page_no:v,total_page:11})
-    }
-    let data=[
-        {
-            num:'01',
-            k_value:'K-32,101.4GiB',
-            file_name:'文件名',
-            status:10
         },
-        {
-            num:'20',
-            k_value:'K-32,101.4GiB',
-            file_name:'文件名',
-            status:30
-        },
-        {
-            num:'200',
-            k_value:'K-32,101.4GiB',
-            file_name:'文件名',
-            status:50
-        },
-        {
-            num:'2000',
-            k_value:'K-32,101.4GiB',
-            file_name:'文件名',
-            status:90
+        type=='2'&&{
+            name:'操作', 
+            dataIndex:"operval",
+            key:"operval",
+            className:'text_left',
+            render(value:string){
+                return <div style={{textAlign:'left'}}>123</div>
+            }
         }
     ]
+    useEffect(()=>{
+        dispatch(getMachineDataAsync());
+    },[])
+    
+    //翻页
+    const updatePage = (v:number)=>{
+       dispatch(getMachineDataAsync(v));
+    }
+    column = column.filter((val)=>{
+        return val!==false
+    })
   return (
     <div>
-      <TableGrid column={column} data={data} page_no={tableData.page_no} total_page={tableData.total_page} updatePage={updatePage}  min_height={479}/>     
+      <TableGrid column={column} emptyTips="暂无P盘数据" data={list} page_no={page_no} total_page={total_page} updatePage={updatePage} min_height={467}/>
     </div>
   );
 };
