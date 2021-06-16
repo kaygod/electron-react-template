@@ -8,7 +8,7 @@ export const handler = async (params:any)=>{
     //the two params must be array
     const data:any = {}
     const result:any = await call(`list_3`, [page_no])//获取列表
-    const result2:any = await call(`page_2`) //获取首页头部已批正在p的数量
+    const result2:any = await call(`page_2`) // 硬件使用率
     const evalRes = eval("("+result2+")")
     data['list'] = formatExchange(result[0],['hard_disk','draw_num','draw_capacity'])//数据转换
     data['cpu_rate'] = evalRes.cpu_use

@@ -14,9 +14,14 @@ export const handler = async (params:any)=>{
     data['working_tasks'] = evalRes['p_ing']
     data['end_tasks'] = evalRes['p_complete']
     data['page_no'] = page_no
-    if(type == 1 ){
-        // 1为已完成P盘总数除每页数量
+    if(type ==  1){
+        // 1为正在P盘总数除每页数量
         data['total_page'] =Math.ceil(data['working_tasks']/10)
+        if(!data['list'].length){
+            data['is_complete'] = true
+        }else{
+            data['is_complete'] = false
+        }
     }else{
         data['total_page'] =Math.ceil(data['end_tasks']/10)
     }

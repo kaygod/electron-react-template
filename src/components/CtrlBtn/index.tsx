@@ -3,8 +3,8 @@ import style from './index.scss';
 import { useSelector, useDispatch } from 'react-redux'
 import { getter,statusType,startWorkAsync,getMachineDataAsync,switchMachineAsync,stopAsync,updateStatus } from "store/reducers/Home";
 import  { getter as globalGetter } from "store/reducers/Global";
-import { KEY_IS_REQUIRED } from "util/constants";
-import { Alert } from "util/common";
+import { KEY_IS_REQUIRED,KEY_IS_SANME,CONFIRM_SWITCH,CONFIRM_STOP } from "util/constants";
+import { Alert,Confirm } from "util/common";
 import { useLoop } from "HOC/Loop";
 
 type defaultProps = {
@@ -43,7 +43,7 @@ const ctrlBtn = (props: defaultProps) => {
     <div className={style.flexLeft}>
 
         {
-          status == statusType.completed || status === statusType.initial || status === statusType.stop?
+          status === statusType.initial?
           <div className={style.btn+' '+style.flexCenter} onClick={startWork} style={bgStartStyle}>开始P盘</div>
           :null
         }
@@ -63,7 +63,7 @@ const useMethods = ()=>{
 
   const dispatch = useDispatch();
 
-  const state = useSelector(getter);
+  const  state = useSelector(getter);
 
   const global_state = useSelector(globalGetter);
 
@@ -86,7 +86,7 @@ const useMethods = ()=>{
     const is_login = global_state.chia_key == null ?false:true; // 是否登录
 
     // 对应情况1 和 情况 2 还有 情况 3
-    if(status === statusType.initial || status === statusType.stop || status === statusType.completed){ 
+    if(status === statusType.initial){ 
          if(!is_login){ // 没有登录
            Alert(KEY_IS_REQUIRED);
            return;
@@ -95,7 +95,7 @@ const useMethods = ()=>{
          // 开始P盘
          try {  
           await dispatch(startWorkAsync());
-          if(status === statusType.stop || status === statusType.initial){
+          if(status === statusType.initial){
             toggleLoop(true);//开启定时器
           }else{
 
@@ -111,9 +111,19 @@ const useMethods = ()=>{
   * 切换P盘
   */
   const switchMachine = async ()=>{
+    if(localStorage.getItem('Ping_key')==state.k_type){
+      Alert(KEY_IS_SANME)
+      return
+    }
     try {
-      await dispatch(switchMachineAsync()); // 切换P盘
-      dispatch(getMachineDataAsync()); // 获取P盘数据   
+      Confirm(CONFIRM_SWITCH).then(async (res)=>{
+        if(res){
+          await dispatch(switchMachineAsync()); // 切换P盘
+          dispatch(getMachineDataAsync()); // 获取P盘数据   
+        }
+      },err=>{
+        console.log(err)
+      })  
     } catch (error) {
       console.log(error);
     }
@@ -124,9 +134,15 @@ const useMethods = ()=>{
   */
   const stop = async ()=>{
     try {
-      await dispatch(stopAsync()); // 全部停止
-      toggleLoop(false);//关掉定时器
-      dispatch(getMachineDataAsync()); // 获取P盘数据    
+      Confirm(CONFIRM_STOP).then(async res=>{
+        if(res){
+          await dispatch(stopAsync()); // 全部停止
+          toggleLoop(false);//关掉定时器
+          dispatch(getMachineDataAsync()); // 获取P盘数据  
+        } 
+      },err=>{
+        console.log(err)
+      })
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,12 @@
 export const DRAW_IS_REQUIRE = "请选择绘图大小";
 
-export const KEY_IS_REQUIRED = "没有填写公钥,不允许P盘";
+export const KEY_IS_REQUIRED = "输入公钥后才能开始P盘";
+
+export const KEY_IS_SANME = "你没有选择其他绘图大小"
+
+export const CONFIRM_SWITCH = '切换P盘会清除当前正在P的任务，你确定操作吗？'
+
+export const CONFIRM_STOP = '停止P盘会清除当前正在P的任务，你确定操作吗？'
 
 export const KEY_FARM_IS_REQUIRED = "请输入farm key"
 
