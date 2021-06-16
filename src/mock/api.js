@@ -43,6 +43,8 @@ app.post('/getMachineData',function(req, res){
       working_tasks:10,
       total_page:2,
       is_complete:false,
+      status:status,
+      k_type:null,
       list:[
         {
           k_value:30,

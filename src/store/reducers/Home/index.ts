@@ -83,14 +83,14 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
 /**
  * 获取p盘状态
  */
-export const getStatusAsync = () => async (dispatch: Function, getState: Function) => {
-   const response = await fetch({
-     url:"/getStatus",
-     data:{}
-   })
-   dispatch(updateStatus(response.status));
-   dispatch(updateKType(response.k_type));
-};
+// export const getStatusAsync = () => async (dispatch: Function, getState: Function) => {
+//    const response = await fetch({
+//      url:"/getStatus",
+//      data:{}
+//    })
+//    dispatch(updateStatus(response.status));
+//    dispatch(updateKType(response.k_type));
+// };
 
 
 /**
@@ -142,6 +142,8 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   });
   //更新后端数据
   dispatch(updateState(response));
+  dispatch(updateStatus(response.status));
+  dispatch(updateKType(response.k_type));
   if(page != null){
    dispatch(updatePage(page));
   }

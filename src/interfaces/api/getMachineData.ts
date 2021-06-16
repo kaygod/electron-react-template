@@ -24,9 +24,29 @@ export const handler = async (params:any)=>{
         }else{
             data['is_complete'] = false
         }
+        // 调用的脚本是正在P的脚本不用再次调用  
+        if(data['list'].length>0){
+            data['status'] = 2
+            data['k_type'] = data['list']['k_value'].substring(1)
+        }else{
+            data['status'] = 1
+            data['k_type'] = null
+        }
+        localStorage.setItem('Ping_key', data['k_type'])
     }else{
         data['total_page'] =Math.ceil(data['end_tasks']/10)
+        // 如果是完成页再调用正在P的列表
+        const Ping_result:any = await call(`list_1`)//获取列表
+        const Ping_list = formatExchange(Ping_result[0],['k_value','file_name','status'])//数据转换
+    if(Ping_list.length>0){
+            data['status'] = 2
+            data['k_type'] = Ping_list['k_value'].substring(1)
+        }else{
+            data['status'] = 1
+            data['k_type'] = null
+        }
+        localStorage.setItem('Ping_key', data['k_type'])
     }
-    console.log(data)
+    console.log
     return data;
 }
