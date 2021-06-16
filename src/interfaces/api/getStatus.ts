@@ -12,6 +12,8 @@ export const handler = async (params:any)=>{
     const list = formatExchange(result1[0],['k_value','file_name','status'])
     if(evalRes.p_ing>0){
         data['status'] = 2
+    }else{
+        data['status'] = 1
     }
     if(list.length>0){
         data['k_type'] = list['k_value'].substring(1)
