@@ -10,7 +10,14 @@ const CutSwitch = () => {
   }
   return (
     <div className={styles.header}>
-      <div className={styles.moveBar}></div>
+      <div className={styles.moveBar}>
+        <div className={styles.logos}>
+          <div className={styles.imgs}><img src="images/logo.png" alt="" /></div>
+          <p>自动化P盘</p>
+        </div>
+        
+        <div className={styles.name}>信维股份</div>         
+      </div>
       <div className={styles.switch}>
                 <div className={styles.small} onClick={min}><span className="iconfont icon-minus"></span></div>
                 <div className={styles.cut} onClick={close}><span className="iconfont icon-close"></span></div>

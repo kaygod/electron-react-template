@@ -136,7 +136,7 @@ table {
 
 body,
 html {
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.8);
   width: 1200px;
   margin: 0 auto;
   overflow-x:hidden;

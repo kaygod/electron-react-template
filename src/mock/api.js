@@ -82,6 +82,16 @@ app.post('/getMachineData',function(req, res){
           k_value:90,
           file_name:"admin",
           status:30
+        },
+        {
+          k_value:30,
+          file_name:"admin",
+          status:30
+        },
+        {
+          k_value:90,
+          file_name:"admin",
+          status:30
         }
       ]
     }
@@ -165,7 +175,21 @@ app.post('/getHardStatus',function(req, res){
           hard_disk:"had",
           draw_num:"122",
           draw_capacity:"100"
-        }, {
+        },{
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"300"
+        },
+        {
+          hard_disk:"had",
+          draw_num:"122",
+          draw_capacity:"100"
+        },{
           hard_disk:"had",
           draw_num:"122",
           draw_capacity:"100"

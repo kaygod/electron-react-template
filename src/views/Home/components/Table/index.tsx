@@ -72,7 +72,7 @@ const Table = () => {
     })
   return (
     <div>
-      <TableGrid column={column} emptyTips="暂无P盘数据" data={list} page_no={page_no} total_page={total_page} updatePage={updatePage} min_height={479}/>
+      <TableGrid column={column} emptyTips="暂无P盘数据" data={list} page_no={page_no} total_page={total_page} updatePage={updatePage} min_height={467}/>
     </div>
   );
 };

@@ -51,9 +51,9 @@ const SwitchKey = () => {
     }
   }
   return (
-    <div  className={styles.switchkey}>
+    <div  className={styles.switchKey}>
         <div className={styles.mid_box}>
-            <div className={styles.alltext}>
+            <div className={styles.allText}>
                <div className={styles.title}>请选择您的P盘公钥</div>
                <div className={styles.choice}>
                  <SelectBox 
@@ -89,3 +89,4 @@ const SwitchKey = () => {
 };
 
 export default SwitchKey;
+                                             
