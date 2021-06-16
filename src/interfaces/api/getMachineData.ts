@@ -26,5 +26,6 @@ export const handler = async (params:any)=>{
     }else{
         data['total_page'] =Math.ceil(data['end_tasks']/10)
     }
+    console.log(data)
     return data;
 }
