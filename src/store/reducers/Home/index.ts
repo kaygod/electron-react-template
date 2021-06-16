@@ -36,7 +36,7 @@ export const counterSlice = createSlice({
      total_page:1,
      end_tasks:"0",
      working_tasks:"0",
-     type:'2'
+     type:'1'
   } as defaultType,
   reducers: {
     // 更新k值
@@ -132,13 +132,15 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   if(is_complete){
     dispatch(updateStatus(statusType.initial));
   }
-  response.list.forEach((item: any, index: number) => {
+  response.list.map((item: any, index: number) => {
+    const new_item = Object.assign(item,{code:''})
     let code: string | number = index + 1;
-    code = page ? (page - 1) * 10 + code : code
+    code = page ? (page - 1) * 10 + Number(code) : code
     if (code < 10) {
       code = '0' + code;
     }
-    item.code = code;
+    new_item['code'] = code;
+    return new_item
   });
   //更新后端数据
   dispatch(updateState(response));
