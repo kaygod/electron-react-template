@@ -32,9 +32,9 @@ export const call = (name: string,payload:any[] = []) => {
 
     const isExit = await fs.pathExists(dist_path); // 脚本已经存在了吗
 
-    //!isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
+    !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
 
-    await fs.copy(script_path, dist_path);
+    // await fs.copy(script_path, dist_path);
 
     const result:any = await execuate(dist_path,payload);
 
