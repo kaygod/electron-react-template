@@ -46,7 +46,7 @@ const Table = () => {
             key:"file_name",
             className:'text_left',
             render(value:string){
-                return <p style={{textAlign:'left'}}>{value}</p>
+                return <p style={{textAlign:'left'}} title={value}>{value}</p>
             }
         },
         {
