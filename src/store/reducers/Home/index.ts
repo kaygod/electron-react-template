@@ -89,6 +89,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
      data:{}
    })
    dispatch(updateStatus(response.status));
+   dispatch(updateKType(response.k_type));
 };
 
 
