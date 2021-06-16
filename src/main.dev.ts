@@ -74,6 +74,7 @@ const createWindow = async () => {
     icon: getAssetPath('icon.png'),
     frame:false,
     resizable:false,
+    transparent:true,
     webPreferences: {
       nodeIntegration: true,
     },

@@ -64,7 +64,7 @@ const Table = () => {
             key:"operval",
             className:'text_left',
             render(value:string){
-                return <div style={{textAlign:'left'}} onClick={()=>{deleteLog()}}>123</div>
+                return <div style={{textAlign:'left'}} onClick={()=>{deleteLog()}}><i className="iconfont icon-shanchu" style={{color:'#ccc'}}></i></div>
             }
         }
     ]

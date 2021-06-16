@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./index.scss";
-import { app, BrowserWindow, ipcRenderer } from 'electron'
+import { app, BrowserWindow, ipcRenderer } from 'electron';
+
+
 const CutSwitch = () => {
   const close = ()=>{
     ipcRenderer.send('close')
@@ -12,7 +14,7 @@ const CutSwitch = () => {
     <div className={styles.header}>
       <div className={styles.moveBar}>
         <div className={styles.logos}>
-          <div className={styles.imgs}><img src="images/logo.png" alt="" /></div>
+          <div className={styles.imgs}><img src={require("../../images/logo.png").default} alt="" /></div>
           <p>自动化P盘</p>
         </div>
         
