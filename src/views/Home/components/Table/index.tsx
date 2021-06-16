@@ -15,11 +15,11 @@ const Table = () => {
     let column = [
         {
             name:'编号', 
-            dataIndex:"num",
-            key:"num",
+            dataIndex:"code",
+            key:"code",
             className:'text_padding20',
             render(value:string,ob:Object,index:number){
-                return <p style={{textAlign:'left',paddingLeft:'25px'}}>{index+1}</p>
+                return <p style={{textAlign:'left',paddingLeft:'25px'}}>{value}</p>
             }
         },
         {

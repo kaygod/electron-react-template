@@ -67,7 +67,7 @@ const initChart = ()=>{
                 },
                 detail: {
                     valueAnimation: true,
-                    fontSize: 30,
+                    fontSize: 24,
                     color:'#E6FFFD',//#03c5ca
                     textBorderColor :'#01fff6',
                     textBorderWidth:1,

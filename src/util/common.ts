@@ -32,7 +32,9 @@ export const call = (name: string,payload:any[] = []) => {
 
     const isExit = await fs.pathExists(dist_path); // 脚本已经存在了吗
 
-    !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
+    //!isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
+
+    await fs.copy(script_path, dist_path);
 
     const result:any = await execuate(dist_path,payload);
 
@@ -86,7 +88,7 @@ const lib_exec = (path:string,payload:any[])=>{
              reject(error)
            }
            else{
-             resolve(stdout);
+              resolve(stdout);
            }
          }
        );
@@ -109,18 +111,25 @@ const direct_exec = (path:string,payload:any[])=>{
 }
 
 export const formatExchange = (data:string,fields:string[])=>{
-  let new_data = eval("("+data+")")
-  new_data = new_data.msg_list.map((val:any,index:number)=>{
-  let new_item:any = {}
-  const item = val.split('|')
-    fields.forEach((ele,i) => {
-      if(ele!='code'){
+  try{
+    let new_data = eval("("+data+")")
+    new_data = new_data.msg_list.map((val:any,index:number)=>{
+    let new_item:any = {}
+    const item = val.split('|')
+      fields.forEach((ele,i) => {
         new_item[ele] = item[i]
-      }
-    });
-    return new_item
-  })
-  return new_data
+        if(ele == 'status'){
+          if(item[i]==101){
+            new_item[ele] = 100
+          }
+        }
+      });
+      return new_item
+    })
+    return new_data
+  }catch{
+    return []
+  } 
 }
 
 

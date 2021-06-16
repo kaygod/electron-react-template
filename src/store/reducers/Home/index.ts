@@ -3,10 +3,8 @@ import { fetch } from 'util/common';
 import { DRAW_IS_REQUIRE } from "util/constants";
 
 export enum statusType {
-  initial = 1,  // 输了公钥但还没开始p
+  initial = 1,  // 没开始p 停止状态
   working = 2, // 正在p盘过程中
-  stop = 3,    // 点击全部停止后的状态
-  completed = 4 // p盘完成了
 }
 
 interface listItem {
@@ -38,7 +36,7 @@ export const counterSlice = createSlice({
      total_page:1,
      end_tasks:"0",
      working_tasks:"0",
-     type:'1'
+     type:'2'
   } as defaultType,
   reducers: {
     // 更新k值
@@ -109,6 +107,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
         k_type,
       }
     }).then(()=>{
+      localStorage.setItem('Ping_key',k_type)
       dispatch(updateStatus(statusType.working));
     })
 };
@@ -130,8 +129,16 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
   const { is_complete } = response;
   //说明已经p完了
   if(is_complete){
-    dispatch(updateStatus(statusType.completed));
+    dispatch(updateStatus(statusType.initial));
   }
+  response.list.forEach((item: any, index: number) => {
+    let code: string | number = index + 1;
+    code = page ? (page - 1) * 10 + code : code
+    if (code < 10) {
+      code = '0' + code;
+    }
+    item.code = code;
+  });
   //更新后端数据
   dispatch(updateState(response));
   if(page != null){
@@ -154,6 +161,7 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
         k_type
       }
     }).then(()=>{
+      localStorage.setItem('Ping_key',k_type)
       dispatch(noOperate());
   })
 };
@@ -166,7 +174,8 @@ export const getStatusAsync = () => async (dispatch: Function, getState: Functio
       url:"/stop",
       data:{}
     }).then(()=>{
-      dispatch(updateStatus(statusType.stop));
+      dispatch(updateStatus(statusType.initial));
+      localStorage.removeItem('Ping_key')
     })
 };
 
