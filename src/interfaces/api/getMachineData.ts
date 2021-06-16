@@ -5,6 +5,7 @@ import { call,formatExchange } from "util/common";
  */
 export const handler = async (params:any)=>{
     const {page_no,type} = params
+    console.log(page_no,type)
     //the two params must be array
     const data:any = {}
     const result:any = await call(`list_${type}`, [page_no])//获取列表
