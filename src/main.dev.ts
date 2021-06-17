@@ -72,15 +72,9 @@ const createWindow = async () => {
     width: 1200,
     height: 800,
     icon: getAssetPath('icon.png'),
-<<<<<<< HEAD
-    frame:false,
-    resizable:false,
-    //transparent:true,整体透明
-=======
     frame: false,
     resizable: false,
-    transparent: true,
->>>>>>> 3d676728e10c5988e67dee86c2831a487a7571ab
+    //transparent: true,
     webPreferences: {
       nodeIntegration: true,
     },
