@@ -47,52 +47,52 @@ app.post('/getMachineData',function(req, res){
       k_type:null,
       list:[
         {
-          k_value:30,
+          k_value:'k32',
           file_name:"admin",
           status:30
         },
         {
-          k_value:40,
+          k_value:'k33',
           file_name:"admin",
           status:30
         },
         {
-          k_value:50,
+          k_value:'k34',
           file_name:"admin",
           status:30
         },
         {
-          k_value:30,
+          k_value:'k35',
           file_name:"admin",
           status:30
         },
         {
-          k_value:30,
+          k_value:'k32',
           file_name:"admin",
           status:30
         },
         {
-          k_value:70,
+          k_value:'k35',
           file_name:"admin",
           status:30
         },
         {
-          k_value:30,
+          k_value:'k35',
           file_name:"admin",
           status:30
         },
         {
-          k_value:90,
+          k_value:'k35',
           file_name:"admin",
           status:30
         },
         {
-          k_value:30,
+          k_value:'k34',
           file_name:"admin",
           status:30
         },
         {
-          k_value:90,
+          k_value:'k33',
           file_name:"admin",
           status:30
         }

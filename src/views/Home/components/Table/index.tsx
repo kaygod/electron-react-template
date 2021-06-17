@@ -24,6 +24,22 @@ const Table = () => {
             console.log(err)
         })
     }
+    const k_value_list = [
+        {name:'K-32,101.4GiB',value:'k32'},
+        {name:'K-33,208.8GiB',value:'k33'},
+        {name:'K-34,429.8GiB',value:'k34'},
+        {name:'K-35,884.1GiB',value:'k35'}
+    ]
+    const k_filter =(value:string)=>{    
+       const item= k_value_list.find(val=>{
+            return val.value==value
+       })
+       if(item){
+         return item.name
+       }else{
+           return value;
+       }
+    } 
     let column = [
         {
             name:'编号', 
@@ -40,7 +56,7 @@ const Table = () => {
             key:"k_value",
             className:'text_left',
             render(value:string){
-                return <p style={{textAlign:'left'}}>{value}</p>
+                return <p style={{textAlign:'left'}}>{k_filter(value)}</p>
             }
         },
         type=='2'&&{
@@ -49,7 +65,7 @@ const Table = () => {
             key:"file_name",
             className:'text_left',
             render(value:string){
-                return <p style={{textAlign:'left'}} title={value}>{value}</p>
+                return <p style={{textAlign:'left',paddingRight:'20px'}} title={value}>{value}</p>
             }
         },
         {
@@ -65,6 +81,7 @@ const Table = () => {
             name:'操作', 
             dataIndex:"operval",
             key:"operval",
+            width:50,
             className:'text_left',
             render(value:string,ob:Object){
                 return <div style={{textAlign:'left'}} onClick={()=>{deleteLog(ob)}}><i className="iconfont icon-shanchu" style={{color:'#ccc'}}></i></div>
