@@ -1,5 +1,6 @@
 #!/bin/sh
 offer=15
+home=$(env | grep ^HOME= | cut -c 6-)
 if [ ! -n "$1" ];
 then
   page=1
@@ -12,10 +13,10 @@ then
 else
   limit=`expr $page - 1`
   limit=`expr $limit \* $offer`
-  limit=`expr $limit + 1`
+  limit=`expr $limit + 1`  
 fi
 json="{'msg_list':["
-file='tem.txt'
+file=$home/tem.txt
 df |grep '/data*'  | tail -n "+$limit" | head -n $offer |while read line
 do
   num=${line##*/data}
@@ -27,7 +28,7 @@ do
 
 done > $file
 msg_list=$(cat $file)
-if [ '$msg_list' = '' ]
+if [ "$msg_list" = "" ]
 then
   json="$json"
 else
