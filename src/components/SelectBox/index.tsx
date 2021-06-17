@@ -26,7 +26,7 @@ const ctrlBtn = (props: defaultProps) => {
     inputType='text',
     placeHold='请选择',
     ableDrag = true,
-    dragShowName="name",
+    dragShowName="farmer_keys",
     inputChange = () => {},
     onChange = () => {},
   } = props;

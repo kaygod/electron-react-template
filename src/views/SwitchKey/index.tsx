@@ -21,23 +21,23 @@ import { useHistory } from 'react-router'
   useEffect(()=>{
     dispatch(queryAsync())
     if(chia_key!=null){
-      dispatch(updateKey({key_name:'farmar_keys',value:chia_key.farmar_keys}))
+      dispatch(updateKey({key_name:'farmer_keys',value:chia_key.farmer_keys}))
       dispatch(updateKey({key_name:'pool_keys',value:chia_key.pool_keys}))
     }
   },[])
 
   const farmKey=(v:string)=>{
-    dispatch(updateKey({key_name:'farmar_keys',value:v}))
+    dispatch(updateKey({key_name:'farmer_keys',value:v}))
   }
   const poolKey=(v:string)=>{
     dispatch(updateKey({key_name:'pool_keys',value:v}))
   }
-  const onChange = (v:{farmar_keys:string,pool_keys:string})=>{
-    dispatch(updateKey({key_name:'farmar_keys',value:v.farmar_keys}))
+  const onChange = (v:{farmer_keys:string,pool_keys:string})=>{
+    dispatch(updateKey({key_name:'farmer_keys',value:v.farmer_keys}))
     dispatch(updateKey({key_name:'pool_keys',value:v.pool_keys}))
   }
   const comfirm = ()=>{
-    if(!key.farmar_keys){
+    if(!key.farmer_keys){
       Alert(KEY_FARM_IS_REQUIRED)
       return
     }else if(!key.pool_keys){
@@ -65,11 +65,11 @@ import { useHistory } from 'react-router'
                  <SelectBox 
                   titleAlwayShow={true} 
                   title="farm key" 
-                  value={key.farmar_keys} 
+                  value={key.farmer_keys} 
                   ableInput={true} 
                   placeHold="请选择/输入farm key"
                   list={list} 
-                  dragShowName="farmar_keys" 
+                  dragShowName="farmer_keys" 
                   inputChange={(v)=>farmKey(v)}
                   onChange={(v)=>onChange(v)}
                  />

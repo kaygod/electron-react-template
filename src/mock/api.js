@@ -218,6 +218,6 @@ app.post('/switchKey',function(req, res){
 
 app.post('/getKey',function(req, res){
   res.json(
-    [{farmar_keys:'123',pool_keys:'456'},{farmar_keys:'789',pool_keys:'111'}]
+    [{farmer_keys:'123',pool_keys:'456'},{farmer_keys:'789',pool_keys:'111'}]
   );
 })
