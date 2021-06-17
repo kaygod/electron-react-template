@@ -3,6 +3,7 @@ import TableGrid from "components/TableGrid/index"
 import StatusSize from "./components/StatusSize/index"
 import { useSelector,useDispatch } from 'react-redux'
 import { getter,getMachineDataAsync,deleteAsync } from "store/reducers/Home";
+import { getter as globalGetter } from "store/reducers/Global";
 import { Confirm } from 'util/common';
 import {CONFIRM_DELETE} from 'util/constants'
 
@@ -11,7 +12,7 @@ const Table = () => {
 
 
     const { page_no,total_page,list,type } = useSelector(getter);
-    
+    const {chia_key} = useSelector(globalGetter)
     const dispatch = useDispatch();
     const deleteLog = (ob:any)=>{
         const id = ob.id
@@ -71,7 +72,9 @@ const Table = () => {
         }
     ]
     useEffect(()=>{
-        dispatch(getMachineDataAsync());
+        if(chia_key!=null){
+         dispatch(getMachineDataAsync());
+        }
     },[])
     
     //翻页
