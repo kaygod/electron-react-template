@@ -54,6 +54,7 @@ const Table = () => {
             name:'K的大小', 
             dataIndex:"k_value",
             key:"k_value",
+            width:150,
             className:'text_left',
             render(value:string){
                 return <p style={{textAlign:'left'}}>{k_filter(value)}</p>
@@ -65,13 +66,14 @@ const Table = () => {
             key:"file_name",
             className:'text_left',
             render(value:string){
-                return <p style={{textAlign:'left',paddingRight:'20px'}} title={value}>{value}</p>
+                return <p style={{textAlign:'left',paddingRight:'30px'}} title={value}>{value}</p>
             }
         },
         {
             name:'状态', 
             dataIndex:"status",
             key:"status",
+            width:150,
             className:'text_left',
             render(value:string){
                 return <StatusSize value={value} />

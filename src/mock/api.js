@@ -48,52 +48,52 @@ app.post('/getMachineData',function(req, res){
       list:[
         {
           k_value:'k32',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k33',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k34',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k35',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k32',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k35',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k35',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k35',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k34',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         },
         {
           k_value:'k33',
-          file_name:"admin",
+          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
           status:30
         }
       ]
