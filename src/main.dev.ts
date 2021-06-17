@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell,globalShortcut,ipcMain } from 'electron';
+import { app, BrowserWindow, shell, globalShortcut, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -67,18 +67,30 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
-  mainWindow = new BrowserWindow({
+  const options = {
     show: false,
     width: 1200,
     height: 800,
     icon: getAssetPath('icon.png'),
+<<<<<<< HEAD
     frame:false,
     resizable:false,
     //transparent:true,整体透明
+=======
+    frame: false,
+    resizable: false,
+    transparent: true,
+>>>>>>> 3d676728e10c5988e67dee86c2831a487a7571ab
     webPreferences: {
       nodeIntegration: true,
     },
-  });
+  };
+
+  if (process.platform === 'linux') {
+    options.icon = path.join(__dirname, 'images/icon.png');
+  }
+
+  mainWindow = new BrowserWindow(options);
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
@@ -110,10 +122,10 @@ const createWindow = async () => {
   });
 
   globalShortcut.register('ctrl+d', function () {
-    if(mainWindow){
+    if (mainWindow) {
       mainWindow.webContents.openDevTools();
     }
-  })
+  });
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
@@ -139,18 +151,18 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
-ipcMain.on('close',()=>{
-  if(mainWindow){
-    mainWindow.close()
+ipcMain.on('close', () => {
+  if (mainWindow) {
+    mainWindow.close();
   }
-})
+});
 
-ipcMain.on('min',()=>{
-  if(mainWindow){
-    mainWindow.minimize()
+ipcMain.on('min', () => {
+  if (mainWindow) {
+    mainWindow.minimize();
   }
-})
+});
 
-ipcMain.on('getDataPath',(event)=>{
-  event.returnValue = app.getPath("userData");
-})
+ipcMain.on('getDataPath', (event) => {
+  event.returnValue = app.getPath('userData');
+});

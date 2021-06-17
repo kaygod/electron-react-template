@@ -158,5 +158,5 @@ export const mockDataList = {
   "/switchKey":{
     result:1
   },
-  "/getKey": [{farm_key:'123',pool_key:'456'},{farm_key:'789',pool_key:'111'}]
+  "/getKey": [{farmer_keys:'123',pool_keys:'456'},{farmer_keys:'789',pool_keys:'111'}]
 }

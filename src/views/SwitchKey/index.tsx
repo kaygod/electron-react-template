@@ -21,33 +21,32 @@ import { useHistory } from 'react-router'
   useEffect(()=>{
     dispatch(queryAsync())
     if(chia_key!=null){
-      dispatch(updateKey({key_name:'farm_key',value:chia_key.farm_key}))
-      dispatch(updateKey({key_name:'pool_key',value:chia_key.pool_key}))
+      dispatch(updateKey({key_name:'farmer_keys',value:chia_key.farmer_keys}))
+      dispatch(updateKey({key_name:'pool_keys',value:chia_key.pool_keys}))
     }
   },[])
 
   const farmKey=(v:string)=>{
-    dispatch(updateKey({key_name:'farm_key',value:v}))
+    dispatch(updateKey({key_name:'farmer_keys',value:v}))
   }
   const poolKey=(v:string)=>{
-    dispatch(updateKey({key_name:'pool_key',value:v}))
+    dispatch(updateKey({key_name:'pool_keys',value:v}))
   }
-  const onChange = (v:{farm_key:string,pool_key:string})=>{
-    dispatch(updateKey({key_name:'farm_key',value:v.farm_key}))
-    dispatch(updateKey({key_name:'pool_key',value:v.pool_key}))
+  const onChange = (v:{farmer_keys:string,pool_keys:string})=>{
+    dispatch(updateKey({key_name:'farmer_keys',value:v.farmer_keys}))
+    dispatch(updateKey({key_name:'pool_keys',value:v.pool_keys}))
   }
   const comfirm = ()=>{
-    if(!key.farm_key){
+    if(!key.farmer_keys){
       Alert(KEY_FARM_IS_REQUIRED)
       return
-    }else if(!key.pool_key){
+    }else if(!key.pool_keys){
       Alert(POOL_KEY_IS_REQUIRED)
       return
     }else{
       Confirm(COMFIRM_UPDATE_KEY).then(async ()=>{
         dispatch(stopAsync())
        const suc =await dispatch(queryUpdateKey(key))
-       console.log(suc)
        if(suc){
          dispatch(updatePage(1))
         history.replace('/')
@@ -66,11 +65,11 @@ import { useHistory } from 'react-router'
                  <SelectBox 
                   titleAlwayShow={true} 
                   title="farm key" 
-                  value={key.farm_key} 
+                  value={key.farmer_keys} 
                   ableInput={true} 
                   placeHold="请选择/输入farm key"
                   list={list} 
-                  dragShowName="farm_key" 
+                  dragShowName="farmer_keys" 
                   inputChange={(v)=>farmKey(v)}
                   onChange={(v)=>onChange(v)}
                  />
@@ -80,7 +79,7 @@ import { useHistory } from 'react-router'
                   ableDrag={false}
                   titleAlwayShow={true}
                   title="pool key"
-                  value={key.pool_key}
+                  value={key.pool_keys}
                   ableInput={true} 
                   placeHold="请选择/输入pool key" 
                   inputChange={(v)=>poolKey(v)}/></div>
