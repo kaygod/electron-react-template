@@ -33,7 +33,7 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
+    "productName": "自动化P盘",
     "appId": "org.erb.ElectronReact",
     "files": [
       "images/",
