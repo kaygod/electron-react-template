@@ -16,6 +16,9 @@ export const handler = async (params:any)=>{
     data['working_tasks'] = evalRes['p_ing']
     data['end_tasks'] = evalRes['p_complete']
     data['page_no'] = page_no
+    /**
+     * 根据list_1，正在P的列表获取P盘状态以及在这P什么类型的盘
+     */
     if(type ==  1){
         // 1为正在P盘总数除每页数量
         data['total_page'] =Math.ceil(data['working_tasks']/10)
