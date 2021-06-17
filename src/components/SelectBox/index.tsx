@@ -44,7 +44,7 @@ const ctrlBtn = (props: defaultProps) => {
 
   return (
     <div className={style.select}>
-        <div className={style.flexLeft+' '+ style.selectBar}>
+        <div className={style.flexLeft+' '+ style.selectBar}  onClick={()=>{setdropShow(!dropShow)}}>
         <div className={style.containBox}>
                 {
                     (titleAlwayShow||value)&&
@@ -55,7 +55,7 @@ const ctrlBtn = (props: defaultProps) => {
                     <div className={style.textShow+' '+style.textEllips}>{filter(value)}</div>
                 }
         </div>
-        {ableDrag&&<div className={`${style.icon} ${style.flexCenter}`} onClick={()=>{setdropShow(!dropShow)}}>
+        {ableDrag&&<div className={`${style.icon} ${style.flexCenter}`}>
                 <span className="iconfont icon-caret-down"></span>
         </div>}
         </div>

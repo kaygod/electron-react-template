@@ -2,15 +2,15 @@ import { createSlice,PayloadAction } from '@reduxjs/toolkit';
 import { fetch } from 'util/common';
 
 interface keyItemType {
-    farm_key:string,
-    pool_key:string,
+    farmar_keys:string,
+    pool_keys:string,
 } 
 export const counterSlice = createSlice({
   name: 'SwitchKey',
   initialState: {
     key:{
-        farm_key:'',
-        pool_key:''
+        farmar_keys:'',
+        pool_keys:''
     },
     list:[]
   },
