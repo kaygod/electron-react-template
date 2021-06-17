@@ -22,7 +22,7 @@ const ctrlBtn = (props: defaultProps) => {
     title,
     ableInput=false,
     titleAlwayShow=false,
-    value,
+    value = '',
     inputType='text',
     placeHold='请选择',
     ableDrag = true,
@@ -44,7 +44,7 @@ const ctrlBtn = (props: defaultProps) => {
 
   return (
     <div className={style.select}>
-        <div className={style.flexLeft+' '+ style.selectBar}  onClick={()=>{setdropShow(!dropShow)}}>
+        <div className={style.flexLeft+' '+ style.selectBar}>
         <div className={style.containBox}>
                 {
                     (titleAlwayShow||value)&&
@@ -56,7 +56,7 @@ const ctrlBtn = (props: defaultProps) => {
                 }
         </div>
         {ableDrag&&<div className={`${style.icon} ${style.flexCenter}`}>
-                <span className="iconfont icon-caret-down"></span>
+                <span className="iconfont icon-caret-down"  onClick={()=>{setdropShow(!dropShow)}}></span>
         </div>}
         </div>
         {
