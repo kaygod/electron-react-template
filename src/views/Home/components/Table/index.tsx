@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import TableGrid from "components/TableGrid/index"
 import StatusSize from "./components/StatusSize/index"
 import { useSelector,useDispatch } from 'react-redux'
-import { getter,getMachineDataAsync } from "store/reducers/Home";
+import { getter,getMachineDataAsync,deleteAsync } from "store/reducers/Home";
 import { Confirm } from 'util/common';
 import {CONFIRM_DELETE} from 'util/constants'
 
@@ -13,9 +13,11 @@ const Table = () => {
     const { page_no,total_page,list,type } = useSelector(getter);
     
     const dispatch = useDispatch();
-    const deleteLog = ()=>{
+    const deleteLog = (ob:any)=>{
+        const id = ob.id
         Confirm(CONFIRM_DELETE).then(res=>{
             if(res){
+                dispatch(deleteAsync(id))
             }
         },err=>{
             console.log(err)
@@ -63,8 +65,8 @@ const Table = () => {
             dataIndex:"operval",
             key:"operval",
             className:'text_left',
-            render(value:string){
-                return <div style={{textAlign:'left'}} onClick={()=>{deleteLog()}}><i className="iconfont icon-shanchu" style={{color:'#ccc'}}></i></div>
+            render(value:string,ob:Object){
+                return <div style={{textAlign:'left'}} onClick={()=>{deleteLog(ob)}}><i className="iconfont icon-shanchu" style={{color:'#ccc'}}></i></div>
             }
         }
     ]

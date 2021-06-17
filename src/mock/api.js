@@ -221,3 +221,11 @@ app.post('/getKey',function(req, res){
     [{farmer_keys:'123',pool_keys:'456'},{farmer_keys:'789',pool_keys:'111'}]
   );
 })
+
+app.post('/delete',function(req, res){
+  res.json(
+   {
+     result:1
+   }
+  );
+})

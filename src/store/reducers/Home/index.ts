@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetch } from 'util/common';
+import { Alert, fetch } from 'util/common';
 import { DRAW_IS_REQUIRE } from "util/constants";
 
 export enum statusType {
@@ -183,6 +183,19 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       localStorage.removeItem('Ping_key')
     })
 };
-
+/**
+ * 删除数据
+ */
+ export const deleteAsync = (id:string|number) => (dispatch: Function, getState: Function) => {
+  return fetch({
+     url:"/delete",
+     data:{
+       id
+     }
+   }).then(()=>{
+     Alert('删除成功')
+     dispatch(getMachineDataAsync());
+   })
+};
 
 export default counterSlice.reducer;
