@@ -400,7 +400,7 @@ export const msgCode = (n: string) => {
  * 提示框
  */
 export const Alert = (msg:string)=>{
-  window.alert(msg);
+  window.alert(msg); 
 }
 
 /**

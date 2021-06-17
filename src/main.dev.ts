@@ -74,7 +74,7 @@ const createWindow = async () => {
     icon: getAssetPath('icon.png'),
     frame:false,
     resizable:false,
-    transparent:true,
+    //transparent:true,整体透明
     webPreferences: {
       nodeIntegration: true,
     },
