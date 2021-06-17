@@ -19,6 +19,7 @@ const Home = () => {
     if(chia_key == null && has_switch === false){
       history.replace("/update_key");
       dispatch(updateSwitchFlag(true));
+      return
     }
   },[])
 
