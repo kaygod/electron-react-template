@@ -7,6 +7,7 @@ export const handler = async (params:any)=>{
     //the two params must be array
     const data:any = {}
     const result:any = await call(`keys`)//获取密钥列表
+    console.log(result)
     const evalRes = eval("("+result+")")
     console.log(evalRes)
     return data;
