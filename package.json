@@ -43,8 +43,7 @@
       "index.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json",
-      "public/"
+      "package.json"
     ],
     "afterSign": ".erb/scripts/Notarize.js",
     "mac": {
@@ -80,7 +79,6 @@
       "target": [
         "AppImage"
       ],
-      "icon":"./public/icons/256x256.png",
       "category": "Development"
     },
     "directories": {
