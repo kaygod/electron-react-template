@@ -81,7 +81,7 @@ const createWindow = async () => {
   };
 
   if (process.platform === 'linux') {
-    options.icon = path.join(__dirname, './assets/icon.png');
+    options.icon = path.join(__dirname, './images/icon.png');
   }
 
   mainWindow = new BrowserWindow(options);
