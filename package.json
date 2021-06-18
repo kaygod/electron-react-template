@@ -79,7 +79,7 @@
       "target": [
         "AppImage"
       ],
-      "icon": "./assets/icons",
+      "icon": "assets/icons",
       "category": "Development"
     },
     "directories": {
