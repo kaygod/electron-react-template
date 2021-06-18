@@ -79,6 +79,7 @@
       "target": [
         "AppImage"
       ],
+      "icon":"./images/icon.png",
       "category": "Development"
     },
     "directories": {
