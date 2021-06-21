@@ -79,7 +79,6 @@
       "target": [
         "AppImage"
       ],
-      "icon":"./assets/icons/256x256.png",
       "category": "Development"
     },
     "directories": {
