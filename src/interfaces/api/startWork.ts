@@ -20,7 +20,7 @@ export const handler = async (params:any)=>{
         const result_obj = eval("("+result+")")
         console.log(result_obj)
         if(result_obj){
-            data['result'] = result_obj.result
+            data['result'] = result_obj.error_no
         }else{
             data['result'] = 1
         }
