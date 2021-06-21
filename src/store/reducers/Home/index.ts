@@ -107,7 +107,19 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       data:{
         k_type,
       }
-    }).then(()=>{
+    }).then((res)=>{
+      // * 200 P盘已满
+      // * 102 参数缺失
+      // * 101 参数错误
+      if(res.result==200){
+        Alert('P盘数已满')
+        return
+      }else if(res.result==102||res.result==101){
+        Alert('参数错误，请与管理员联系')
+        return
+      }else{
+        Alert('已开始P盘')
+      }
       localStorage.setItem('Ping_key',k_type)
       dispatch(updateStatus(statusType.working));
     })
