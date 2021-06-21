@@ -5,6 +5,7 @@ import { call,formatExchange } from "util/common";
  */
 export const handler = async (params:any)=>{
     const data:any = {}
+    console.log(123)
     console.log(params.k_type)
     console.log(localStorage.getItem('chia_key'))
     // const result:any = await call(`start ${}`)
