@@ -156,7 +156,7 @@ ipcMain.on('min', () => {
     mainWindow.minimize();
   }
 });
-
+app.setAboutPanelOptions({iconPath:'../assets'})
 ipcMain.on('getDataPath', (event) => {
   event.returnValue = app.getPath('userData');
 });
