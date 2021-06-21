@@ -5,7 +5,9 @@ import { call,formatExchange } from "util/common";
  */
 export const handler = async (params:any)=>{
     const data:any = {}
-    // const result:any = await call(`list_1`)
+    console.log(params.k_type)
+    console.log(localStorage.getItem('chia_key'))
+    // const result:any = await call(`start ${}`)
     // const list = formatExchange(result[0],['k_value','file_name','status'])
     data['result'] = 1
     return data;
