@@ -26,12 +26,13 @@ do
 done > $file
 msg_list=$(cat $file)
 #echo $msg_list
-if [ $msg_list ]
+if [ "$msg_list" = "" ]
 then
+  json="$json"
+else
   msg_list=${msg_list:0:-1}
   json="$json$msg_list"
-else
-  json="$json"
+
 fi
-json="$json]}"
+json="$json}]"
 echo $json
