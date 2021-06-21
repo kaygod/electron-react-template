@@ -34,5 +34,5 @@ else
   json="$json$msg_list"
 
 fi
-json="$json}]"
+json="$json]}"
 echo $json
