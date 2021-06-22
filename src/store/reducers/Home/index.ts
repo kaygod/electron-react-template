@@ -122,6 +122,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       }
       localStorage.setItem('Ping_key',k_type)
       dispatch(updateStatus(statusType.working));
+      dispatch(updateType('1'))
       dispatch(getMachineDataAsync(1))
     })
 };
@@ -148,7 +149,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   response.list.map((item: any, index: number) => {
     const new_item = Object.assign(item,{code:''})
     let code: string | number = index + 1;
-    code = page_no ? (page_no - 1) * 10 + Number(code) : code
+    code = page ? (page - 1) * 10 + Number(code) : code
     if (code < 10) {
       code = '0' + code;
     }
