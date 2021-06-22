@@ -19,7 +19,6 @@ export const handler = async (params:any)=>{
         num++
         evalRes = handler({})
     }else{
-        console.log('进来了')
         data.push(evalRes)
         return data;
     }   

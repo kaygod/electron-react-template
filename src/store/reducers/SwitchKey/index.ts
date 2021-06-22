@@ -40,7 +40,8 @@ export const queryAsync = (
     const response: any = await fetch({
       url: '/getKey',
     });
-        dispatch(updateKeyList(response))
+    console.log(response)
+    dispatch(updateKeyList(response))
   };
 // Action creators are generated for each case reducer function
 
