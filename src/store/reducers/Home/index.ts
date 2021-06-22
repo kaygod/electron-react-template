@@ -146,10 +146,11 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   if(is_complete){
     dispatch(updateStatus(statusType.initial));
   }
+  const now_page = page?page:page_no
   response.list.map((item: any, index: number) => {
     const new_item = Object.assign(item,{code:''})
     let code: string | number = index + 1;
-    code = page ? (page - 1) * 10 + Number(code) : code
+    code = now_page ? (now_page - 1) * 10 + Number(code) : code
     if (code < 10) {
       code = '0' + code;
     }

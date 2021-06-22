@@ -69,7 +69,7 @@ const useMethods = ()=>{
 
   const toggleLoop = useLoop(()=>{
       dispatch(getMachineDataAsync());
-  },state.status === statusType.working);
+  },state.status === statusType.working&&state.type==1);
 
 
      /**
