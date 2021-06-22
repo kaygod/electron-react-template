@@ -8,6 +8,7 @@ export const handler = async (params:any)=>{
     const data:any = []
     const result:any = await call(`keys`)//获取密钥列表
     const evalRes = eval("("+result+")")
+    console.log(result)
     data.push(evalRes)
     console.log(data)
     return data;
