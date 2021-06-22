@@ -3,24 +3,23 @@ import { call } from "util/common";
 /**
  * 执行函数
  */
- const getData = async()=>{
+let num = 0
+const getData = async()=>{
     const result:any = await call(`keys`)//获取密钥列表
     const evalRes = eval("("+result+")")
-    console.log(result)
-    return evalRes
+    if(evalRes.farmer_keys==''&&num==0){
+        num++
+        getData()
+    }
+    if(evalRes.farmer_keys!=''){
+        return evalRes
+    }
 }
-let num = 0
 export const handler = async (params:any)=>{
     //the two params must be array
     const data:any = []
     let evalRes:any = await getData()
-    console.log(evalRes)
-    if(evalRes.farmer_keys==''&&num==0){
-        num++
-        evalRes = handler({})
-    }else{
-        data.push(evalRes)
-        return data;
-    }   
+   data.push(evalRes)
+   return data
 }
 
