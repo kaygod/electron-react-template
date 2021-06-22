@@ -42,7 +42,6 @@ export const counterSlice = createSlice({
     updateKType(state,action){
         const k_type= action.payload;
         state.k_type = k_type;
-        console.log(state.k_type)
     },
     // 更新状态
     updateStatus(state,action){

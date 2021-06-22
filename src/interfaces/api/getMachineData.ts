@@ -50,6 +50,5 @@ export const handler = async (params:any)=>{
         }
         localStorage.setItem('Ping_key', data['k_type'])
     }
-    console.log(data)
     return data;
 }

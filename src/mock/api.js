@@ -44,7 +44,7 @@ app.post('/getMachineData',function(req, res){
       total_page:2,
       is_complete:false,
       status:status,
-      k_type:null,
+      k_type:32,
       list:[
         {
           k_value:'k32',

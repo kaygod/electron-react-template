@@ -48,7 +48,7 @@ export const queryUpdateKey = (
         ...key
       }
     });
-    if(response.result===1){
+    if(response.result==1){
       dispatch(updateKey(key))
       Alert('切换成功')
       try {

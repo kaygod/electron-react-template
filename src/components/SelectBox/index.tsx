@@ -33,7 +33,7 @@ const ctrlBtn = (props: defaultProps) => {
 
   const filter = (val:string)=>{
         const item = list.find((item)=>{
-            return item.value === val;
+            return item.value == val;
         })
         if(item){
             return item[dragShowName];

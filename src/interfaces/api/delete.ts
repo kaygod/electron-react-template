@@ -5,8 +5,10 @@ import { call,formatExchange } from "util/common";
  */
 export const handler = async (params:any)=>{
     const id = params.id
-    const result:any = await call(`kill_1 ${id}`)
+    const data:any = {}
+    const result:any = await call(`kill_1`,[id])
     // const list = formatExchange(result[0],['k_value','file_name','status'])
     const evalRes = eval("("+result+")")
+    data['result'] = 1
     return evalRes;
 }
