@@ -30,6 +30,7 @@ export const handler = async (params:any)=>{
         // 调用的脚本是正在P的脚本不用再次调用根据正在P的数量判断是否有在这P盘
         if(data['list'].length>0){
             data['status'] = 2
+            console.log(data)
             data['k_type'] = data['list']['k_value'].substring(1)
         }else{
             data['status'] = 1
