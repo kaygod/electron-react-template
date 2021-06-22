@@ -8,7 +8,7 @@ export const handler = async (params:any)=>{
     const data:any = {}
     const result:any = await call(`kill_1`,[id])
     // const list = formatExchange(result[0],['k_value','file_name','status'])
-    const evalRes = eval("("+result+")")
+    // const evalRes = eval("("+result+")")
     data['result'] = 1
-    return evalRes;
+    return data;
 }
