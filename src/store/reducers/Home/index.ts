@@ -16,7 +16,7 @@ interface listItem {
 
 interface defaultType {
   status:statusType,
-  k_type:number | null, // 绘图大小对应的类型
+  k_type:string|number | null, // 绘图大小对应的类型
   list:listItem[], // 表格数据
   page_no:number,
   total_page:number,
@@ -24,13 +24,12 @@ interface defaultType {
   working_tasks:string, // 正在进行p盘数
   type:string
 }
-
-
+const loc_k_type = localStorage.getItem('Ping_key')||null
 export const counterSlice = createSlice({
   name: 'Home',
   initialState: {
      status:statusType.initial,
-     k_type:null,
+     k_type:loc_k_type,
      list:[],
      page_no:1,
      total_page:1,
@@ -43,6 +42,7 @@ export const counterSlice = createSlice({
     updateKType(state,action){
         const k_type= action.payload;
         state.k_type = k_type;
+        console.log(state.k_type)
     },
     // 更新状态
     updateStatus(state,action){
@@ -122,6 +122,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       }
       localStorage.setItem('Ping_key',k_type)
       dispatch(updateStatus(statusType.working));
+      dispatch(getMachineDataAsync(1))
     })
 };
 
@@ -147,7 +148,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   response.list.map((item: any, index: number) => {
     const new_item = Object.assign(item,{code:''})
     let code: string | number = index + 1;
-    code = page ? (page - 1) * 10 + Number(code) : code
+    code = page_no ? (page_no - 1) * 10 + Number(code) : code
     if (code < 10) {
       code = '0' + code;
     }

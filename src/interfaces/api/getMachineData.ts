@@ -27,10 +27,10 @@ export const handler = async (params:any)=>{
         }else{
             data['is_complete'] = false
         }
-        // 调用的脚本是正在P的脚本不用再次调用  
+        // 调用的脚本是正在P的脚本不用再次调用根据正在P的数量判断是否有在这P盘
         if(data['list'].length>0){
             data['status'] = 2
-            data['k_type'] = data['list']['k_value']
+            data['k_type'] = data['list']['k_value'].substring(1)
         }else{
             data['status'] = 1
             data['k_type'] = null
@@ -43,7 +43,7 @@ export const handler = async (params:any)=>{
         const Ping_list = formatExchange(Ping_result[0],['k_value','file_name','status'])//数据转换
     if(Ping_list.length>0){
             data['status'] = 2
-            data['k_type'] = Ping_list['k_value']
+            data['k_type'] = Ping_list['k_value'].substring(1)
         }else{
             data['status'] = 1
             data['k_type'] = null
