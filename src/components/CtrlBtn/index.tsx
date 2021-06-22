@@ -96,7 +96,7 @@ const useMethods = ()=>{
          try {  
           await dispatch(startWorkAsync());
           console.log(localStorage.getItem('Ping_key'))
-          const suc = localStorage.getItem('Ping_key')!=null?true:false
+          const suc = localStorage.getItem('Ping_key')!='null'?true:false
           console.log(suc)
           if(status === statusType.initial){
             toggleLoop(suc);//开启定时器
