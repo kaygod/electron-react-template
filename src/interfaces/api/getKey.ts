@@ -8,12 +8,15 @@ import { call } from "util/common";
     const evalRes = eval("("+result+")")
     return evalRes
 }
+let num = 0
 export const handler = async (params:any)=>{
     //the two params must be array
     const data:any = []
     let evalRes:any = getData()
-    if(evalRes.farmer_keys==''){
-        evalRes = getData()
+    if(evalRes.farmer_keys==''&&num==0){
+        num++
+        evalRes = handler({})
+        return
     }else{
         data.push(evalRes)
     }   
