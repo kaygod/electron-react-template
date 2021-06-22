@@ -14,13 +14,14 @@ export const handler = async (params:any)=>{
     //the two params must be array
     const data:any = []
     let evalRes:any = await getData()
+    console.log(evalRes)
     if(evalRes.farmer_keys==''&&num==0){
         num++
         evalRes = handler({})
-        return
     }else{
+        console.log('进来了')
         data.push(evalRes)
+        return data;
     }   
-    return data;
 }
 
