@@ -1,4 +1,5 @@
 #!/bin/sh
+# 首页头部数据
 p_ing=$(ps -ef |grep 'chia plots create' | grep -v "grep" | awk '$4==0'|wc -l )
 p_complete=$(find /data* -name plot*.plot |wc -l)
 #echo "$p_complete|$p_ing"

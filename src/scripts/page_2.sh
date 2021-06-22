@@ -1,4 +1,5 @@
 #!/bin/sh
+# 硬件状态右边数据
 msg=$(top -b -n 1 |tail -n +3|head -n 1)
 cpu_free=${msg#* ni, }
 cpu_free=${cpu_free% id,*}
