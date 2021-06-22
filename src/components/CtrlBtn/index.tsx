@@ -96,7 +96,7 @@ const useMethods = ()=>{
          try {  
           await dispatch(startWorkAsync());
           if(status === statusType.initial){
-            toggleLoop(true);//开启定时器
+            toggleLoop(state.type==1);//开启定时器
           }else{
 
           }
