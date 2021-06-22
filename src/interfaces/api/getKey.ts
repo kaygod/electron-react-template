@@ -12,7 +12,7 @@ let num = 0
 export const handler = async (params:any)=>{
     //the two params must be array
     const data:any = []
-    let evalRes:any = getData()
+    let evalRes:any = await getData()
     if(evalRes.farmer_keys==''&&num==0){
         num++
         evalRes = handler({})
