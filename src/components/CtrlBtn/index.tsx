@@ -69,7 +69,7 @@ const useMethods = ()=>{
 
   const toggleLoop = useLoop(()=>{
       dispatch(getMachineDataAsync());
-  },state.status === statusType.working&&state.type==1);
+  },state.status === statusType.working);
 
 
      /**
@@ -94,9 +94,10 @@ const useMethods = ()=>{
          //dispatch(updateStatus(statusType.working))
          // 开始P盘
          try {  
-          await dispatch(startWorkAsync());
+          const suc = await dispatch(startWorkAsync());
+          console.log(suc)
           if(status === statusType.initial){
-            toggleLoop(state.type==1);//开启定时器
+            toggleLoop(true);//开启定时器
           }else{
 
           }

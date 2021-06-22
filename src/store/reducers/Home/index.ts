@@ -123,6 +123,11 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       dispatch(updateStatus(statusType.working));
       dispatch(updateType('1'))
       dispatch(getMachineDataAsync(1))
+      if(res.result ==1){
+        return true
+      }else{
+        return false
+      }
     })
 };
 
