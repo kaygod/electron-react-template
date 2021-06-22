@@ -94,10 +94,11 @@ const useMethods = ()=>{
          //dispatch(updateStatus(statusType.working))
          // 开始P盘
          try {  
-          const suc = await dispatch(startWorkAsync());
+          await dispatch(startWorkAsync());
+          const suc = localStorage.getItem('Ping_key')?true:false
           console.log(suc)
           if(status === statusType.initial){
-            toggleLoop(true);//开启定时器
+            toggleLoop(suc);//开启定时器
           }else{
 
           }

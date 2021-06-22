@@ -24,12 +24,11 @@ interface defaultType {
   working_tasks:string, // 正在进行p盘数
   type:string
 }
-const loc_k_type = localStorage.getItem('Ping_key')||null
 export const counterSlice = createSlice({
   name: 'Home',
   initialState: {
      status:statusType.initial,
-     k_type:loc_k_type,
+     k_type:null,
      list:[],
      page_no:1,
      total_page:1,
@@ -123,11 +122,6 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       dispatch(updateStatus(statusType.working));
       dispatch(updateType('1'))
       dispatch(getMachineDataAsync(1))
-      if(res.result ==1){
-        return true
-      }else{
-        return false
-      }
     })
 };
 
