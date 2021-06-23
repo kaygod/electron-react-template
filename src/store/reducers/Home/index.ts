@@ -219,5 +219,16 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
      dispatch(getMachineDataAsync());
    })
 };
+export const deletebatchAsync = (ArrIds:any) => async(dispatch: Function, getState: Function) => {
+  const response = await fetch({
+     url:"/deleteArr",
+     data:{
+      ArrIds
+     }
+   })
+   if(response.result==1){
+     Alert('删除成功')
+   }
+};
 
 export default counterSlice.reducer;

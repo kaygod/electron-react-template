@@ -1,16 +1,18 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import TableGrid from "components/TableGrid/index"
 import StatusSize from "./components/StatusSize/index"
 import { useSelector,useDispatch } from 'react-redux'
-import { getter,getMachineDataAsync,deleteAsync } from "store/reducers/Home";
+import { getter,getMachineDataAsync,deleteAsync,deletebatchAsync } from "store/reducers/Home";
 import { getter as globalGetter } from "store/reducers/Global";
 import { Confirm } from 'util/common';
-import {CONFIRM_DELETE} from 'util/constants'
-
+import {CONFIRM_DELETE} from 'util/constants';
+import style from './index.scss';
 
 const Table = () => {
 
-
+    const [check_all,set_check] =useState(false)
+    const [checkArr,setCheckArr] = useState<any[]>([])
+    
     const { page_no,total_page,list,type } = useSelector(getter);
     const {chia_key} = useSelector(globalGetter)
     const dispatch = useDispatch();
@@ -39,12 +41,62 @@ const Table = () => {
        }else{
            return value;
        }
-    } 
+    }
+    const item_chack=(ob:any) =>{
+        const arr = JSON.parse(JSON.stringify(checkArr))
+       const index = arr.indexOf(ob.id)
+        if(index==-1){
+            arr.push(ob.id)
+        }else{
+            arr.splice(index,1)
+        }
+        if(arr.length>=10){
+            set_check(true)
+        }else{
+            set_check(false)
+        }
+        setCheckArr(arr)
+
+    }
+    const check_all_fun =(bool:boolean) =>{
+        let arr:any = []
+        set_check(bool)
+        if(bool){
+            arr = list.map((val:any)=>{
+                return val.id
+            })
+        }
+        setCheckArr(arr)
+    }
+    const deletebatch = ()=>{
+        dispatch(deletebatchAsync(checkArr))
+    }
+    const checkbox = ()=>{
+        return <div className={`${style.deleteBox} ${style.inp}`}>
+            <input className={style.inp} type="checkbox" checked={check_all} onChange={()=>check_all_fun(!check_all)} />
+            <div onClick={()=>{deletebatch}}>删除</div>
+        </div>
+    }
+    const is_check = (ob:any)=>{
+        return checkArr.includes(ob.id)
+    }
+   
     let column = [
+        type=='2'&&{
+            name:
+            checkbox(), 
+            dataIndex:"check",
+            key:"check",
+            className:'',
+            render(value:string,ob:Object,index:number){
+                return <p  className={`${style.inp} ${style.deleteItem}`}><input checked={is_check(ob)} type="checkbox" onChange={(e)=>{item_chack(ob)}} /></p>
+            }
+        },
         {
             name:'编号', 
             dataIndex:"code",
             key:"code",
+            width:120,
             className:'text_padding20',
             render(value:string,ob:Object,index:number){
                 return <p style={{textAlign:'left',paddingLeft:'25px'}}>{value}</p>
@@ -99,6 +151,8 @@ const Table = () => {
     //翻页
     const updatePage = (v:number)=>{
        dispatch(getMachineDataAsync(v));
+       setCheckArr([])
+       set_check(false)
     }
     column = column.filter((val)=>{
         return val!==false

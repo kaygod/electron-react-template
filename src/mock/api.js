@@ -49,52 +49,62 @@ app.post('/getMachineData',function(req, res){
         {
           k_value:'k32',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:1,
         },
         {
           k_value:'k33',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:2,
         },
         {
           k_value:'k34',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:3,
         },
         {
           k_value:'k35',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:4,
         },
         {
           k_value:'k32',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:5,
         },
         {
           k_value:'k35',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:6,
         },
         {
           k_value:'k35',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:7,
         },
         {
           k_value:'k35',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          file_name:"p,lot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+          status:30,
+          id:8,
         },
         {
           k_value:'k34',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:9,
         },
         {
           k_value:'k33',
           file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30
+          status:30,
+          id:10,
         }
       ]
     }
