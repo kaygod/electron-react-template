@@ -147,7 +147,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   const { is_complete } = response;
   //说明已经p完了
   if(is_complete){
-    dispatch(updateStatus(statusType.initial));
+    dispatch(stopAsync())
   }
   const now_page = page?page:page_no
   response.list.map((item: any, index: number) => {
