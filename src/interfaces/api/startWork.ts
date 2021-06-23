@@ -18,10 +18,9 @@ export const handler = async (params:any)=>{
         console.log([`k${k_type}`,chia_key.farmer_keys,chia_key.pool_keys])
         const result:any = await call(`start`,[`k${k_type}`,chia_key.farmer_keys,chia_key.pool_keys])
         console.log(result)
-        const result_obj = eval("("+result+")")
-        console.log(result_obj)
         if(result.length>0){
             console.log('报错')
+            const result_obj = eval("("+result+")")
             data['result'] = result_obj.error_no
         }else{
             console.log('正常')
