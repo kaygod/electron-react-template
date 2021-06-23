@@ -244,18 +244,23 @@ do
 done
 path_data=$path
 #echo $path_data
+#echo "task=$task"
 
 bak1=$path_data
 bak2=$path_nvme
 for((i=0;i<$task;i++));
 do
-  for((j=0;j<$i;j++));
-  do
-    bak1=${bak1#*,}
-    bak2=${bak2#*,}
-  done
-  data=${bak1%%,*}
-  nvme=${bak2%%,*}
+  left1=${bak1%%,*}
+  right1=${bak1#*,}
+  #echo "$left1---$right1"  
+  left2=${bak2%%,*}
+  right2=${bak2#*,}
+
+  data=$left1
+  nvme=$left2
   exec nohup /usr/lib/chia-blockchain/resources/app.asar.unpacked/daemon/chia plots create -$1 -n1 -t$nvme -2$nvme -d$data -b$memory_unit -u128 -r$cpu_unit -f$2 -p$3>/dev/null 2>&1 &
   #echo "/usr/lib/chia-blockchain/resources/app.asar.unpacked/daemon/chia plots create -$1 -n1 -t$nvme -2$nvme -d$data -b$memory_unit -u128 -r$cpu_unit -f$2 -p$3"
+
+  bak1=$right1
+  bak2=$right2
 done
