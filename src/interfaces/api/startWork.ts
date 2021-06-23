@@ -20,7 +20,7 @@ export const handler = async (params:any)=>{
         console.log(result)
         const result_obj = eval("("+result+")")
         console.log(result_obj)
-        if(result.length){
+        if(result.length>0){
             console.log('报错')
             data['result'] = result_obj.error_no
         }else{
@@ -28,6 +28,7 @@ export const handler = async (params:any)=>{
             data['result'] = 1
         }
     }catch{
+        console.log('错了')
         data['result'] = 101
     }
     console.log(data)
