@@ -22,7 +22,8 @@ interface defaultType {
   total_page:number,
   end_tasks:string, // 已完成p盘数
   working_tasks:string, // 正在进行p盘数
-  type:string
+  type:string,
+  firstIn:boolean
 }
 export const counterSlice = createSlice({
   name: 'Home',
@@ -34,7 +35,8 @@ export const counterSlice = createSlice({
      total_page:1,
      end_tasks:"0",
      working_tasks:"0",
-     type:'1'
+     type:'1',
+     firstIn:false
   } as defaultType,
   reducers: {
     // 更新k值
@@ -66,6 +68,9 @@ export const counterSlice = createSlice({
     updateType(state,action){
       state.page_no = 1
       state.type = action.payload
+    },
+    updateFirstin(state,actions){
+      state.firstIn = actions.payload
     }
   },
 });
@@ -75,7 +80,7 @@ export const getter = (state: any) => {
 };
 
 // Action creators are generated for each case reducer function
-export const {  noOperate,updateStatus,updateState,updateKType,updatePage,updateType } = counterSlice.actions;
+export const {  noOperate,updateStatus,updateState,updateKType,updatePage,updateType,updateFirstin } = counterSlice.actions;
 
 
 /**
@@ -130,7 +135,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
  *  获取P盘数据
  */
  export const getMachineDataAsync = (page:number | undefined = undefined) => async (dispatch: Function, getState: Function) => {
-  const { page_no,type } = getter(getState());
+  const { page_no,type,firstIn } = getter(getState());
   const response = await fetch({
     url:"/getMachineData",
     data:{
@@ -158,7 +163,10 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   //更新后端数据
   dispatch(updateState(response));
   dispatch(updateStatus(response.status));
-  dispatch(updateKType(response.k_type));
+  if(!firstIn){
+  dispatch(updateStatus(response.k_type));
+    dispatch(updateFirstin(true))
+  }
   if(page != null){
    dispatch(updatePage(page));
   }

@@ -120,7 +120,9 @@ const useMethods = ()=>{
       Confirm(CONFIRM_SWITCH).then(async (res)=>{
         if(res){
           await dispatch(switchMachineAsync()); // 切换P盘
-          dispatch(getMachineDataAsync()); // 获取P盘数据   
+          setTimeout(()=>{
+            dispatch(getMachineDataAsync()); // 获取P盘数据   
+          },1000)    
         }
       },err=>{
         console.log(err)
