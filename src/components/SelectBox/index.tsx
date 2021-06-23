@@ -11,6 +11,7 @@ type defaultProps = {
     dragShowName?:string,
     inputType?:string,
     ableDrag?:boolean,
+    ellipsis?:boolean, //列表是否超长...
     inputChange?:(v: any) => void; // 更新事件
     onChange?: (v: any) => void; // 更新事件
 };
@@ -22,6 +23,7 @@ const ctrlBtn = (props: defaultProps) => {
     title,
     ableInput=false,
     titleAlwayShow=false,
+    ellipsis= true,
     value = '',
     inputType='text',
     placeHold='请选择',
@@ -64,7 +66,7 @@ const ctrlBtn = (props: defaultProps) => {
             {
                 list.map((val,index)=>{
                     return (
-                        <div key={index} className={style.selectItem+' '+style.textEllips} onClick={()=>{
+                        <div key={index} className={`${style.selectItem} ${ellipsis?style.textEllips:style.noEllips}`} onClick={()=>{
                             onChange(val) 
                             setdropShow(false)
                             }}>

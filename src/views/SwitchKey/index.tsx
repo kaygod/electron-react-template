@@ -3,7 +3,7 @@ import styles from "./index.scss";
 import SelectBox from "components/SelectBox/index";
 import CtrlBtn from "components/CtrlBtn/index"
 import { queryAsync, getter, updateKey,updateKeyList } from 'store/reducers/SwitchKey';
-import { stopAsync,updatePage } from 'store/reducers/Home';
+import { stopAsync,updatePage, updateState, updateType } from 'store/reducers/Home';
 import { queryUpdateKey,getter as globalGetter } from 'store/reducers/Global';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Confirm } from 'util/common'
@@ -52,6 +52,7 @@ import { useHistory } from 'react-router'
        const suc =await dispatch(queryUpdateKey(key))
        if(suc){
          dispatch(updatePage(1))
+         dispatch(updateType('1'))
         history.replace('/')
        }
       }).catch(()=>{
@@ -72,6 +73,7 @@ import { useHistory } from 'react-router'
                   ableInput={true} 
                   placeHold="请选择/输入farm key"
                   list={list} 
+                  ellipsis= {false}
                   dragShowName="farmer_keys" 
                   inputChange={(v)=>farmKey(v)}
                   onChange={(v)=>onChange(v)}

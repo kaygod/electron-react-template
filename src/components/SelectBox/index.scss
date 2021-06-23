@@ -48,6 +48,11 @@
     overflow: hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
+    line-height: 42px;
+}
+.noEllips{
+    word-break:break-all;
+    line-height: 20px;
 }
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:#fff;
@@ -70,8 +75,7 @@
     z-index: 999;
 }
 .selectItem{
-    height: 42px;
-    line-height: 42px;
+    min-height: 42px;
     color: #fff;
     box-sizing: border-box;
     padding:0 10px;
