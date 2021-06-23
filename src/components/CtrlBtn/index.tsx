@@ -67,9 +67,9 @@ const useMethods = ()=>{
 
   const global_state = useSelector(globalGetter);
 
-  // const toggleLoop = useLoop(()=>{
-  //     dispatch(getMachineDataAsync());
-  // },state.status === statusType.working);
+  const toggleLoop = useLoop(()=>{
+      dispatch(getMachineDataAsync());
+  },state.status === statusType.working);
 
 
      /**
@@ -97,7 +97,7 @@ const useMethods = ()=>{
           await dispatch(startWorkAsync());
           const suc = localStorage.getItem('Ping_key')!='null'?true:false
           if(status === statusType.initial){
-            // toggleLoop(suc);//开启定时器
+            toggleLoop(suc);//开启定时器
           }else{
 
           }
@@ -138,7 +138,7 @@ const useMethods = ()=>{
       Confirm(CONFIRM_STOP).then(async res=>{
         if(res){
           await dispatch(stopAsync()); // 全部停止
-          // toggleLoop(false);//关掉定时器
+          toggleLoop(false);//关掉定时器
           dispatch(getMachineDataAsync()); // 获取P盘数据  
         } 
       },err=>{
