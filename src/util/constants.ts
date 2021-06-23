@@ -14,6 +14,8 @@ export const KEY_FARM_IS_REQUIRED = "请输入farm key"
 
 export const POOL_KEY_IS_REQUIRED = "请输入pool key"
 
+export const KEY_NOT_CHANGE = '当前公钥未更换'
+
 export const COMFIRM_UPDATE_KEY = "切换公钥会清除当前任务，且已P好的会成无效算力，您确定要操作吗？"
 
 export const SCRIPT_ERROR = "脚本执行发生错误,请联系管理员!";

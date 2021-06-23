@@ -7,7 +7,7 @@ import { stopAsync,updatePage } from 'store/reducers/Home';
 import { queryUpdateKey,getter as globalGetter } from 'store/reducers/Global';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Confirm } from 'util/common'
-import { KEY_FARM_IS_REQUIRED, POOL_KEY_IS_REQUIRED, COMFIRM_UPDATE_KEY } from 'util/constants'
+import { KEY_FARM_IS_REQUIRED, POOL_KEY_IS_REQUIRED, COMFIRM_UPDATE_KEY,KEY_NOT_CHANGE } from 'util/constants'
 import { useHistory } from 'react-router'
 
   const SwitchKey = () => {
@@ -36,6 +36,7 @@ import { useHistory } from 'react-router'
     dispatch(updateKey({key_name:'farmer_keys',value:v.farmer_keys}))
     dispatch(updateKey({key_name:'pool_keys',value:v.pool_keys}))
   }
+  const loc_chia_key = JSON.parse(localStorage.getItem('chia_key')||'{"farmer_keys":"","pool_keys":""}')
   const comfirm = ()=>{
     if(!key.farmer_keys){
       Alert(KEY_FARM_IS_REQUIRED)
@@ -43,6 +44,8 @@ import { useHistory } from 'react-router'
     }else if(!key.pool_keys){
       Alert(POOL_KEY_IS_REQUIRED)
       return
+    }else if(key.farmer_keys==loc_chia_key.farmer_keys&&key.pool_keys==loc_chia_key.pool_keys){
+      Alert(KEY_NOT_CHANGE)
     }else{
       Confirm(COMFIRM_UPDATE_KEY).then(async ()=>{
         dispatch(stopAsync())

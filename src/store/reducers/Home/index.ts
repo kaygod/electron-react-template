@@ -115,7 +115,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       // * 102 参数缺失
       // * 101 参数错误
       if(res.result==200){
-        Alert('P盘数已满')
+        Alert('没有足够的空间P盘')
         return
       }else if(res.result==102||res.result==101){
         Alert('参数错误，请与管理员联系')
