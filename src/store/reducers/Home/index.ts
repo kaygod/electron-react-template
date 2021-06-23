@@ -201,6 +201,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
       data:{}
     }).then(()=>{
       dispatch(updateStatus(statusType.initial));
+      dispatch(updateKType(null))
       localStorage.removeItem('Ping_key')
     })
 };

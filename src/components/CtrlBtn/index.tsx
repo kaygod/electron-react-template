@@ -122,7 +122,7 @@ const useMethods = ()=>{
           await dispatch(switchMachineAsync()); // 切换P盘
           setTimeout(()=>{
             dispatch(getMachineDataAsync()); // 获取P盘数据   
-          },1000)    
+          },2000)    
         }
       },err=>{
         console.log(err)
