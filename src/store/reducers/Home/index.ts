@@ -164,7 +164,7 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
   dispatch(updateState(response));
   dispatch(updateStatus(response.status));
   if(!firstIn){
-  dispatch(updateStatus(response.k_type));
+  dispatch(updateKType(response.k_type));
     dispatch(updateFirstin(true))
   }
   if(page != null){
