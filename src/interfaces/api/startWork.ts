@@ -21,12 +21,15 @@ export const handler = async (params:any)=>{
         const result_obj = eval("("+result+")")
         console.log(result_obj)
         if(result.length){
+            console.log('报错')
             data['result'] = result_obj.error_no
         }else{
+            console.log('正常')
             data['result'] = 1
         }
     }catch{
         data['result'] = 101
     }
+    console.log(data)
     return data;
 }
