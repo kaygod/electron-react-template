@@ -69,7 +69,12 @@ const Table = () => {
         setCheckArr(arr)
     }
     const deletebatch = ()=>{
-        dispatch(deletebatchAsync(checkArr))
+        console.log(checkArr)
+        Confirm('CONFIRM_DELETE').then(res=>{
+            if(res){
+                // dispatch(deletebatchAsync(checkArr))
+            }
+        })
     }
     const checkbox = ()=>{
         return <div className={`${style.deleteBox} ${style.inp}`}>
