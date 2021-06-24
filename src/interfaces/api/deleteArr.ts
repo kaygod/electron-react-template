@@ -8,18 +8,15 @@ export const handler = async (params:any)=>{
     const data:any = {}
     const resultArr:any = [] 
     const callArr:any= ArrIds.map(async (ele:string,index:string) => {
-        const result:any = await call(`list_2`,[index])
+        const result:any = await call(`kill_1`,[ele])
         const evalRes = eval("("+result+")") 
         return evalRes
     });
-    console.log(callArr)
     return Promise.all(callArr).then(res=>{
         const suc = res.some((val:any)=>{
-            console.log(2)
-            return val.msg_list.length>0
+            return val.result==1
         })
         if(suc){
-            console.log(3)
             data['result'] = 1
         }
     return data;
