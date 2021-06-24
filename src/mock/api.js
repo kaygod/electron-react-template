@@ -35,7 +35,68 @@ app.post('/startWork',function(req, res){
 })
 
 
-
+const list = [
+  {
+    k_value:'k32',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:1,
+  },
+  {
+    k_value:'k33',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:2,
+  },
+  {
+    k_value:'k34',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:3,
+  },
+  {
+    k_value:'k35',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:4,
+  },
+  {
+    k_value:'k32',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:5,
+  },
+  {
+    k_value:'k35',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:6,
+  },
+  {
+    k_value:'k35',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:7,
+  },
+  {
+    k_value:'k35',
+    file_name:"p,lot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:8,
+  },
+  {
+    k_value:'k34',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:9,
+  },
+  {
+    k_value:'k33',
+    file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
+    status:30,
+    id:10,
+  }
+]
 app.post('/getMachineData',function(req, res){
   res.json(
     {
@@ -45,68 +106,7 @@ app.post('/getMachineData',function(req, res){
       is_complete:false,
       status:status,
       k_type:32,
-      list:[
-        {
-          k_value:'k32',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:1,
-        },
-        {
-          k_value:'k33',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:2,
-        },
-        {
-          k_value:'k34',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:3,
-        },
-        {
-          k_value:'k35',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:4,
-        },
-        {
-          k_value:'k32',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:5,
-        },
-        {
-          k_value:'k35',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:6,
-        },
-        {
-          k_value:'k35',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:7,
-        },
-        {
-          k_value:'k35',
-          file_name:"p,lot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:8,
-        },
-        {
-          k_value:'k34',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:9,
-        },
-        {
-          k_value:'k33',
-          file_name:"plot-k33-2021-05-12-11-14-0b453ed4ab93d0e4eb3bbbc8eb23661527091bff3951bc08d56cb5509fb1462d.plot",
-          status:30,
-          id:10,
-        }
-      ]
+      list:list
     }
   );
 })
@@ -233,6 +233,14 @@ app.post('/getKey',function(req, res){
 })
 
 app.post('/delete',function(req, res){
+  res.json(
+   {
+     result:1
+   }
+  );
+})
+app.post('/deleteArr',function(req, res){
+  list.splice(0,10)
   res.json(
    {
      result:1

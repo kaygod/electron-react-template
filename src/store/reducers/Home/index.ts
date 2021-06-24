@@ -208,27 +208,28 @@ export const {  noOperate,updateStatus,updateState,updateKType,updatePage,update
 /**
  * 删除数据
  */
- export const deleteAsync = (id:string|number) => (dispatch: Function, getState: Function) => {
-  return fetch({
+ export const deleteAsync = (id:string|number) => async (dispatch: Function, getState: Function) => {
+  const response = await fetch({
      url:"/delete",
      data:{
        id
      }
-   }).then(()=>{
-     Alert('删除成功')
-     dispatch(getMachineDataAsync());
    })
+    if(response.result==1){
+    Alert('删除成功')
+    dispatch(getMachineDataAsync());
+    }
 };
-export const deletebatchAsync = (ArrIds:any) => async(dispatch: Function, getState: Function) => {
+export const deletebatchAsync = (ArrIds:any) => async (dispatch: Function, getState: Function) => {
   const response = await fetch({
      url:"/deleteArr",
      data:{
       ArrIds
      }
    })
-   console.log(response)
    if(response.result==1){
      Alert('删除成功')
+     dispatch(getMachineDataAsync())
    }
 };
 
