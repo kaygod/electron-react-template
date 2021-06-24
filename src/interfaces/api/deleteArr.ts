@@ -6,13 +6,17 @@ import { call,formatExchange } from "util/common";
 export const handler = async (params:any)=>{
     const ArrIds = params.ArrIds
     const data:any = {}
-    const resultArr:any = []
-    await ArrIds.forEach(async (ele:string,index:string) => {
+    const resultArr:any = [] 
+    const callArr:any = []
+    const callBack = (async (ele:string,index:string)=>{
         const result:any = await call(`list_2`,[index])
         const evalRes = eval("("+result+")")
         resultArr.push(evalRes)
-        console.log(1)
+    })
+    ArrIds.forEach((ele:string,index:string) => {
+        callArr.push(callBack(ele,index))
     });
+    console.log(callArr)
     const suc = resultArr.some((val:any)=>{
         console.log(2)
         return val.result==1

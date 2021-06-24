@@ -37,7 +37,6 @@ export const call = (name: string,payload:any[] = []) => {
     // await fs.copy(script_path, dist_path);
 
     const result:any = await execuate(dist_path,payload);
-  console.log(1)
     if(result == null){
       alert(SCRIPT_ERROR);
     }else{
