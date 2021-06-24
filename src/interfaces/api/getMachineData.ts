@@ -5,7 +5,6 @@ import { call,formatExchange } from "util/common";
  */
 export const handler = async (params:any)=>{
     const {page_no,type} = params
-    console.log(page_no,type)
     //the two params must be array
     const data:any = {}
     const result:any = await call(`list_${type}`, [page_no])//获取列表
@@ -29,7 +28,6 @@ export const handler = async (params:any)=>{
         // 调用的脚本是正在P的脚本不用再次调用根据正在P的数量判断是否有在这P盘
         if(data['list'].length>0){
             data['status'] = 2
-            console.log(data)
             data['k_type'] = data['list'][0]['k_value'].substring(1)
         }else{
             data['status'] = 1
