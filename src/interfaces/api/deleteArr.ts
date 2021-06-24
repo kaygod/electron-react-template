@@ -17,6 +17,9 @@ export const handler = async (params:any)=>{
         callArr.push(callBack(ele,index))
     });
     console.log(callArr)
+    Promise.all(callArr).then(res=>{
+        console.log(res)
+    })
     const suc = resultArr.some((val:any)=>{
         console.log(2)
         return val.result==1
