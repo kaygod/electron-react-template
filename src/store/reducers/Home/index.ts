@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Alert, fetch } from 'util/common';
-import { DRAW_IS_REQUIRE } from "util/constants";
+import { DRAW_IS_REQUIRE,SCRIPT_ERROR } from "util/constants";
 
 export enum statusType {
   initial = 1,  // 没开始p 停止状态
@@ -230,6 +230,8 @@ export const deletebatchAsync = (ArrIds:any) => async (dispatch: Function, getSt
    if(response.result==1){
      Alert('删除成功')
      dispatch(getMachineDataAsync())
+   }else{
+     Alert(SCRIPT_ERROR)
    }
 };
 
