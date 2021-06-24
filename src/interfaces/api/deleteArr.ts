@@ -16,7 +16,7 @@ export const handler = async (params:any)=>{
     return Promise.all(callArr).then(res=>{
         const suc = res.some((val:any)=>{
             console.log(2)
-            return val.result==1
+            return val.msg_list.length>0
         })
         if(suc){
             console.log(3)
