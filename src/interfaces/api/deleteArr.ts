@@ -7,14 +7,10 @@ export const handler = async (params:any)=>{
     const ArrIds = params.ArrIds
     const data:any = {}
     const resultArr:any = [] 
-    const callArr:any = []
-    const callBack = (async (ele:string,index:string)=>{
+    const callArr:any= ArrIds.map(async (ele:string,index:string) => {
         const result:any = await call(`list_2`,[index])
-        const evalRes = eval("("+result+")")
-        resultArr.push(evalRes)
-    })
-    ArrIds.forEach((ele:string,index:string) => {
-        callArr.push(callBack(ele,index))
+        const evalRes = eval("("+result+")") 
+        return evalRes
     });
     console.log(callArr)
     Promise.all(callArr).then(res=>{
