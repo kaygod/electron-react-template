@@ -7,8 +7,8 @@ export const handler = async (params:any)=>{
     const ArrIds = params.ArrIds
     const data:any = {}
     const resultArr:any = []
-    ArrIds.forEach(async (ele:string) => {
-        const result:any = await call(`list_2`)
+    await ArrIds.forEach(async (ele:string,index:string) => {
+        const result:any = await call(`list_2`,[index])
         const evalRes = eval("("+result+")")
         resultArr.push(evalRes)
     });
