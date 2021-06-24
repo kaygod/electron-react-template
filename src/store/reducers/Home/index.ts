@@ -226,6 +226,7 @@ export const deletebatchAsync = (ArrIds:any) => async(dispatch: Function, getSta
       ArrIds
      }
    })
+   console.log(response)
    if(response.result==1){
      Alert('删除成功')
    }

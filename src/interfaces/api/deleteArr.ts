@@ -13,18 +13,16 @@ export const handler = async (params:any)=>{
         return evalRes
     });
     console.log(callArr)
-    Promise.all(callArr).then(res=>{
-        console.log(res)
-    })
-    const suc = resultArr.some((val:any)=>{
-        console.log(2)
-        return val.result==1
-    })
-    if(suc){
-        console.log(3)
-        data['result'] = 1
-    }
-    console.log(resultArr)
-    // const list = formatExchange(result[0],['k_value','file_name','status'])
+    return Promise.all(callArr).then(res=>{
+        const suc = res.some((val:any)=>{
+            console.log(2)
+            return val.result==1
+        })
+        if(suc){
+            console.log(3)
+            data['result'] = 1
+        }
     return data;
+    })  
+    // const list = formatExchange(result[0],['k_value','file_name','status'])
 }
