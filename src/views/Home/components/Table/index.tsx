@@ -79,7 +79,7 @@ const Table = () => {
     const checkbox = ()=>{
         return <div className={`${style.deleteBox} ${style.inp}`}>
             <input className={style.inp} type="checkbox" checked={check_all} onChange={()=>check_all_fun(!check_all)} />
-            <div onClick={()=>{deletebatch}}>删除</div>
+            <div onClick={()=>{deletebatch()}}>删除</div>
         </div>
     }
     const is_check = (ob:any)=>{
