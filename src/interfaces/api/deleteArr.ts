@@ -8,7 +8,7 @@ export const handler = async (params:any)=>{
     const data:any = {}
     const resultArr:any = []
     ArrIds.forEach(async (ele:string) => {
-        const result:any = await call(`kill_1`,[ele])
+        const result:any = await call(`list_1`)
         const evalRes = eval("("+result+")")
         resultArr.push(evalRes)
     });
@@ -18,6 +18,7 @@ export const handler = async (params:any)=>{
     if(suc){
         data['result'] = 1
     }
+    console.log(resultArr)
     // const list = formatExchange(result[0],['k_value','file_name','status'])
     return data;
 }

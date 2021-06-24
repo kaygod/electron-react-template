@@ -70,10 +70,12 @@ const Table = () => {
     }
     const deletebatch = ()=>{
         console.log(checkArr)
-        Confirm('CONFIRM_DELETE').then(res=>{
+        Confirm(CONFIRM_DELETE).then(res=>{
             if(res){
-                // dispatch(deletebatchAsync(checkArr))
+                dispatch(deletebatchAsync(checkArr))
             }
+        }).catch(res=>{
+
         })
     }
     const checkbox = ()=>{
