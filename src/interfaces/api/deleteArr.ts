@@ -11,11 +11,14 @@ export const handler = async (params:any)=>{
         const result:any = await call(`list_2`,[index])
         const evalRes = eval("("+result+")")
         resultArr.push(evalRes)
+        console.log(1)
     });
     const suc = resultArr.some((val:any)=>{
+        console.log(2)
         return val.result==1
     })
     if(suc){
+        console.log(3)
         data['result'] = 1
     }
     console.log(resultArr)
