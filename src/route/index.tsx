@@ -1,25 +1,23 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from 'views/Home/index';
-import HdList from "views/HdList/index";
-import SwitchKey from "views/SwitchKey/index";
-import LeftSider from "components/LeftSider/index";
+import LeftSider from 'components/LeftSider';
+import PageOne from 'views/Page1/index';
+import PageTwo from 'views/Page2/index';
 
 export default function RouteList() {
   return (
     <Router>
       <div className="main">
         <div className="left">
-            <LeftSider/>
-          </div>
-          <div className="right">
+          <LeftSider />
+        </div>
+        <div className="right">
           <Switch>
-            <Route path="/hd_list" component={HdList} />
-            <Route path="/update_key" component={SwitchKey} />
-            <Route path="/" component={Home} /> 
+            <Route path="/two" component={PageTwo} />
+            <Route path="/" component={PageOne} />
           </Switch>
         </div>
-      </div>  
+      </div>
     </Router>
   );
 }

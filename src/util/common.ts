@@ -1,192 +1,56 @@
-const path = require('path');
-const exec = require('child_process').exec;
-const fs = require('fs-extra');
-const { ipcRenderer } = require('electron');
-const sudo = require('sudo-prompt');
-
 import axios, { AxiosResponse } from 'axios';
-import { api_url } from "mock/config";
-import SudoerLinux from "util/sudoer";
-import { SCRIPT_ERROR } from "util/constants";
-import { callScript } from "interfaces/index";
-import { mockDataList } from "./mockData";
+import { api_url } from 'mock/config';
+import { mockDataList } from './mockData';
 
-const service_ip = process.env.NODE_ENV === 'development' ?api_url:"";
+const service_ip = process.env.NODE_ENV === 'development' ? api_url : '';
 
-const configDir = ipcRenderer.sendSync("getDataPath");
-
-
-const sudoer = new SudoerLinux({name: 'trusme application'});
-
-let has_right = false; //有权限吗
-
-export const call = (name: string,payload:any[] = []) => {
-
-  const script_path = path.join(__dirname, 'scripts', `${name}.sh`); // 脚本的真实路径
-
-  return new Promise(async (resolve, reject) => {
-
-    await fs.ensureDir(path.join(configDir,"/myScripts")); //判断用户数据目录下面有没有myScripts文件夹,没有就创建一个
-
-    const dist_path = path.join(configDir,`/myScripts/${name}.sh`);
-
-    const isExit = await fs.pathExists(dist_path); // 脚本已经存在了吗
-
-    !isExit && (await fs.copy(script_path, dist_path)); // 如果不存在,就复制一份过去
-
-    // await fs.copy(script_path, dist_path);
-
-    const result:any = await execuate(dist_path,payload);
-    if(result == null){
-      alert(SCRIPT_ERROR);
-    }else{
-      const array = result.split("\n");
-      const output = array.filter((item:string)=>{
-        return item !== "";
-      })
-      resolve(output);
-    }
-
-  });
-};
-
-/**
- * 执行命令
- */
-const execuate = async (path:string,payload:any[])=>{
-  let result = null;
-  if(!has_right){
-    //执行脚本
-    try {
-      //result = await sudoer.exec(`bash ${path} ${payload.join(" ")}`);
-      result =  await lib_exec(path,payload);
-      has_right = true;
-    } catch (error) {
-      console.log(error);
-      result = null;
-    }
-  }else{
-     try {
-        result = await direct_exec(path,payload);
-     } catch (error) {
-        console.log(error);
-        result = null;
-     }
-  }
-  return result;
-}
-
-const lib_exec = (path:string,payload:any[])=>{
-    const options = {
-      name: 'Electron'
-    };
-    return new Promise((resolve,reject)=>{
-      sudo.exec(`bash ${path} ${payload.join(" ")}`, options,
-        function(error:string, stdout:string) {
-           if (error){
-             reject(error)
-           }
-           else{
-              resolve(stdout);
-           }
-         }
-       );
-    })
-}
-
-/**
- * 直接执行
- */
-const direct_exec = (path:string,payload:any[])=>{
-  return new Promise((resolve,reject)=>{
-    exec(`bash ${path} ${payload.join(" ")}`,(error:string, stdout:string)=>{
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(stdout);
-    });
-  })
-}
-
-export const formatExchange = (data:string,fields:string[])=>{
-  try{
-    let new_data = eval("("+data+")")
-    new_data = new_data.msg_list.map((val:any,index:number)=>{
-    let new_item:any = {}
-    const item = val.split('|')
-      fields.forEach((ele,i) => {
-        new_item[ele] = item[i]
-        if(ele == 'status'){
-          if(item[i]==101){
-            new_item[ele] = 100
+export const formatExchange = (data: string, fields: string[]) => {
+  try {
+    let new_data = eval('(' + data + ')');
+    new_data = new_data.msg_list.map((val: any, index: number) => {
+      let new_item: any = {};
+      const item = val.split('|');
+      fields.forEach((ele, i) => {
+        new_item[ele] = item[i];
+        if (ele == 'status') {
+          if (item[i] == 101) {
+            new_item[ele] = 100;
           }
         }
       });
-      return new_item
-    })
-    return new_data
-  }catch{
-    return []
-  } 
-}
+      return new_item;
+    });
+    return new_data;
+  } catch {
+    return [];
+  }
+};
 
-
-
-export const fetch = (
-  params: any
-) => {
+export const fetch = (params: any) => {
   return new Promise<any>(async (resolve, reject) => {
     let result = null;
-    // windows系统
-    if(process.platform === "win32"){
-        try {
-          result = await windowFetch(params);
-          resolve(result);
-        } catch (error) {
-          console.log(error);
-          reject(error);
-        }
-    }else{ // linux系统
-       try {
-         result = await linuxFetch(params);
-         resolve(result);
-       } catch (error) {
-          console.log(error);
-          //reject(error);
-       }
+    try {
+      result = await windowFetch(params);
+      resolve(result);
+    } catch (error) {
+      console.log(error);
+      reject(error);
     }
   });
 };
-
-
-/**
- * @param params
- * @returns
- *  linux下调用脚本
- */
-const linuxFetch = async (params:any)=>{
-  return new Promise((resolve,reject)=>{
-    callScript(params).then((data)=>{
-      resolve(data);
-    }).catch((error)=>{
-      reject(error);
-    })
-  })
-}
 
 /**
  * windows下获取数据
  */
-const windowFetch = (params:any)=>{
-
-  if(process.env.NODE_ENV === 'production'){ // windows下的生产环境
+const windowFetch = (params: any) => {
+  if (process.env.NODE_ENV === 'production') {
+    // windows下的生产环境
     return mockData(params);
   }
 
   params.url = `${service_ip}${params.url}`;
   const data = params.data || {};
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve, reject) => {
     axios({
       ...params,
       method: params.method || 'post',
@@ -198,17 +62,17 @@ const windowFetch = (params:any)=>{
         if (typeof res == 'string') {
           res = JSON.parse(res);
         }
-          const rResult = res.data;
-          if(rResult.error == null){
-            resolve(rResult);
-          }else{
-            if (rResult.error == '1030' || rResult.error == '1040') {
-              //没有登录 或者 被挤下来了
-              //store.commit('noLogin');
-            }
-            Alert(msgCode(rResult.error));
-            reject(rResult.error);
+        const rResult = res.data;
+        if (rResult.error == null) {
+          resolve(rResult);
+        } else {
+          if (rResult.error == '1030' || rResult.error == '1040') {
+            //没有登录 或者 被挤下来了
+            //store.commit('noLogin');
           }
+          Alert(msgCode(rResult.error));
+          reject(rResult.error);
+        }
       })
       .catch((error) => {
         if (error.code === 'ECONNABORTED') {
@@ -217,17 +81,16 @@ const windowFetch = (params:any)=>{
         }
         reject(error);
       });
-  })
-}
+  });
+};
 
 /**
  * 模拟的假数据
  */
-const mockData = (params:{url:keyof typeof mockDataList})=>{
+const mockData = (params: { url: keyof typeof mockDataList }) => {
   const result = mockDataList[params.url];
   return Promise.resolve(result);
-}
-
+};
 
 //错误码
 export const msgCode = (n: string) => {
@@ -398,19 +261,19 @@ export const msgCode = (n: string) => {
 /**
  * 提示框
  */
-export const Alert = (msg:string)=>{
-  window.alert(msg); 
-}
+export const Alert = (msg: string) => {
+  window.alert(msg);
+};
 
 /**
  * 弹框
  */
-export const Confirm  = (msg:string)=>{
-  return new Promise((resolve,reject)=>{
-    if(window.confirm(msg)){
+export const Confirm = (msg: string) => {
+  return new Promise((resolve, reject) => {
+    if (window.confirm(msg)) {
       resolve(true);
-    }else{
+    } else {
       reject(null);
     }
-  })
-}
+  });
+};
